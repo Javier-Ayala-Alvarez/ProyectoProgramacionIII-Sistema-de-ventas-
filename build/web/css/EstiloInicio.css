@@ -1,0 +1,280 @@
+
+*{
+    margin:0;
+    padding:0;
+   
+}
+.HTML{
+     margin: auto;
+
+}
+body{
+    
+     
+     width: 100%;
+    margin: auto;
+     font-family: sans-serif;
+}
+
+
+nav{
+    top: +2px;
+    position: fixed;
+    left: 0;
+    right: 0;
+    margin:auto;
+    width: 100%;
+    max-width: 1012px;
+    color: red; 
+
+}
+
+
+
+nav > ul {
+    
+    left: -2cm;
+    display: table;
+    width:35cm;
+    background: #2D0A02;
+    position: absolute;
+}
+
+nav > ul li{
+
+    display: table-cell;
+}
+
+/*sudmenu*/
+nav> ul> li:hover > ul{ 
+    display: block;
+    height: 100%;
+}
+nav > ul> li > ul{
+    display: block;
+    position: absolute;
+    background: #2D0A02;
+    left:0;
+    right:0;
+    overflow: hidden;
+    height: 0%;
+        -webkit-transition: all .3s ease;
+        -moz-transition: all .3s ease;
+        -ms-transition: all .3s ease;
+        -o-transition: all .3s ease;
+         transition: all .3s ease;
+}
+nav> ul li a {
+
+    color: #fff;
+    display: block;
+    line-height: 20px;
+    padding: 20px;
+    position: relative;
+
+    text-align: center;
+    text-decoration: none;
+        -webkit-transition: all .3s ease;
+        -moz-transition: all .3s ease;
+        -ms-transition: all .3s ease;
+        -o-transition: all .3s ease;
+         transition: all .3s ease;
+}
+
+
+nav> ul> li> ul> li a:hover{
+    background:#0774d9;
+    
+}
+
+
+.TABLE{
+    width: 5%;
+    height: 19.5CM;
+    background:#2D0A02; 
+        position: fixed;
+}
+
+.imgRedonda {
+    width:4cm;
+    height:4cm;
+    border-radius:160px;
+    border:10px solid #666;
+}
+.letra{
+ border-radius:10px;
+  border:10px solid #666;   
+  padding: 0.23cm;
+    margin: 0.70cm;
+}
+
+.btn-enviar{
+
+    background: #FA1F0C;
+    color: #fff;
+    margin:auto;
+    display: block;
+    padding: 4px 18px;
+    cursor: pointer;
+    margin: 0.20cm;
+}
+.btn-enviar {
+    list-style: none;
+}
+.btn-enviar:hover
+{
+
+transform: scale(1.1);
+}
+.li1:hover
+{
+transform: scale(1.05);
+    background: #FA1F0C;
+}
+
+.TEXTE {
+    margin: auto;
+    width: 3cm;
+    height: 0.75CM;
+    font-family: Oswald;
+    border-color: BLACK;
+    background-color: #FFF;
+}
+.TEXT{
+    margin: auto;
+    width: 5cm;
+    height: 0.70CM;
+    font-family: Oswald;
+    border-color: BLACK;
+    background-color: #FFF;
+}
+
+
+.TABLE3{
+        top: +140px;
+    position: absolute;
+    left: 5cm;
+    right: 0;
+    margin:auto;
+     width:33cm;
+    max-width: 25cm;
+    color: black; 
+   
+    font-family:cursive;
+    border: 2px;
+ border-radius:2px;
+ border-color:black;
+ border-spacing:0.025;
+ 
+    height: auto;
+        color: black;
+     }
+
+.grafica{
+            top: +140px;
+    position: absolute;
+    left: 5cm;
+    right: 0;
+    margin:auto;
+    max-width: 1000px;
+    color: black; 
+    background-color: #2D0A02  ;
+    font-family:cursive;
+    border: 5px;
+ border-radius:6px;
+ border-color:indianred;
+ border-spacing:0.25;
+ width: auto;
+    height: inherit;
+        color: #fff;
+     
+}
+
+     .PRO {
+    top: +140px;
+    position: absolute;
+    left: 7cm;
+    right: 0;
+ width: 7%;
+    height: 10CM;
+    border-width: 10px;
+    
+    padding: 0px;
+    background-color: #DDDDEE  ;
+}
+
+
+.div1 {
+
+    width: 13%;
+    height: auto;
+
+    border-style: inset;
+
+    border-radius: 30px;
+    border-style: inset;
+    border-width: 10px;
+    background-color: #880E4F;
+    padding: 20px;
+    border-color: BLACK;
+
+} 
+
+.TABLE1{
+
+        top: +140px;
+    position: relative;
+    left: 2.5cm;
+    right: 0;
+    margin:auto;
+    width: 7cm;
+    height: 10CM;
+    max-width: 1000px;
+    background-color: #2D0A02  ;
+    font-family:arial;
+    border: 5px;
+ border-radius:6px;
+ border-color:red;
+ border-spacing:0.25;
+ width: auto;
+    height: auto;
+        color: #fff;
+     }
+.TABLE4{
+        top: +140px;
+    position: absolute;
+    left: 10cm;
+    right: 0;
+    margin:auto;
+    width: 100%;
+    max-width: 1000px;
+    color: black; 
+    background-color: #2D0A02  ;
+    font-family:cursive;
+    border: 5px;
+ border-radius:6px;
+ border-color:indianred;
+ border-spacing:0.25;
+ width: auto;
+    height: auto;
+        color: #fff;
+     }
+.TABLE5{
+        top: +140px;
+    position: absolute;
+    left: 20cm;
+    right: 0;
+    margin:auto;
+    width: 100%;
+    max-width: 1000px;
+    color: black; 
+    background-color: #2D0A02  ;
+    font-family:cursive;
+    border: 5px;
+ border-radius:6px;
+ border-color:indianred;
+ border-spacing:0.25;
+ width: auto;
+    height: auto;
+        color: #fff;
+     }
