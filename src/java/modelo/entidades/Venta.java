@@ -12,8 +12,8 @@ public class Venta {
    private double saldoTotal;
    private int estado;
    private ArrayList<Registros> registros;
-   private Cliente cliente;
-   private Empleados empleado;
+   private Cliente cliente = new Cliente();;
+   private Empleados empleado = new Empleados();;
    private Empresa empresa;
    
    
@@ -111,10 +111,16 @@ public class Venta {
     public void setnFactura(String nFactura) {
         this.nFactura = nFactura;
     }
-    public void setNombreCliente(){
-
+    public void setNombreCliente(String nombre){
+         
+         cliente.setNombre(nombre);
+        
     }
-
+    public void setNombreEmpleado(String nombre){
+         
+         empleado.setNombre(nombre);
+        
+    }
 
     public int getIdFactura() {
         return idFactura;

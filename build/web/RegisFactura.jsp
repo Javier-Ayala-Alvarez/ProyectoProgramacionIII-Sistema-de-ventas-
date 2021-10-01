@@ -6,7 +6,7 @@
 <%@include file="Inicio.jsp"%>
 <!DOCTYPE html>
 
-<table border="3" class="TABLE3">
+<table border="3" class="TABLE3" >
     <TR>
         <TD COLSPAN="15" ALIGN="CENTER" bgcolor="#fff">
 
@@ -19,7 +19,7 @@
                                     <H4><font color="#fff">VENDEDOR<TD bgcolor="#3EB429" >
                                             <H4><font color="#fff">TOTAL</TD>
                                                 <TD bgcolor="#3EB429" >
-                                            <H4><font color="#fff">OPCIONES</TD>
+                                            <H4><font color="#fff">DETALLE</TD>
                                                 
                                                  <%
                                                         List<Venta> lstVenta = (List<Venta>) request.getAttribute("ventasList");
@@ -29,32 +29,31 @@
 
                                                    
 
-                                                    <td>
+                                                    <td align="center">
 
                                                         <%= registro.getnFactura()%>
                                                     </td>
-                                                    <td>
+                                                    <td align="center">
                                                         <%= registro.getFechaVenta()%>
 
                                                     </td>
 
-                                                    <td>
-                                                        <%= registro.getCliente()%>
+                                                    <td align="center">
+                                                        <%= registro.getCliente().getNombre()%>
 
                                                     </td>
 
-                                                    <td>
+                                                    <td align="center">
 
-                                                        <%= registro.getEmpleado()%>
+                                                        <%= registro.getEmpleado().getNombre()%>
                                                     </td>
-                                                    <td>
+                                                    <td align="center">
 
                                                         <%= registro.getSaldoTotal()%>
                                                     </td>
-                                                    <td>
-
-                                                        <input type="submit" name="detalle" value="detalle" class="btn-enviar">  
-
+                                                    <td align="center">
+                                                        
+                                                        <a href="ControlDetalleVen?id=<%= registro.getnFactura()%>"><img src="img/registro.png"/></a>
                                                     </td>
                                                    
                                                     <%} %></tr>

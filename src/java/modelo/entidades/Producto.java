@@ -46,6 +46,11 @@ public class Producto {
         return idProducto;
     }
 
+    public Producto(String codigoProducto, String nombreProducto) {
+        this.codigoProducto = codigoProducto;
+        this.nombreProducto = nombreProducto;
+    }
+
     public void setIdProducto(int idProducto) {
         this.idProducto = idProducto;
     }

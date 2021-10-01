@@ -6,7 +6,8 @@ public class Registros {
     private int idRegistros;
     private int cantidadProducto;
     private double precioTotalProducto;
-    Producto producto;
+    Producto producto = new Producto();
+    
     Venta venta;
     public Registros() {
         
@@ -21,8 +22,19 @@ public class Registros {
     public Registros(int idRegistros) {
         this.idRegistros = idRegistros;
     }
-    
-
+    //producto = new Producto();
+    public void setNombreProducto(String nombre){
+         
+         producto.setNombreProducto(nombre); 
+    }
+    public void setCodigoProducto(String nombre){
+             
+             producto.setCodigoProducto(nombre); 
+    }
+    public void setPrecioVentaProducto(Double precio){
+             
+             producto.setPrecioVenta(precio); 
+    }
     public int getCantidadProducto() {
         return cantidadProducto;
     }

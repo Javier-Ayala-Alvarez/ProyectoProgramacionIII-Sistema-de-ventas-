@@ -1,7 +1,7 @@
 <%@page import="java.util.List"%>
 <link rel="stylesheet" type="text/css" href="css/EstiloInicio.css">
 
-<%@page import ="modelo.entidades.Venta"%>
+<%@page import ="modelo.entidades.Registros"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="Inicio.jsp"%>
 <!DOCTYPE html>
@@ -12,18 +12,18 @@
 
             <H1>
                 <font  color="#B76103" > 
-                Facturas</H1><TR><TD bgcolor="#3EB429" >
+                Registros</H1><TR><TD bgcolor="#3EB429" >
             <H4 ><font color="#fff">CODIGO<TD bgcolor="#3EB429" >
-                    <H4><font color="#fff">FECHA<TD bgcolor="#3EB429" >
-                            <H4><font color="#fff">CLIENTE<TD bgcolor="#3EB429" >
-                                    <H4><font color="#fff">VENDEDOR<TD bgcolor="#3EB429" >
+                    <H4><font color="#fff">NOMBRE<TD bgcolor="#3EB429" >
+                            <H4><font color="#fff">CANTIDAD<TD bgcolor="#3EB429" >
+                                    <H4><font color="#fff">PRECIO<TD bgcolor="#3EB429" >
                                             <H4><font color="#fff">TOTAL</TD>
-                                                <TD bgcolor="#3EB429" >
-                                            <H4><font color="#fff">DETALLE</TD>
+                                                
+                                            
                                                 
                                                  <%
-                                                        List<Venta> lstVenta = (List<Venta>) request.getAttribute("ventasList");
-                                                        for (Venta registro : lstVenta) {
+                                                        List<Registros> registroList = (List<Registros>) request.getAttribute("registroList");
+                                                        for (Registros registro : registroList) {
                                                     %>
                                                 <TR>
 
@@ -31,30 +31,27 @@
 
                                                     <td align="center">
 
-                                                        <%= registro.getnFactura()%>
+                                                        <%= registro.getProducto().getCodigoProducto()%>
                                                     </td>
                                                     <td align="center">
-                                                        <%= registro.getFechaVenta()%>
-
-                                                    </td>
-
-                                                    <td align="center">
-                                                        <%= registro.getCliente().getNombre()%>
+                                                        <%= registro.getProducto().getNombreProducto()%>
 
                                                     </td>
 
                                                     <td align="center">
+                                                        <%= registro.getCantidadProducto()%>
 
-                                                        <%= registro.getEmpleado().getNombre()%>
+                                                    </td>
+
+                                                    <td align="center">
+
+                                                        <%= registro.getProducto().getPrecioVenta()%>
                                                     </td>
                                                     <td align="center">
 
-                                                        <%= registro.getSaldoTotal()%>
+                                                        <%= registro.getPrecioTotalProducto()%>
                                                     </td>
-                                                    <td align="center">
-                                                        
-                                                        <a href="ControlDetalleVen?id=<%= registro.getnFactura()%>"><img src="img/registro.png"/></a>
-                                                    </td>
+                                                    
                                                    
                                                     <%} %></tr>
                                                     </table>
