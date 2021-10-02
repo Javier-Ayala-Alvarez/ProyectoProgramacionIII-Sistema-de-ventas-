@@ -1,0 +1,232 @@
+
+*{
+    margin:0;
+    padding:0;
+
+}
+
+
+
+
+nav{
+    top: 0px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    color: red; 
+
+}
+nav > ul {
+    left: 0cm;
+    width:40cm;
+    background: #2D0A02;
+    position: absolute;
+}
+
+nav > ul li{
+
+    display: table-cell;
+}
+.form-register{
+    margin: 5px;
+    top: 2cm;
+    left: 2cm;
+    width:35cm;
+    right: 3cm;
+border-radius:10px;
+
+    border:3px solid #666;
+    position: absolute;
+    font-family: arial;
+   
+
+}
+.form-register1{
+    margin: 10px;
+    top: 17cm;
+    left: 25cm;
+    width:35cm;
+    right: 3cm;
+    border:2px;
+    position: absolute;
+    font-family: arial;
+   
+
+}
+
+.input{
+    text-align: center;
+    margin-bottom: 5px;
+    padding: 5px;
+    font-size: 13px;
+    border-radius: 4px;
+    border: 1px solid #551A44 ;
+}
+.input1{
+    text-align: center;
+    right: +12cm;
+    margin-bottom: 5px;
+    padding: 10px;
+    font-size: 13px;
+    border-radius: 4px;
+    border: 1px solid #551A44 ;
+}
+
+
+.contenedor-inputs{
+    padding: 10px 15px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+/*sudmenu*/
+nav> ul> li:hover > ul{ 
+    display: block;
+    height: 100%;
+}
+nav > ul> li > ul{
+    display: block;
+    position: absolute;
+    background: #2D0A02;
+    left:0;
+    right:0;
+    overflow: hidden;
+    height: 0%;
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    transition: all .3s ease;
+}
+nav> ul li a {
+
+    color: #fff;
+    display: block;
+    line-height: 20px;
+    padding: 20px;
+    position: relative;
+
+    text-align: center;
+    text-decoration: none;
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    transition: all .3s ease;
+}
+
+
+nav> ul> li> ul> li a:hover{
+    background:#0774d9;
+
+}
+
+
+.imgRedonda {
+    width:4cm;
+    height:4cm;
+    border-radius:160px;
+    border:10px solid #666;
+}
+.letra{
+    border-radius:10px;
+    border:10px solid #666;   
+    padding: 0.23cm;
+    margin: 0.70cm;
+}
+
+.btn-enviar{
+
+    background: #FA1F0C;
+    color: #fff;
+    margin:1px;
+    display: block;
+    padding: 4px 18px;
+    cursor: pointer;
+    margin: 8px;
+}
+.btn{
+
+    background: #FA1F0C;
+    color: #fff;
+
+    padding: 10px 18px;
+
+}
+.btn-enviar {
+    list-style: none;
+}
+.btn-enviar:hover
+{
+
+    transform: scale(1.1);
+}
+.li1:hover
+{
+    transform: scale(1.05);
+    background: #FA1F0C;
+}
+
+
+
+.TABLE3{
+    left: 2cm;
+    width:35cm;
+    right: 3cm;
+    top: +240px;
+    position: absolute;
+    margin:auto;
+    max-width: 35cm;
+    font-family:cursive;  
+}
+
+.grafica{
+    top: +140px;
+    position: absolute;
+    left: 5cm;
+    right: 0;
+    margin:auto;
+    max-width: 1000px;
+    color: black; 
+    background-color: #2D0A02  ;
+    font-family:cursive;
+    border: 5px;
+    border-radius:6px;
+    border-color:indianred;
+    border-spacing:0.25;
+    width: auto;
+    height: inherit;
+    color: #fff;
+
+}
+
+.PRO {
+    top: +140px;
+    position: absolute;
+    left: 7cm;
+    right: 0;
+    width: 7%;
+    height: 10CM;
+    border-width: 10px;
+
+    padding: 0px;
+    background-color: #DDDDEE  ;
+}
+
+
+.div1 {
+
+    width: 13%;
+    height: auto;
+
+    border-style: inset;
+
+    border-radius: 30px;
+    border-style: inset;
+    border-width: 10px;
+    background-color: #880E4F;
+    padding: 20px;
+    border-color: BLACK;
+
+} 
+

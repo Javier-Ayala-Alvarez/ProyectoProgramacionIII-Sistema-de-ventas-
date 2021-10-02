@@ -6,7 +6,9 @@
 <%@include file="Inicio.jsp"%>
 <!DOCTYPE html>
 
-<table border="3" class="TABLE3" >
+  
+        <table border="0" class="TABLE3">
+            
     <TR>
         <TD COLSPAN="15" ALIGN="CENTER" bgcolor="#fff">
 
