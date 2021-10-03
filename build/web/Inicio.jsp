@@ -62,8 +62,8 @@
                                     <li><input type="submit" name="BOTON" value="Consulta Empleado" class="btn-enviar"></li>
                                     <li><input type="submit" name="BOTON" value="Añadir Empleado" class="btn-enviar"></li>
                                     <li><input type="submit" name="BOTON" value="Consulta Usuario" class="btn-enviar"></li>
-                                    <li><input type="submit" name="BOTON" value="Consulta Bono" class="btn-enviar"></li>
-                                    <li><input type="submit" name="BOTON" value="Añadir Bono" class="btn-enviar"></li>
+                                    <li><input type="submit" name="BOTON" value="Añadir Usuario" class="btn-enviar"></li>
+                                    
 
                                 </form>
                         </ul>
