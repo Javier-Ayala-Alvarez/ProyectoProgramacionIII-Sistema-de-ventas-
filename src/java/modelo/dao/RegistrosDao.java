@@ -17,10 +17,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import modelo.conexion.Conexion;
-import modelo.entidades.Cliente;
-import modelo.entidades.Empleados;
 import modelo.entidades.Registros;
-import modelo.entidades.Venta;
 
 /**
  *

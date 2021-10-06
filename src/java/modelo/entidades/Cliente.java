@@ -5,13 +5,18 @@
  */
 package modelo.entidades;
 
+import java.io.IOException;
 import java.io.Serializable;
+import java.io.Writer;
+import java.util.LinkedHashMap;
+import org.json.simple.JSONStreamAware;
+import org.json.simple.JSONValue;
 
 /**
  *
  * @author gerar
  */
-public class Cliente implements Serializable{
+public class Cliente implements Serializable, JSONStreamAware{
     
     private int idCliente;
     private String codigoCliente;
@@ -19,6 +24,7 @@ public class Cliente implements Serializable{
     private String apellido;
     private String telefono;
     private String direccion;
+    private int max;
 
     public Cliente() {
     }
@@ -34,6 +40,14 @@ public class Cliente implements Serializable{
 
     public Cliente(int idCliente) {
         this.idCliente = idCliente;
+    }
+
+    public int getMax() {
+        return max;
+    }
+
+    public void setMax(int max) {
+        this.max = max;
     }
 
     
@@ -84,6 +98,17 @@ public class Cliente implements Serializable{
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
+    }
+
+    @Override
+    public void writeJSONString(Writer out) throws IOException {
+      LinkedHashMap obj = new LinkedHashMap();//un objeto que nos ayudara a mapear
+      obj.put("codigo",codigoCliente);
+      obj.put("nombre",nombre);
+      obj.put("apellido",apellido);
+      obj.put("telefono",telefono);
+      obj.put("telefono",direccion);
+      JSONValue.writeJSONString(obj, out);
     }
     
     

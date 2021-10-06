@@ -3,12 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Francisco%20Javier/Downloads/UES%20_ACTIVIDADES/ciclo4/Programacion%20III/ProyectoProgramacionlll/web/css/EstiloFactura.css</file>
-            <file>file:/C:/Users/Francisco%20Javier/Downloads/UES%20_ACTIVIDADES/ciclo4/Programacion%20III/ProyectoProgramacionlll/web/css/bulma.min.css</file>
+            <file>file:/C:/Users/Francisco%20Javier/Downloads/UES%20_ACTIVIDADES/ciclo4/Programacion%20III/ProyectoProgramacionlll/src/java/controlador/ControlDetalleVen.java</file>
+            <file>file:/C:/Users/Francisco%20Javier/Downloads/UES%20_ACTIVIDADES/ciclo4/Programacion%20III/ProyectoProgramacionlll/web/Ajax1.js</file>
+            <file>file:/C:/Users/Francisco%20Javier/Downloads/UES%20_ACTIVIDADES/ciclo4/Programacion%20III/ProyectoProgramacionlll/src/java/modelo/dao/ClienteDao.java</file>
             <file>file:/C:/Users/Francisco%20Javier/Downloads/UES%20_ACTIVIDADES/ciclo4/Programacion%20III/ProyectoProgramacionlll/web/Factura.jsp</file>
-            <file>file:/C:/Users/Francisco%20Javier/Downloads/UES%20_ACTIVIDADES/ciclo4/Programacion%20III/ProyectoProgramacionlll/web/RegisFactura.jsp</file>
-            <file>file:/C:/Users/Francisco%20Javier/Downloads/UES%20_ACTIVIDADES/ciclo4/Programacion%20III/ProyectoProgramacionlll/src/java/modelo/entidades/Venta.java</file>
-            <file>file:/C:/Users/Francisco%20Javier/Downloads/UES%20_ACTIVIDADES/ciclo4/Programacion%20III/ProyectoProgramacionlll/web/RegistrosVenta.jsp</file>
+            <file>file:/C:/Users/Francisco%20Javier/Downloads/UES%20_ACTIVIDADES/ciclo4/Programacion%20III/ProyectoProgramacionlll/src/java/modelo/dao/RegistrosDao.java</file>
+            <file>file:/C:/Users/Francisco%20Javier/Downloads/UES%20_ACTIVIDADES/ciclo4/Programacion%20III/ProyectoProgramacionlll/src/java/controlador/ControlCliente.java</file>
+            <file>file:/C:/Users/Francisco%20Javier/Downloads/UES%20_ACTIVIDADES/ciclo4/Programacion%20III/ProyectoProgramacionlll/src/java/modelo/entidades/Cliente.java</file>
         </group>
     </open-files>
 </project-private>

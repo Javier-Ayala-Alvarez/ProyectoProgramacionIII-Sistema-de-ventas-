@@ -1,10 +1,9 @@
-<%-- 
-    Document   : Factura
-    Created on : 10-01-2021, 06:23:30 PM
-    Author     : Francisco Javier
---%>
+
+<%@page import="java.util.List"%>
+<%@page import="modelo.entidades.Venta"%>
 <link rel="stylesheet" type="text/css" href="css/EstiloFactura.css">
 <link rel="stylesheet" href="css/bulma.min.css"/>
+<!DOCTYPE html>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -43,7 +42,7 @@
                         </td></tr><tr ><td class="column is-one-third">
                             Cliente:</td><td> <input type="text"  name="Usuario" placeholder="Nombre" class="input is-success"/></td> 
                         <td align="right">
-                             <button class="button is-success is-active"><a href="javascript:abrirCliente()">Buscar</a></button></td>
+                            <button class="button is-success is-active"><a href="javascript:abrirCliente()">Buscar</</a></button></td>
                         <td  class="column is-one-third">
                             Direcion:</td><td> <input type="text"  name="Usuario" placeholder="Direccion Cliente" class="input is-success " /></td>
                         <td class="column is-one-third">
@@ -118,27 +117,27 @@
       <div class="columns">
           <div class="column">FORMULARIO DE INSCRIPCION</div>
       </div>
+      <form name="Cliente" method="post">
       <div class="columns" >
+         
           <div class="column">
-            NOMBRE: <input type="text"  name="Usuario" placeholder="Nombre" class="input is-link" /> 
+            NOMBRE: <input type="text"  name="nombre" placeholder="Apellido" class="input is-link" pattern="[A-Za-z]+"  required/> 
           </div>
           <div class="column">
-            APELLIDO: <input type="text"  name="Usuario" placeholder="Apellido" class="input is-link" /> 
-          </div>
-          <div class="column">
-            TELEFONO: <input type="text"  name="Usuario" placeholder="Telefono" class="input is-link" /> 
+           APELLIDO: <input type="text"  name="apellido" placeholder="Telefono" class="input is-link" pattern="[A-Za-z]+"  required/> 
           </div>
       </div>
       <div class="columns">
           <div class="column">
-            TELEFONO: <input type="text"  name="Usuario" placeholder="Telefono" class="input is-link" /> 
+            TELEFONO: <input type="text"  name="telefono" placeholder="Telefono"  class="input is-link" pattern="[0-9]+" minlength="8" maxlength="8" required /> 
           </div>
           <div class="column">
-            DIRECCION: <input type="text"  name="Usuario" placeholder="Direccion" class="input is-link" /> 
+            DIRECCION: <input type="text"  name="direccion" placeholder="Direccion" class="input is-link"  required/> 
           </div>
           <div class="column is-one-third">
               
-            AGREGAR <input type="submit" name="ReFactura" value="Nuevo" class="button is-link is-active is-fullwidth">
+            AGREGAR <input type="submit" name="btn_agregar" value="Nuevo" class="button is-link is-active is-fullwidth">
+            </form>
           </div>
       </div>
       <div class="columns">
@@ -146,6 +145,7 @@
       </div>
      <div class="columns">
             <div class="contanier">
+                <div id="tabla"></div>
          <table  class="table is-fullwidth" >
          <TR bgcolor="#3EB429" ><TD>
          <H4 ><font color="#FFF">CODIGO<TD>
@@ -154,11 +154,14 @@
           <H4><font color="#FFF">TELEFONO<TD>
           <H4><font color="#FFF">DIRECCION<TD>
           <H4><font color="#FFF">SELECCIONAR</TD>
-              <tr><td>w</td>
+              
+            
+              <tr><td>i</td>
                   <td>w</td>
                   <td>w</td>
                   <td>w</td>
                   <td>W</td>
+                
                   <td><button class="button is-danger is-outlined"><a href="javascript:abrirProducto()">AGREGAR</a></button></td></tr>
       </table>
 
@@ -169,11 +172,9 @@
     </footer>
   </div>
 </div>
-    
-    
-<script>
-    
-     
+   <script src="Ajax1.js"></script> 
+      <script>
+            
 function abrirProducto(){
             document.getElementById("vent").style.display="block";
         }
@@ -186,9 +187,10 @@ function abrirCliente(){
         }
 function cerrarCliente(){
         document.getElementById("ventClien").style.display="none";
-    
-}
+        
+    }    
 </script>
+
        
     
     
@@ -299,6 +301,10 @@ function cerrarCliente(){
                                                                                             </td></tr>
                                                                                     </table>
                                                                                 </div>
-                                                                                </body>
 
+                                                                                </body>
+                                                                                
+                                                                                    
                                                                                 </html>
+
+                                                                               
