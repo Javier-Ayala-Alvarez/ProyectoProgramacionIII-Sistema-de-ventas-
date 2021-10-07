@@ -1,18 +1,29 @@
 var READY_STATE_COMPLETE = 4;   
 var request, datos;
 //referencia del formulario
-datos = document.forms["Cliente"] ;
-//asignar escucha//
 
-datos.addEventListener("submit",cargarContenido,false);
 
 //asignar escucha//
 $("#btn_Cliente").click(function(e){
+datos = document.forms["Cliente"] ;
+datos.addEventListener("submit",cargarContenido,false);
  MostrarCliente();
 })
+$("#btn_Cliente1").click(function(e){
+ MostrarCliente();
+})
+
 $("#btn_Producto").click(function(e){
  MostrarProducto();
 })
+$(document).on('click', '.agregarCliente',function(e){
+    e.preventDefault();
+   var row = $(this).parent().parent().children().first().text();
+   alert("Se hizo un click"+row);
+   console.log(row);
+});
+
+
 $("#btn_Eliminar").click(function(e){
   $.ajax({
        //trabajando
@@ -24,7 +35,6 @@ $("#btn_Eliminar").click(function(e){
     });
 })
 
-datos12.addEventListener("submit",Mostrar,false);
 function cargarContenido(event){
     
     event.preventDefault();

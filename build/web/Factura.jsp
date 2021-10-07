@@ -1,6 +1,7 @@
 
 <%@page import="java.util.List"%>
 <%@page import="modelo.entidades.Venta"%>
+
 <script src="jquery-latest.js"></script>
 <link rel="stylesheet" type="text/css" href="css/EstiloFactura.css">
 
