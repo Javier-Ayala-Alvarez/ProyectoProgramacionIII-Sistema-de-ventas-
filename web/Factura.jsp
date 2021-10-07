@@ -1,11 +1,14 @@
 
 <%@page import="java.util.List"%>
 <%@page import="modelo.entidades.Venta"%>
+<script src="jquery-latest.js"></script>
 <link rel="stylesheet" type="text/css" href="css/EstiloFactura.css">
+
 <link rel="stylesheet" href="css/bulma.min.css"/>
 <!DOCTYPE html>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 
 <html>
@@ -16,16 +19,7 @@
 <!-- OPCCIONES ... -->
     <nav>
         <ul>
-            <li>
-                <form  action="javascript:abrirProducto()" method="post">
-                    <input type="submit" name="ReFactura" value="Producto" class="btn-enviar">
-                </form>
-            </li>
-            <li>
-                <form action="javascript:abrirCliente()" method="post">
-                    <input type="submit" name="ReFactura" value="Cliente" class="btn-enviar">
-                </form>
-            </li>
+            
             <li>
                 <form action="index.html" method="post">
                     <input type="submit" name="ReFactura" value="Cerrar" class="btn-enviar">
@@ -36,13 +30,13 @@
         <div class="columns">
             <div  class="form-register">
                 <table><tr ><td><td><td><td ><td><td><td><td><td align="center">N° Factura<td>
-                            <form >
+                            <form  name="Dato">
                                 <input type="text"  name="Usuario" placeholder="Numero Factura" class="input is-success" />               
 
                         </td></tr><tr ><td class="column is-one-third">
                             Cliente:</td><td> <input type="text"  name="Usuario" placeholder="Nombre" class="input is-success"/></td> 
                         <td align="right">
-                            <button class="button is-success is-active"><a href="javascript:abrirCliente()">Buscar</</a></button></td>
+                            <button class="button is-success is-active"  id="submit" ><a href="javascript:abrirCliente()" id="btn_Cliente">Buscar</</a></button></td>
                         <td  class="column is-one-third">
                             Direcion:</td><td> <input type="text"  name="Usuario" placeholder="Direccion Cliente" class="input is-success " /></td>
                         <td class="column is-one-third">
@@ -50,7 +44,7 @@
                         <td class="column is-one-third">
                             Producto:</td><td><input type="text"  name="Usuario" placeholder="Producto" class="input is-success" /></td>
                         <td>
-                            <button class="button is-success is-active"><a href="javascript:abrirProducto()">Buscar</a></button></td> 
+                            <button class="button is-success is-active"><a href="javascript:abrirProducto()" id="btn_Producto">Buscar</a></button></td> 
                         <td class="column is-one-third">
                             Cantidad:</td><td> <input type="number"  name="Usuario" placeholder="Cantidad" class="input is-success"  /></td>
                         <td align="center">
@@ -78,21 +72,9 @@
     </header>
     <section class="modal-card-body">
       <!-- Content ... -->
-      <div class="columns">
-            <div class="column">
-         <table  class="table is-fullwidth" >
-         <TR><TD>
-         <H4 ><font color="blue">CODIGO<TD>
-          <H4><font color="blue">PRODUCTO<TD>
-          <H4><font color="blue">PRECIO<TD >
-          <H4><font color="blue">CANTIDAD<TD>
-          <H4><font color="blue">SELECCIONAR</TD>
-              <tr><td>w</td>
-                  <td>w</td>
-                  <td>w</td>
-                  <td>w</td>
-                  <td><button class="button is-danger is-outlined"><a href="javascript:abrirProducto()">AGREGAR</a></button></td></tr>
-      </table>
+      <div class="columns" id="producto">
+            <div class="column"  >
+<!-- Muestra Productos---------------- ... -->
     </section>
    <footer class="modal-card-foot">
       Debe Seleccionar un registro
@@ -117,7 +99,7 @@
       <div class="columns">
           <div class="column">FORMULARIO DE INSCRIPCION</div>
       </div>
-      <form name="Cliente" method="post">
+      <form name="Cliente" method="post" >
       <div class="columns" >
          
           <div class="column">
@@ -136,42 +118,29 @@
           </div>
           <div class="column is-one-third">
               
-            AGREGAR <input type="submit" name="btn_agregar" value="Nuevo" class="button is-link is-active is-fullwidth">
+            AGREGAR <input type="submit" name="btn_agregar" value="Nuevo" id="btn_agregar" class="button is-link is-active is-fullwidth">
             </form>
           </div>
       </div>
       <div class="columns">
           <div class="column">DATOS ALMACENADOS</div>
       </div>
-     <div class="columns">
-            <div class="contanier">
-                <div id="tabla"></div>
-         <table  class="table is-fullwidth" >
-         <TR bgcolor="#3EB429" ><TD>
-         <H4 ><font color="#FFF">CODIGO<TD>
-          <H4><font color="#FFF">NOMBRE<TD>
-          <H4><font color="#FFF">APELLIDO<TD>
-          <H4><font color="#FFF">TELEFONO<TD>
-          <H4><font color="#FFF">DIRECCION<TD>
-          <H4><font color="#FFF">SELECCIONAR</TD>
-              
-            
-              <tr><td>i</td>
-                  <td>w</td>
-                  <td>w</td>
-                  <td>w</td>
-                  <td>W</td>
-                
-                  <td><button class="button is-danger is-outlined"><a href="javascript:abrirProducto()">AGREGAR</a></button></td></tr>
-      </table>
-
+     <div class="columns"  id="data1">
+            <div class="contanier" >
+<!-- Muestra Cliente en la tabla---------------- ... -->
     </section>
     <footer class="modal-card-foot">
-      <button class="button is-success">Guardar</button>
+      <button class="button is-success" id="btn_Cliente1">Recargar</button>
+       <form  action="javascript:cerrarCliente()" method="post">
       <button class="button">Cancel</button>
+      </form>
+      
     </footer>
   </div>
 </div>
+          <script>
+	
+</script>
    <script src="Ajax1.js"></script> 
       <script>
             
