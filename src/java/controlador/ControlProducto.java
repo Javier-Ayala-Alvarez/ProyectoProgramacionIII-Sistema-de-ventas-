@@ -1,3 +1,5 @@
+package controlador;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -49,7 +51,20 @@ private ArrayList<Producto> registroList;
             response.setContentType( "text/html; charset=iso-8859-1" );
             PrintWriter out1 =  response.getWriter();
             this.registroList = daoProducto.getSelect();
+            
+            out1.println("");
+            out1.println("");
+            out1.println("");
+            out1.println("");
+            out1.println("");
+            out1.println("");
+            out1.println("");
+            out1.println("");
+            out1.println("");
+
+           
             out1.println("<link rel='stylesheet' type='text/css' href='css/EstiloFactura.css'>");
+            out1.println("<script src=http://code.jquery.com/jquery-latest.js></script><script src=Ajax1.js></script> ");
             out1.println("<table  class='table is-fullwidth' >");
             out1.println("<TR bgcolor='#3EB429' ><TD>");
             out1.println("<H4 ><font color='#FFF'>CODIGO<TD>");
@@ -63,7 +78,7 @@ private ArrayList<Producto> registroList;
                 out1.println("<td>"+registro.getPrecioVenta()+"</td>");
                 out1.println("<td>"+registro.getCantidad()+"</td>");
                
-                out1.println("<td></button><button class='button is-link is-outlined '> <a href='javascript:abrirProducto()'>AGREGAR</a></button>");
+                out1.println("<td><button class='button is-link is-outlined agregarProducto'>AGREGAR</button>");
                
             }
             out1.print("</tr>");

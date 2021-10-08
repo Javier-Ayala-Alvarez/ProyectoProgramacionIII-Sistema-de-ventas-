@@ -21,47 +21,32 @@
     <nav>
         <ul>
             
+            
+            <li> <input type="submit" name="ReFactura" value="Nueva Factura" id="datosCliente1" class="btn-enviar"></li>
+        
+            
+            <li> 
+                <form action="javascript:abrirCliente()" method="post">
+                <input type="submit" name="ReFactura" value="Cliente" class="btn-enviar">
+                </form>
+            </li>
             <li>
                 <form action="index.html" method="post">
                     <input type="submit" name="ReFactura" value="Cerrar" class="btn-enviar">
+                   
                 </form>
-            </li>
+                 </li>
         </ul>
+        </nav>
 <!-- FORMULARIO DE LA FACTURA ... -->
-        <div class="columns">
-            <div  class="form-register">
-                <table><tr ><td><td><td><td ><td><td><td><td><td align="center">N° Factura<td>
-                            <form  name="Dato">
-                                <input type="text"  name="Usuario" placeholder="Numero Factura" class="input is-success" />               
-
-                        </td></tr><tr ><td class="column is-one-third">
-                            Cliente:</td><td> <input type="text"  name="Usuario" placeholder="Nombre" class="input is-success"/></td> 
-                        <td align="right">
-                            <button class="button is-success is-active"  id="submit" ><a href="javascript:abrirCliente()" id="btn_Cliente">Buscar</</a></button></td>
-                        <td  class="column is-one-third">
-                            Direcion:</td><td> <input type="text"  name="Usuario" placeholder="Direccion Cliente" class="input is-success " /></td>
-                        <td class="column is-one-third">
-                            Fecha:</td><td> <input type="date"  name="Usuario" placeholder="Fecha" class="input is-success"  /></td></tr><tr>
-                        <td class="column is-one-third">
-                            Producto:</td><td><input type="text"  name="Usuario" placeholder="Producto" class="input is-success" /></td>
-                        <td>
-                            <button class="button is-success is-active"><a href="javascript:abrirProducto()" id="btn_Producto">Buscar</a></button></td> 
-                        <td class="column is-one-third">
-                            Cantidad:</td><td> <input type="number"  name="Usuario" placeholder="Cantidad" class="input is-success"  /></td>
-                        <td align="center">
-                            Precio Unitario:</td><td> <input type="text"  name="Usuario" placeholder="Precio Unitario" class="input is-success"/></td>
-                        <td align="center">
-                            Precio Total: </td><td><input type="text"  name="Usuario" placeholder="Precio Total" class="input is-success" /></td>
-                        <td align="center">
-                            <input type="submit" name="ReFactura" value="Agregar a Carrito" class="button is-link is-active"></td></tr>
-
-                    </form>
-
-                </table>
-            </div>
+        <div class="columns" id="datosGenerales" >
+           
+            
+<!-- MUESTRA DATOS GENERALES ... -->
+            
         </div>
 <!-- VENTANA MODAL PRODUCTO ... -->
-    </nav>
+    
 <div class="modal" id="vent">
   <div class="modal-background"></div>
   <div class="modal-card">
@@ -100,29 +85,9 @@
       <div class="columns">
           <div class="column">FORMULARIO DE INSCRIPCION</div>
       </div>
-      <form name="Cliente" method="post" >
-      <div class="columns" >
-         
-          <div class="column">
-            NOMBRE: <input type="text"  name="nombre" placeholder="Apellido" class="input is-link" pattern="[A-Za-z]+"  required/> 
-          </div>
-          <div class="column">
-           APELLIDO: <input type="text"  name="apellido" placeholder="Telefono" class="input is-link" pattern="[A-Za-z]+"  required/> 
-          </div>
-      </div>
-      <div class="columns">
-          <div class="column">
-            TELEFONO: <input type="text"  name="telefono" placeholder="Telefono"  class="input is-link" pattern="[0-9]+" minlength="8" maxlength="8" required /> 
-          </div>
-          <div class="column">
-            DIRECCION: <input type="text"  name="direccion" placeholder="Direccion" class="input is-link"  required/> 
-          </div>
-          <div class="column is-one-third">
-              
-            AGREGAR <input type="submit" name="btn_agregar" value="Nuevo" id="btn_agregar" class="button is-link is-active is-fullwidth">
-            </form>
-          </div>
-      </div>
+      <div id="data2"> </div>
+        <!-- Muestra El formulario---------------- ... -->  
+      
       <div class="columns">
           <div class="column">DATOS ALMACENADOS</div>
       </div>

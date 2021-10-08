@@ -57,4 +57,31 @@ public ArrayList<Producto> getSelect() throws SQLException {
         }
         return this.registroList;
     }
+public Producto getSelectTo(String codigo) throws SQLException {
+
+        this.registroList = new ArrayList<>();
+
+        try {
+            con = conectar.getConexion();
+            String sql = "SELECT * FROM producto WHERE codigoproducto ='"+codigo+"'";
+            ps = con.prepareStatement(sql);
+            this.rs = this.ps.executeQuery();
+            if(this.rs.next()){
+                
+                 Producto producto = new Producto();
+                producto.setIdProducto(rs.getInt("idproducto"));
+                producto.setCodigoProducto(rs.getString("codigoproducto"));
+                producto.setNombreProducto(rs.getString("nombreproducto"));
+                producto.setPrecioVenta(rs.getDouble("precioventa"));
+                producto.setCantidad(rs.getInt("cantidad"));
+               
+                return producto;
+            }
+            this.conectar.cerrarConexiones();
+        } catch (Exception e) {
+        }
+        return null;
+    }
 }
+
+
