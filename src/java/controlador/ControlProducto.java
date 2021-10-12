@@ -51,20 +51,9 @@ private ArrayList<Producto> registroList;
             response.setContentType( "text/html; charset=iso-8859-1" );
             PrintWriter out1 =  response.getWriter();
             this.registroList = daoProducto.getSelect();
-            
-            out1.println("");
-            out1.println("");
-            out1.println("");
-            out1.println("");
-            out1.println("");
-            out1.println("");
-            out1.println("");
-            out1.println("");
-            out1.println("");
-
-           
+                 
             out1.println("<link rel='stylesheet' type='text/css' href='css/EstiloFactura.css'>");
-            out1.println("<script src=http://code.jquery.com/jquery-latest.js></script><script src=Ajax1.js></script> ");
+            out1.println("<script src=https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js></script><script src=Ajax1.js></script> ");
             out1.println("<table  class='table is-fullwidth' >");
             out1.println("<TR bgcolor='#3EB429' ><TD>");
             out1.println("<H4 ><font color='#FFF'>CODIGO<TD>");

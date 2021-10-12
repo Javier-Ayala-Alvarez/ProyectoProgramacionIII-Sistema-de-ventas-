@@ -32,7 +32,27 @@ public class DaoProducto {
         this.conectar = new Conexion();
     }
 
+public Producto getMax() throws SQLException {
 
+        this.registroList = new ArrayList<>();
+
+        try {
+            con = conectar.getConexion();
+            String sql = "SELECT MAX(idproducto) Max FROM producto";
+            ps = con.prepareStatement(sql);
+            this.rs = this.ps.executeQuery();
+            if (this.rs.next()) {
+
+                registros = new Producto();
+                registros.setMax(rs.getInt("Max"));
+
+                return registros;
+            }
+            this.conectar.cerrarConexiones();
+        } catch (Exception e) {
+        }
+        return null;
+    }
 public ArrayList<Producto> getSelect() throws SQLException {
 
         this.registroList = new ArrayList<>();

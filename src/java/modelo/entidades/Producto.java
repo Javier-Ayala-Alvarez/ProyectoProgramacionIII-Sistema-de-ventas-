@@ -10,7 +10,7 @@ public class Producto {
   private int cantidad;
   private Date fechaVencimiento;
   private int max;
-  private int min;
+  
   private int estado;
   private double gananciaUni;
   private double iva;
@@ -25,14 +25,14 @@ public class Producto {
         this.idProducto = idProducto;
     }
 
-    public Producto(String codigoProducto, String nombreProducto, double precioCompra, int cantidad, Date fechaVencimiento, int max, int min, int estado, double gananciaUni, double iva, double precioVenta, Empresa empresa) {
+    public Producto(String codigoProducto, String nombreProducto, double precioCompra, int cantidad, Date fechaVencimiento, int max,  int estado, double gananciaUni, double iva, double precioVenta, Empresa empresa) {
         this.codigoProducto = codigoProducto;
         this.nombreProducto = nombreProducto;
         this.precioCompra = precioCompra;
         this.cantidad = cantidad;
         this.fechaVencimiento = fechaVencimiento;
         this.max = max;
-        this.min = min;
+       
         this.estado = estado;
         this.gananciaUni = gananciaUni;
         this.iva = iva;
@@ -105,13 +105,7 @@ public class Producto {
         this.max = max;
     }
 
-    public int getMin() {
-        return min;
-    }
-
-    public void setMin(int min) {
-        this.min = min;
-    }
+  
 
     public int getEstado() {
         return estado;

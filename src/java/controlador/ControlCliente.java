@@ -50,8 +50,10 @@ public class ControlCliente extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        
+         PrintWriter out1 = response.getWriter();
+         out1.println("<script src=https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js></script><script src=Ajax1.js></script> ");
         if (request.getParameter("btn_agregar") != null) {
-
             try {
                 this.daoCliente = new ClienteDao();// 
                 this.registroList = daoCliente.getMax();
@@ -61,14 +63,10 @@ public class ControlCliente extends HttpServlet {
             } catch (SQLException ex) {
                 Logger.getLogger(ControlCliente.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } else if (request.getParameter("event").equals("1")) {
-
+        } if (request.getParameter("event").equals("1")) {
             daoCliente.delete(request.getParameter("Eliminar"));
+        } if (request.getParameter("event").equals("2")) {
 
-        } else if (request.getParameter("event").equals("2")) {
-            response.setContentType("text/html; charset=iso-8859-1");
-            PrintWriter out1 = response.getWriter();
-            out1.println("<script src=http://code.jquery.com/jquery-latest.js></script><script src=Ajax1.js></script> ");
             out1.println("<link rel='stylesheet' type='text/css' href='css/EstiloFactura.css'>");
             out1.println("<form name='Cliente' method='post'><div class='columns'>");
             out1.println(" <div class='column'>");
@@ -78,16 +76,16 @@ public class ControlCliente extends HttpServlet {
             out1.println("DIRECCION:<input type='text'  name='direccion' placeholder='Direccion' class='input is-link'  required/> </div> <div class='column is-one-third'>");
             out1.println("AGREGAR<input type='submit' name='btn_agregar' value='Nuevo' id='btn_agregar' class='button is-link is-active is-fullwidth'></form> </div> </div>");
      
-        } else if ((!request.getParameter("btn").isEmpty())) {
+        
             this.daoCliente = new ClienteDao();
             this.registroList1 = new ArrayList();
             try {
-                response.setContentType("text/html; charset=iso-8859-1");
-                PrintWriter out1 = response.getWriter();
+                
                 this.registroList1 = daoCliente.getSelect();
-                out1.println("<script src=http://code.jquery.com/jquery-latest.js></script><script src=Ajax1.js></script> ");
+                
                 out1.println("<link rel='stylesheet' type='text/css' href='css/EstiloFactura.css'>");
                 out1.println("<table  class='table is-fullwidth' >");
+                out1.println("<TR><TD  colspan='6'>REGISTROS DE CLIENTE</TD></TR>");
                 out1.println("<TR bgcolor='#3EB429' ><TD>");
                 out1.println("<H4 ><font color='#FFF'>CODIGO<TD>");
                 out1.println("<H4><font color='#FFF'>NOMBRE<TD>");
@@ -96,12 +94,12 @@ public class ControlCliente extends HttpServlet {
                 out1.println(" <H4><font color='#FFF'>DIRECCION<TD>");
                 out1.println("  <H4><font color='#FFF'>SELECCIONAR</TD>");
                 for (Cliente registro : registroList1) {
-                    out1.println("<tr><td>" + registro.getCodigoCliente() + "</td>");
+                    out1.println("<tr id='regisCliente'><td>" + registro.getCodigoCliente() + "</td>");
                     out1.println("<td>" + registro.getNombre() + "</td>");
                     out1.println("<td>" + registro.getApellido() + "</td>");
                     out1.println("<td>" + registro.getTelefono() + "</td>");
                     out1.println("<td>" + registro.getDireccion() + "</td>");
-                    out1.println("<td></button><button class='button is-link is-outlined is-small agregarCliente' id='agregarCliente' value=" + registro.getCodigoCliente() + "> <img src='img/agregarFact.png' /></a></button>");
+                    out1.println("<td></button><button class='button is-link is-outlined is-small agregarCliente'  value=" + registro.getCodigoCliente() + "> <img src='img/agregarFact.png' /></a></button>");
                     out1.println("</button><button class='button is-danger is-outlined is-small btn_Eliminar' > <img src='img/basurero.png' /></a></button></td>");
 
                 }
@@ -112,7 +110,7 @@ public class ControlCliente extends HttpServlet {
                 Logger.getLogger(ControlCliente.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-        }
+    }
 
     }
 
@@ -129,9 +127,7 @@ public class ControlCliente extends HttpServlet {
         return correlativo;
     }
 
-    public void mostrar() {
 
-    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
