@@ -18,8 +18,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modelo.dao.ClienteDao;
 import modelo.dao.DaoProducto;
+import modelo.dao.VentaDao;
 import modelo.entidades.Cliente;
 import modelo.entidades.Producto;
+import modelo.entidades.Venta;
 
 /**
  *
@@ -32,15 +34,19 @@ public class ControladorProducto extends HttpServlet {
     private Producto registroproduc;
     private Producto registroproduc1;
     private DaoProducto daoProducto;
+    private Venta venta;
+    private VentaDao daoVenta;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         this.daoProducto = new DaoProducto();//
         this.registroproduc = new Producto();
+        this.venta = new Venta();
+        this.daoVenta = new VentaDao();
 
         
-            int idCliente, idProducto;
+            int idCliente, idProducto, id=0;
 
            
              if (request.getParameter("event").equals("2")) {
@@ -56,11 +62,13 @@ public class ControladorProducto extends HttpServlet {
             double total = 0;
             try {
                 this.registroproduc1 = daoProducto.getMax();
+                 venta = daoVenta.getSelectMax();
+                 id = venta.getMax() + 1;
             } catch (SQLException ex) {
                 Logger.getLogger(ControladorProducto.class.getName()).log(Level.SEVERE, null, ex);
             }
             
-            int id = registroproduc1.getMax() + 1;;
+           
             total = Integer.parseInt(request.getParameter("cantidad")) * registroproduc.getPrecioVenta();
 
             response.setContentType("text/html; charset=iso-8859-1");
@@ -71,7 +79,7 @@ public class ControladorProducto extends HttpServlet {
             out1.println("<table><tr ><td><td><td><td><td><td><td><td><td><td><td><td align='center' class='column is-one-third'>N° Factura<td>");
             out1.println("<form  name='Dato'> ");
             
-            out1.println("<input type='text'  name='factura' placeholder='Numero Factura' id='factura' value=" + crearCodigo("CF-", id) + " class='input is-success' readonly/>  ");
+            out1.println("<input type='text'  name='factura' placeholder='Numero Factura' id='factura' value=" + crearCodigo("NF-", id) + " class='input is-success' readonly/>  ");
             out1.println("</td></tr><tr><td class='column is-one-third'>");
             out1.println("Codigo:</td><td><input type='text'  name='codigopro' id='codigopro' class='input is-success codigopro' value=" + registroproduc.getCodigoProducto() + " readonly/></td><td>");
            out1.println("<td class='column is-one-third'>");

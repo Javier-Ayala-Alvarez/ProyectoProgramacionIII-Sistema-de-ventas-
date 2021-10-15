@@ -105,20 +105,19 @@ $(document).on('click', '#registrosProduct', function (e) {
     var codigoEmpleado = $("#codigoEmpleado").val();
     var precio = $("#precioUni").val();
     var codigoCliente = $("#codigoCliente").val();
-
-
-
-    alert("codigo" + codigoCliente + "?");
+    var fecha = $("#fecha").val();
+    alert("fecha" + fecha + "?");
 
     $.ajax({
-
         url: "ControlRegistro", type: 'POST', data: 'btn=4' +
                 '&producto=' + producto +
-                '&cantidadfactura=' + codigofactura +
+                '&codigofactura=' + codigofactura +
                 '&precioUni=' + precio +
                 '&codigoprducto=' + codigoprducto +
                 '&cantidad=' + cantidad +
                 '&codigoEmpleado=' + codigoEmpleado +
+                '&codigoCliente=' + codigoCliente +
+                '&fecha=' + fecha +
                 '&event=3',
 //        url: "ControlRegistro", type: 'POST', data: 'btn=4' + '&event=3',
         success: function (data) {
@@ -174,28 +173,28 @@ var codigoCliente;
 $(document).on('click', '#btn_modificarCliente1', function (e) {
     e.preventDefault();
     e.stopImmediatePropagation();
-    
+
     var nombre = $("#nombreClien").val();
     var apellido = $("#apellidoClien").val();
     var telefono = $("#telefonoClien").val();
     var direccion = $("#direccionClien").val();
     alert("Modificado con exito");
-        $.ajax({
-            //trabajando
-            url: "ControlCliente", type: 'POST', data: 'event=4'
-                    + '&ModificarClien='+ codigoCliente
-                    + '&nombre=' + nombre
-                    + '&apellido=' + apellido
-                    + '&telefono=' + telefono
-                    + '&direccion=' + direccion,
-            success: function (data) {
-                $("#data2").html(data);
-            }, error: function (xml, data) {
-                swal('Mensaje del sistema', 'Error', 'error');
-            }
-        });
-    
-    
+    $.ajax({
+        //trabajando
+        url: "ControlCliente", type: 'POST', data: 'event=4'
+                + '&ModificarClien=' + codigoCliente
+                + '&nombre=' + nombre
+                + '&apellido=' + apellido
+                + '&telefono=' + telefono
+                + '&direccion=' + direccion,
+        success: function (data) {
+            $("#data2").html(data);
+        }, error: function (xml, data) {
+            swal('Mensaje del sistema', 'Error', 'error');
+        }
+    });
+
+
 });
 $(document).on('click', '.btn_ModificarClienta', function (e) {
     e.preventDefault();
