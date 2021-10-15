@@ -38,6 +38,12 @@
             </li>
         </ul>
     </nav>
+    <div class="columns" id="datosCliente">
+       
+            <!-- MUESTRA DATOS Cliente Fecha y Empleado... -->
+
+    </div>
+
     <!-- FORMULARIO DE LA FACTURA ... -->
     <div class="columns" id="datosGenerales1" >
 
@@ -64,7 +70,7 @@
                         </section>
                         <footer class="modal-card-foot">
                             <button class="button is-success agregarProducto">Recargar</button>
-                            <form  action="javascript:cerrarCliente()" method="post">
+                            <form  action="javascript:cerrarProducto()" method="post">
                                 <button class="button">Cancel</button>
                             </form>
                         </footer>
@@ -91,48 +97,48 @@
                             <div id="data2"> </div>
                             <!-- Muestra El formulario---------------- ... -->  
 
-                                    </section>
-                                    <footer class="modal-card-foot">
-                                        <button class="button is-success btn_Cliente1">Recargar</button>
-                                        <form  action="javascript:cerrarCliente()" method="post">
-                                            <button class="button">Cancel</button>
-                                        </form>
+                        </section>
+                        <footer class="modal-card-foot">
+                            <button class="button is-success btn_Cliente1">Recargar</button>
+                            <form  action="javascript:cerrarCliente()" method="post">
+                                <button class="button">Cancel</button>
+                            </form>
 
-                                    </footer>
-                                </div>
-                            </div>
-                            <script>
+                        </footer>
+                    </div>
+                </div>
+                <script>
 
-                            </script>
-                            <script src="Ajax1.js"></script> 
-                            <script>
+                </script>
+                <script src="Ajax1.js"></script> 
+                <script>
 
-                                function abrirProducto() {
-                                    document.getElementById("vent").style.display = "block";
-                                }
-                                function cerrarProducto() {
-                                    document.getElementById("vent").style.display = "none";
+                    function abrirProducto() {
+                        document.getElementById("vent").style.display = "block";
+                    }
+                    function cerrarProducto() {
+                        document.getElementById("vent").style.display = "none";
 
-                                }
-                                function abrirCliente() {
-                                    document.getElementById("ventClien").style.display = "block";
-                                }
-                                function cerrarCliente() {
-                                    document.getElementById("ventClien").style.display = "none";
+                    }
+                    function abrirCliente() {
+                        document.getElementById("ventClien").style.display = "block";
+                    }
+                    function cerrarCliente() {
+                        document.getElementById("ventClien").style.display = "none";
 
-                                }
-                            </script>
+                    }
+                </script>
 
-                            <!-- TABLA DE LA FACTURA... -->  
+                <!-- TABLA DE LA FACTURA... -->  
 
-                            <section class ="section">
+                <section class ="section">
 
-                                <div class="columns" id="tablaregistro">
+                    <div class="columns" id="tablaregistro">
 
-                                </div>
-                                </body>
+                    </div>
+                    </body>
 
 
-                                </html>
+                    </html>
 
 

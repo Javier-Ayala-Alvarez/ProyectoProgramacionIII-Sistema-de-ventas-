@@ -28,7 +28,7 @@ nav > ul li{
 }
 .form-register{
     margin: 5px;
-    top: 2cm;
+    top: 3cm;
     left: 2cm;
     width:35cm;
     right: 3cm;
@@ -88,7 +88,17 @@ border-radius:10px;
     background: #FA1F0C;
 }
 
-
+.TABLE1{
+    margin: 5px;
+    top: 1.5cm;
+    left: 2cm;
+    width:35cm;
+    right: 3cm;
+    position: absolute;
+    font-family: arial;
+ 
+   
+}
 
 .TABLE3{
     left: 2cm;

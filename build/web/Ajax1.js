@@ -8,12 +8,13 @@ $("#btn_agregar").click(function (e) {
     datos.addEventListener("submit", cargarContenido, false);
 
 })
+
 ////Muestra los clientes en la vista de clientes en factura//
 $(".btn_Cliente1").click(function (e) {
     e.stopImmediatePropagation();
     $.ajax({
 
-        url: "ControlCliente", type:'POST', data:'btn=1&event=2',
+        url: "ControlCliente", type: 'POST', data: 'btn=1&event=2',
         success: function (data) {
             $("#data2").html(data);
         }, error: function (xml, data) {
@@ -21,12 +22,12 @@ $(".btn_Cliente1").click(function (e) {
         }
 
     });
-   
+
 });
 //Muestra los productos en la vista de producto en factura//
 $("#btn_Producto").click(function (e) {
     e.stopImmediatePropagation();
-   $.ajax({
+    $.ajax({
 
         url: "ControlProducto", type: 'POST', data: 'btn=4',
         success: function (data) {
@@ -50,33 +51,36 @@ $("#datosGenerales").click(function (e) {
         }
 
     });
-    
+
 });
 
 //Escucha el evento de agregar cliente a la vista principal//
-//$(document).on('click', '.agregarCliente', function (e) {
-//    e.preventDefault();
-//
-//    var codigoCliente = $(this).parent().parent().children().first().text();
-//
-//    $.ajax({
-//
-//        url: "ControladorProducto", type: 'POST', data: 'btn=4' + '&event=1&cantidad=0&codigo=' + codigoCliente,
-//        success: function (data) {
-//            $("#datosGenerales1").html(data);
-//        }, error: function (xml, data) {
-//            swal('Mensaje del sistema', 'Error', 'error');
-//        }
-//
-//    });
-//
-//});
+$(document).on('click', '.agregarCliente', function (e) {
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    var codigoCliente = $(this).parent().parent().children().first().text();
+    $.ajax({
+
+        url: "ControlSeleccionarCDE", type: 'POST', data: 'codigo=' + codigoCliente,
+
+        success: function (data) {
+            $("#datosCliente").html(data);
+        }, error: function (xml, data) {
+            swal('Mensaje del sistema', 'Error', 'error');
+        }
+
+    });
+
+
+});
+
+var codigo;
 var codigoProducto;
 $(document).on('click', '.agregarProducto', function (e) {
     e.stopImmediatePropagation();
     e.preventDefault();
 
-     codigoProducto = $(this).parent().parent().children().first().text();
+    codigoProducto = $(this).parent().parent().children().first().text();
 
     $.ajax({
 
@@ -94,8 +98,29 @@ $(document).on('click', '.agregarProducto', function (e) {
 $(document).on('click', '#registrosProduct', function (e) {
     e.stopImmediatePropagation();
     e.preventDefault();
+    var codigoprducto = $(".codigopro").val();
+    var codigofactura = $("#factura").val();
+    var producto = $("#producto").val();
+    var cantidad = $("#cantidad1").val();
+    var codigoEmpleado = $("#codigoEmpleado").val();
+    var precio = $("#precioUni").val();
+    var codigoCliente = $("#codigoCliente").val();
+
+
+
+    alert("codigo" + codigoCliente + "?");
+
     $.ajax({
-        url: "ControlRegistro", type: 'POST', data: 'btn=4' + '&event=3',
+
+        url: "ControlRegistro", type: 'POST', data: 'btn=4' +
+                '&producto=' + producto +
+                '&cantidadfactura=' + codigofactura +
+                '&precioUni=' + precio +
+                '&codigoprducto=' + codigoprducto +
+                '&cantidad=' + cantidad +
+                '&codigoEmpleado=' + codigoEmpleado +
+                '&event=3',
+//        url: "ControlRegistro", type: 'POST', data: 'btn=4' + '&event=3',
         success: function (data) {
             $("#tablaregistro").html(data);
         }, error: function (xml, data) {
@@ -107,28 +132,29 @@ $(document).on('click', '#registrosProduct', function (e) {
 });
 //Escucha el evento de agregar Producto a la vista principal//
 
-     
-    $(document).on('keyup','.cantidad',function(e){
-        e.stopImmediatePropagation();
-    var cantidad = $(".cantidad").val();
-            $.ajax({
-            url: "ControladorProducto", type: 'POST', data: 'event=2' + '&cantidad=' + cantidad + '&codigoproduc=' + codigoProducto,
-                    success: function (data) {
-                    $("#datosGenerales1").html(data);
-                    }, error: function (xml, data) {
-            swal('Mensaje del sistema', 'Error', 'error');
-            }
 
-        });
+$(document).on('keyup', '.cantidad', function (e) {
+    e.stopImmediatePropagation();
+    var cantidad = $(".cantidad").val();
+
+    $.ajax({
+        url: "ControladorProducto", type: 'POST', data: 'event=2' + '&cantidad=' + cantidad + '&codigoproduc=' + codigoProducto,
+        success: function (data) {
+            $("#datosGenerales1").html(data);
+        }, error: function (xml, data) {
+            swal('Mensaje del sistema', 'Error', 'error');
+        }
+
     });
+});
 
 
 //Elimina los clientes//
-$(document).on('click', '.btn_Eliminar', function(e) {
+$(document).on('click', '.btn_Eliminar', function (e) {
     e.preventDefault();
     e.stopImmediatePropagation();
     var codigoCliente = $(this).parent().parent().children().first().text();
-    
+
     var opcion = confirm("Deseas eliminar el cliente " + codigoCliente + "? ");
     if (opcion === true) {
         $.ajax({
@@ -136,7 +162,22 @@ $(document).on('click', '.btn_Eliminar', function(e) {
             url: "ControlCliente", type: 'POST', data: 'event=1' + '&Eliminar=' + codigoCliente,
         });
 
-    
+
+    }
+});
+$(document).on('click', '.btn_EliminarProducto', function (e) {
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    var codigoCliente = $(this).parent().parent().children().first().text();
+
+    var opcion = confirm("Deseas eliminar el cliente " + codigoCliente + "? ");
+    if (opcion === true) {
+        $.ajax({
+            //trabajando
+            url: "ControlCliente", type: 'POST', data: 'event=1' + '&Eliminar=' + codigoCliente,
+        });
+
+
     }
 });
 
@@ -151,14 +192,14 @@ function cargarContenido(event) {
     request.setRequestHeader("content-type", "application/x-www-form-urlencoded")
     request.send(crear_query_string());
     datos.reset();
-    
-    
+
+
 
 }
 function inicializarXHMHttpRequest() {
 
     request = new XMLHttpRequest();
-   
+
 }
 //Recive la respuesta segun el estado//
 function procesaRespuesta() {
@@ -176,14 +217,14 @@ function crear_query_string() {
     let apellido = datos.elements["apellido"].value;
     let telefono = datos.elements["telefono"].value;
     let direccion = datos.elements["direccion"].value;
-    
+
 
     return  "nombre=" + encodeURI(nombre) +
             "&apellido=" + encodeURI(apellido) +
             "&telefono=" + encodeURI(telefono) +
             "&direccion=" + encodeURI(direccion) +
             "&btn_agregar=1";
-    
+
 
 }
 
