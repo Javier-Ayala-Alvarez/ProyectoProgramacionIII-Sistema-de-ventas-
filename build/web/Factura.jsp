@@ -83,7 +83,7 @@
                     <div class="modal-background"></div>
                     <div class="modal-card">
                         <header class="modal-card-head">
-                            <p class="modal-card-title">CLIENTE</p>
+                            <p class="modal-card-title ">CLIENTE</p>
                             <form  action="javascript:cerrarCliente()" method="post">
                                 <button class="delete" aria-label="close" id="cerrar"></button>
 

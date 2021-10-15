@@ -72,6 +72,33 @@ public class ClienteDao {
         return false;
     }
 
+    public boolean update(Cliente obj) {
+        String sql = "update cliente set idcliente=?, codigocliente =?, nombre =?, apellido =?, telefonocliente =?, direccioncliente =? where idcliente= '" + obj.getIdCliente()+"'";
+        try {
+            con = conectar.getConexion();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, obj.getIdCliente());
+            ps.setString(2, obj.getCodigoCliente());
+            ps.setString(3, obj.getNombre());
+            ps.setString(4, obj.getApellido());
+            ps.setString(5, obj.getTelefono());
+            ps.setString(6, obj.getDireccion());
+            ps.execute();
+
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                ps.close();
+            } catch (Exception ex) {
+
+            }
+            conectar.cerrarConexiones();
+        }
+        return false;
+    }
+
     public Cliente getSelectTo(String codigo) throws SQLException {
 
         this.registroList = new ArrayList<>();

@@ -75,7 +75,7 @@ public class RegistrosDao {
 
         try {
             this.accesoDB = this.conexion.getConexion();
-             this.sql = "SELECT pr.codigoproducto codigo, pr.nombreproducto producto, r.cantidadproducto cantidad, pr.precioventa precio,"
+             this.sql = "SELECT r.idregistros id, pr.codigoproducto codigo, pr.nombreproducto producto, r.cantidadproducto cantidad, pr.precioventa precio,"
                     + " SUM ( r.cantidadproducto * pr.precioventa ) "
                     + "total FROM venta v INNER JOIN cliente cl ON v.idcliente = cl.idcliente "
                     + "INNER JOIN empleado e ON v.idempleado = e.idempleado "
@@ -83,11 +83,12 @@ public class RegistrosDao {
                     + "INNER JOIN producto pr ON r.idproducto = pr.idproducto "
                     + "WHERE v.estado = 0 and r.idventa = "
                     + "(SELECT idventa FROM venta WHERE idventa = '"+codigo+"')"
-                    + "GROUP BY pr.codigoproducto, pr.nombreproducto, r.cantidadproducto, pr.precioventa";
+                    + "GROUP BY r.idregistros, pr.codigoproducto, pr.nombreproducto, r.cantidadproducto, pr.precioventa";
             this.ps = accesoDB.prepareStatement(this.sql);
             this.rs = this.ps.executeQuery();
             while (this.rs.next()) {
                 registros = new Registros();
+                registros.setIdRegistros(rs.getInt("id"));
                 registros.setCodigoProducto(rs.getString("codigo"));
                 registros.setNombreProducto(rs.getString("producto"));
                 registros.setCantidadProducto(rs.getInt("cantidad"));

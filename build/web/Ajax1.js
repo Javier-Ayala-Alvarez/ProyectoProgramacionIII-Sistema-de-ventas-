@@ -8,7 +8,7 @@ $("#btn_agregar").click(function (e) {
     datos.addEventListener("submit", cargarContenido, false);
 
 })
-
+var codigoCliente;
 ////Muestra los clientes en la vista de clientes en factura//
 $(".btn_Cliente1").click(function (e) {
     e.stopImmediatePropagation();
@@ -58,7 +58,7 @@ $("#datosGenerales").click(function (e) {
 $(document).on('click', '.agregarCliente', function (e) {
     e.preventDefault();
     e.stopImmediatePropagation();
-    var codigoCliente = $(this).parent().parent().children().first().text();
+    codigoCliente = $(this).parent().parent().children().first().text();
     $.ajax({
 
         url: "ControlSeleccionarCDE", type: 'POST', data: 'codigo=' + codigoCliente,
@@ -160,15 +160,66 @@ $(document).on('click', '.btn_Eliminar', function (e) {
         $.ajax({
             //trabajando
             url: "ControlCliente", type: 'POST', data: 'event=1' + '&Eliminar=' + codigoCliente,
+            success: function (data) {
+                $("#data2").html(data);
+            }, error: function (xml, data) {
+                swal('Mensaje del sistema', 'Error', 'error');
+            }
         });
 
 
     }
 });
+var codigoCliente;
+$(document).on('click', '#btn_modificarCliente1', function (e) {
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    
+    var nombre = $("#nombreClien").val();
+    var apellido = $("#apellidoClien").val();
+    var telefono = $("#telefonoClien").val();
+    var direccion = $("#direccionClien").val();
+    alert("Modificado con exito");
+        $.ajax({
+            //trabajando
+            url: "ControlCliente", type: 'POST', data: 'event=4'
+                    + '&ModificarClien='+ codigoCliente
+                    + '&nombre=' + nombre
+                    + '&apellido=' + apellido
+                    + '&telefono=' + telefono
+                    + '&direccion=' + direccion,
+            success: function (data) {
+                $("#data2").html(data);
+            }, error: function (xml, data) {
+                swal('Mensaje del sistema', 'Error', 'error');
+            }
+        });
+    
+    
+});
+$(document).on('click', '.btn_ModificarClienta', function (e) {
+    e.preventDefault();
+    e.stopImmediatePropagation();
+    codigoCliente = $(this).parent().parent().children().first().text();
+
+
+    $.ajax({
+        //trabajando
+        url: "ControlCliente", type: 'POST', data: 'event=3' + '&Modificar=' + codigoCliente,
+        success: function (data) {
+            $("#data2").html(data);
+        }, error: function (xml, data) {
+            swal('Mensaje del sistema', 'Error', 'error');
+        }
+    });
+
+
+
+});
 $(document).on('click', '.btn_EliminarProducto', function (e) {
     e.preventDefault();
     e.stopImmediatePropagation();
-    var codigoCliente = $(this).parent().parent().children().first().text();
+    var codigoCliente = $(".btn_EliminarProducto").val();
 
     var opcion = confirm("Deseas eliminar el cliente " + codigoCliente + "? ");
     if (opcion === true) {

@@ -84,12 +84,12 @@ public class ControlRegistro extends HttpServlet {
                         out1.println("<tr><td align='center'>" + i + "</td>");
                         out1.println("<td align='center'>" + registro.getProducto().getCodigoProducto() + "</td>");
                         out1.println("<td align='center'>" + registro.getProducto().getNombreProducto() + "</td>");
-                        out1.println("<td align='center'>" + registro.getProducto().getPrecioVenta() + "</td>");
+                        out1.println("<td align='center'>" + "$" +String.format("%.2f", registro.getProducto().getPrecioVenta()) +"</td>");
                         out1.println("<td align='center'>" + registro.getCantidadProducto() + "</td>");
-                        out1.println("<td align='center'>" + registro.getPrecioTotalProducto() + "</td>");
+                        out1.println("<td align='center'>" + "$" +String.format("%.2f", registro.getPrecioTotalProducto()) + "</td>");
 
                         i++;
-                        out1.println("<td align='center'> <button class='button is-danger is-outlined btn_EliminarProducto'>Eliminar</a></button>'</td>");
+                        out1.println("<td align='center'> <button class='button is-danger is-outlined btn_EliminarProducto' value='"+registro.getIdRegistros()+"' id='btn_EliminarProducto'>Eliminar</a></button></td>");
                     }
 
                     this.ventasList = daoVenta.getVentaTo(1);
