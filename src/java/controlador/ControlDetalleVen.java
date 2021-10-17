@@ -19,35 +19,24 @@ import javax.servlet.http.HttpServletResponse;
 import modelo.dao.RegistrosDao;
 import modelo.entidades.Registros;
 
-/**
- *
- * @author Francisco Javier
- */
 @WebServlet(name = "ControlDetalleVen", urlPatterns = {"/ControlDetalleVen"})
 public class ControlDetalleVen extends HttpServlet {
-private RegistrosDao daoRegistro;
+
+    private RegistrosDao daoRegistro;
     private ArrayList<Registros> registroList;
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        //Incio: Mostrara datos en la vista de detalles venta en administracion//
         try {
-            String codigo =request.getParameter("id");
-                //request.setAttribute("idV",codigo);
+            String codigo = request.getParameter("id");
             this.daoRegistro = new RegistrosDao();
             this.registroList = new ArrayList<>();
             this.registroList = daoRegistro.getRegistros(codigo);
             request.setAttribute("registroList", this.registroList);
             request.getRequestDispatcher("RegistrosVenta.jsp").forward(request, response);
-        }catch (SQLException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(ControladorVenta.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

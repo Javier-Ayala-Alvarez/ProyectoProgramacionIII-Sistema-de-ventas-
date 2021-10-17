@@ -20,15 +20,10 @@
     <!-- OPCCIONES ... -->
     <nav>
         <ul>
-
-
+             <!-- Boton pata nuevaFactura ... -->
             <li> <input type="submit" name="ReFactura" value="Nueva Factura" id="datosGenerales" class="btn-enviar "></li>
-
-
-            <li> 
-                
-            </li>
             <li>
+                 <!-- Boton para cerrar Factura... -->
                 <form action="index.html" method="post">
                     <input type="submit" name="ReFactura" value="Cerrar" class="btn-enviar">
 
@@ -37,26 +32,20 @@
         </ul>
     </nav>
     <div class="columns" id="datosCliente">
-       
             <!-- MUESTRA DATOS Cliente Fecha y Empleado... -->
-
     </div>
-
     <!-- FORMULARIO DE LA FACTURA ... -->
     <div class="columns" id="datosGenerales1" >
-
-
         <!-- MUESTRA DATOS GENERALES ... -->
-
     </div>
     <!-- VENTANA MODAL PRODUCTO ... -->
-
     <div class="modal" id="vent">
         <div class="modal-background"></div>
         <div class="modal-card">
             <header class="modal-card-head">
                 <p class="modal-card-title">PRODUCTO</p>
                 <form  action="javascript:cerrarProducto()" method="post">
+                     <!-- Boton para cerrar ventana Modal ... -->
                     <button class="delete" aria-label="close" id="cerrar"></button>
                 </form>
             </header>
@@ -68,6 +57,7 @@
                         </section>
                         <footer class="modal-card-foot">
                             <button class="button is-success agregarProducto">Recargar</button>
+                            <!-- Boton para cerrar ventana Modal ... -->
                             <form  action="javascript:cerrarProducto()" method="post">
                                 <button class="button">Cancel</button>
                             </form>
@@ -82,6 +72,7 @@
                     <div class="modal-card">
                         <header class="modal-card-head">
                             <p class="modal-card-title ">CLIENTE</p>
+                            <!-- Boton para cerrar ventana Modal ... -->
                             <form  action="javascript:cerrarCliente()" method="post">
                                 <button class="delete" aria-label="close" id="cerrar"></button>
 
@@ -97,7 +88,9 @@
 
                         </section>
                         <footer class="modal-card-foot">
+                            <!-- Boton para Recargar los datos... -->
                             <button class="button is-success btn_Cliente1">Recargar</button>
+                            <!-- Boton para cerrar ventana Modal ... -->
                             <form  action="javascript:cerrarCliente()" method="post">
                                 <button class="button">Cancel</button>
                             </form>
@@ -105,9 +98,7 @@
                         </footer>
                     </div>
                 </div>
-                <script>
-
-                </script>
+        <!-- Funciones para abrir o cerrar ventanas modales ... -->
                 <script src="Ajax1.js"></script> 
                 <script>
 

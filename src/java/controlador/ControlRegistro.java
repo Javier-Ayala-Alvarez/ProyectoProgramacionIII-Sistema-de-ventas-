@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package controlador;
 
 import java.io.IOException;
@@ -45,6 +41,7 @@ public class ControlRegistro extends HttpServlet {
     private Registros registroVenta;
     private List<Registros> lista = new ArrayList();
     private double total = 0;
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
@@ -59,10 +56,10 @@ public class ControlRegistro extends HttpServlet {
         this.cliente = new Cliente();
         this.daoCliente = new ClienteDao();
         this.registroVenta = new Registros();
-         PrintWriter out1 = response.getWriter();
+        PrintWriter out1 = response.getWriter();
         try (PrintWriter out = response.getWriter()) {
             if ((!request.getParameter("btn").isEmpty())) {
-                if (request.getParameter("event").equals("3")) {
+                if (request.getParameter("event").equals("AgregarRegistro")) {
                     response.setContentType("text/html; charset=iso-8859-1");
 
 //                    try {
@@ -82,14 +79,32 @@ public class ControlRegistro extends HttpServlet {
 //                    } catch (SQLException ex) {
 //
 //                    }
+                    if (lista.size() < 6) {
+                        if (!request.getParameter("codigoprducto").equals("null")) {
+                            if (Integer.parseInt(request.getParameter("cantidad")) > 0) {
+                                registroVenta.setCodigoProducto(request.getParameter("codigoprducto"));
+                                registroVenta.setNombreProducto(request.getParameter("producto"));
+                                registroVenta.setCantidadProducto(Integer.parseInt(request.getParameter("cantidad")));
+                                registroVenta.setPrecioVentaProducto(Double.parseDouble(request.getParameter("precioUni")));
+                                registroVenta.setPrecioTotalProducto(Double.parseDouble(request.getParameter("preciototal1")));
+                                this.lista.add(registroVenta);
+                            } else {
+                                out1.println("<script>alert('Ingrese cantidad'); </script>");
+                            }
+                        } else {
+                            out1.println("<script>alert('Seleccione un Producto'); </script>");
+                        }
+                    } else {
+                        out1.println("<script>alert('Debe generar una nueva Factura'); </script>");
+                    }
 
-                    registroVenta.setCodigoProducto(request.getParameter("codigoprducto"));
-                    registroVenta.setNombreProducto(request.getParameter("producto"));
-                    registroVenta.setCantidadProducto(Integer.parseInt(request.getParameter("cantidad")));
-                    registroVenta.setPrecioVentaProducto(Double.parseDouble(request.getParameter("precioUni")));
-                    registroVenta.setPrecioTotalProducto(Double.parseDouble(request.getParameter("preciototal1")));
-                    this.total = total + Double.parseDouble(request.getParameter("preciototal1"));
-                    this.lista.add(registroVenta);
+                }
+                if (request.getParameter("event").equals("cancelarFactura")) {
+                    this.lista.clear();
+                    this.total = 0;
+                }
+                if (request.getParameter("event").equals("eliminarId")) {
+                    this.lista.remove(Integer.parseInt(request.getParameter("Eliminar")));
                 }
                 out1.println("<div class='column'> <div class='TABLE3'> <table  class='table is-fullwidth'> <TR><TD bgcolor='#3EB429> <H4 ><font color='#fff'>N°<TD bgcolor='#3EB429' >"
                         + "<H4 ><font color='#fff'>CODIGO<TD bgcolor='#3EB429' > <H4><font color='#fff'>PRODUCTO<TD bgcolor='#3EB429' ><H4><font color='#fff'>CANTIDAD<TD bgcolor='#3EB429' >"
@@ -97,27 +112,27 @@ public class ControlRegistro extends HttpServlet {
                 int i = 0;
                 for (Registros registro : lista) {
                     out1.println("<tr><td align='center'>" + i + "</td>");
-                    out1.println("<td align='center'>"+registro.getProducto().getCodigoProducto()+"</td>");
+
+                    out1.println("<td align='center'>" + registro.getProducto().getCodigoProducto() + "</td>");
                     out1.println("<td align='center'>" + registro.getProducto().getNombreProducto() + "</td>");
                     out1.println("<td align='center'>" + registro.getCantidadProducto() + "</td>");
                     out1.println("<td align='center'>" + "$" + String.format("%.2f", registro.getProducto().getPrecioVenta()) + "</td>");
-                    
-                      out1.println("<td align='center'>" + "$" + String.format("%.2f", registro.getPrecioTotalProducto()) + "</td>");
-
+                    out1.println("<td align='center'>" + "$" + String.format("%.2f", registro.getPrecioTotalProducto()) + "</td>");
                     i++;
                     out1.println("<td align='center'> <button class='button is-danger is-outlined btn_EliminarProducto' value='" + registro.getIdRegistros() + "' id='btn_EliminarProducto'>Eliminar</a></button></td>");
+                    this.total = total + registro.getPrecioTotalProducto();
                 }
-                    out1.println("</tr></table>  </div>  </div>");
-                    out1.println("<!-- TOTALES DE LA FACTURA ... -->");
-                    out1.println("<div  class='form-register1'>");
-                    out1.println("<table><tr><td>");
-                    out1.println(" <form>");
-                    out1.println("<td><input type='submit' name='ReFactura' value='Facturar' class='button is-link is-active'>");
-                    out1.println("<td> <input type = 'submit' name = 'ReFactura' value = 'Cancelar' class='button is-danger'>");
-                    out1.println("<td class='column is-one-third'> Total:");
-                    out1.println("<td> <input type='text'  name='Usuario' placeholder='Total' value='"+this.total+"' class='input is-success'/>");
-                    out1.println("</form> </td> </tr> </table>");
-
+                out1.println("</tr></table>  </div>  </div>");
+                out1.println("<!-- TOTALES DE LA FACTURA ... -->");
+                out1.println("<div  class='form-register1'>");
+                out1.println("<table><tr><td>");
+                out1.println(" <form>");
+                out1.println("<td><input type='submit' name='ReFactura' value='Facturar' class='button is-link is-active'>");
+                out1.println("<td> <input type = 'submit' name = 'ReFactura' id='cancelarFactura' value = 'Cancelar' class='button is-danger'>");
+                out1.println("<td class='column is-one-third'> Total:");
+                out1.println("<td> <input type='text'  name='Usuario' placeholder='Total' value='" + this.total + "' class='input is-success'/>");
+                out1.println("</form> </td> </tr> </table>");
+                this.total = 0;
 
             }
 

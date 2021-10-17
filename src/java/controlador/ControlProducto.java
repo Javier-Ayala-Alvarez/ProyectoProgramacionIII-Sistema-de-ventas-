@@ -18,34 +18,21 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import modelo.dao.ClienteDao;
+
 import modelo.dao.DaoProducto;
-import modelo.entidades.Cliente;
+
 import modelo.entidades.Producto;
 
-/**
- *
- * @author Francisco Javier
- */
 @WebServlet(urlPatterns = {"/ControlProducto"})
 public class ControlProducto extends HttpServlet {
 private ArrayList<Producto> registroList;
     private DaoProducto daoProducto;
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
-            /* TODO output your page here. You may use following sample code. */
           if ((!request.getParameter("btn").isEmpty())) {
+              //Factura: Mostrar los registros de productos
             this.daoProducto = new DaoProducto();
             this.registroList = new ArrayList();
             response.setContentType( "text/html; charset=iso-8859-1" );

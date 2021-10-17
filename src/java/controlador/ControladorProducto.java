@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controlador;
 
 import java.io.IOException;
@@ -22,11 +17,6 @@ import modelo.dao.VentaDao;
 import modelo.entidades.Cliente;
 import modelo.entidades.Producto;
 import modelo.entidades.Venta;
-
-/**
- *
- * @author Francisco Javier
- */
 @WebServlet(name = "ControladorProducto", urlPatterns = {"/ControladorProducto"})
 public class ControladorProducto extends HttpServlet {
 
@@ -46,7 +36,8 @@ public class ControladorProducto extends HttpServlet {
 
         int idCliente, idProducto, id = 0;
 
-        if (request.getParameter("event").equals("2")) {
+        if (request.getParameter("event").equals("SeleccionarProducto")) {
+            //ControladoProducto: Mostrara los productos seleccionado en los datos generales
             try {
                 this.registroproduc = daoProducto.getSelectTo(request.getParameter("codigoproduc"));
                 idProducto = registroproduc.getIdProducto();

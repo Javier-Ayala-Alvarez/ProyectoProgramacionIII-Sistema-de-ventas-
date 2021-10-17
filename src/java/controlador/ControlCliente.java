@@ -19,17 +19,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modelo.dao.ClienteDao;
-import modelo.dao.RegistrosDao;
-import modelo.dao.VentaDao;
 import modelo.entidades.Cliente;
-import modelo.entidades.Registros;
-import modelo.entidades.Venta;
-import org.json.simple.JSONArray;
 
-/**
- *
- * @author Francisco Javier
- */
 @WebServlet(name = "ControlCliente", urlPatterns = {"/ControlCliente"})
 public class ControlCliente extends HttpServlet {
 
@@ -38,24 +29,16 @@ public class ControlCliente extends HttpServlet {
     private ClienteDao daoCliente;
     Cliente cliente;
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         this.daoCliente = new ClienteDao();// 
-        registroList = new Cliente();
+        this.registroList = new Cliente();
         PrintWriter out1 = response.getWriter();
         String nombre = "", apellido = "", telefono = "", direccion = "", valor = "Nuevo", id1 = "btn_agregar";
         out1.println("<script src=https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js></script><script src=Ajax1.js></script> ");
         if (request.getParameter("btn_agregar") != null) {
+            //ControlCliente: agregar un nuevo cliente//
             try {
 
                 this.registroList = daoCliente.getMax();
@@ -66,10 +49,12 @@ public class ControlCliente extends HttpServlet {
                 Logger.getLogger(ControlCliente.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        if (request.getParameter("event").equals("1")) {
+        if (request.getParameter("event").equals("btn_EliminarCliente")) {
+            //ControlCliente: Eliminar Un cliente
             daoCliente.delete(request.getParameter("Eliminar"));
         }
-        if (request.getParameter("event").equals("4")) {
+        if (request.getParameter("event").equals("ModificarCliente")) {
+            //ControlCliente: Modificar Un cliente
             try {
                 this.registroList = daoCliente.getSelectTo(request.getParameter("ModificarClien"));
                 registroList.setIdCliente(registroList.getIdCliente());
@@ -85,7 +70,8 @@ public class ControlCliente extends HttpServlet {
 
         }
 
-        if (request.getParameter("event").equals("3")) {
+        if (request.getParameter("event").equals("Cambiarnombre")) {
+            //ControlCliente: resetiar datos;
             try {
                 this.registroList = daoCliente.getSelectTo(request.getParameter("Modificar"));
                 nombre = registroList.getNombre();
@@ -98,7 +84,7 @@ public class ControlCliente extends HttpServlet {
                 Logger.getLogger(ControlCliente.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        // if (request.getParameter("event").equals("2")) {
+        //Factura: Mostrar Datos
 
         out1.println("<link rel='stylesheet' type='text/css' href='css/EstiloFactura.css'>");
         out1.println("<form name='Cliente' method='post'><div class='columns'>");
@@ -108,7 +94,7 @@ public class ControlCliente extends HttpServlet {
         out1.println("<div class='column'>TELEFONO:<input type='text'  name='telefono' id='telefonoClien' placeholder='Telefono' value='" + telefono + "' class='input is-link' pattern='[0-9]+' minlength='8' maxlength='8' required/> </div> <div class='column'>");
         out1.println("DIRECCION:<input type='text'  name='direccion' placeholder='Direccion' id='direccionClien' class='input is-link' value='" + direccion + "' required/> </div> <div class='column is-one-third'>");
         out1.println("AGREGAR<input type='submit' name='btn_agregar' value='" + valor + "' id='" + id1 + "' class='button is-link is-active is-fullwidth'></form> </div> </div>");
-
+//Factura: Mostrar Datos
         this.daoCliente = new ClienteDao();
         this.registroList1 = new ArrayList();
         try {
@@ -143,8 +129,8 @@ public class ControlCliente extends HttpServlet {
             Logger.getLogger(ControlCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        // }
     }
+///Crear Codigo
 
     public String crearCodigo(String a, int corre) {
         String correlativo = a;

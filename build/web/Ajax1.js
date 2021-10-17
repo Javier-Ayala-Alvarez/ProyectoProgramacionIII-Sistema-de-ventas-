@@ -1,15 +1,18 @@
 var READY_STATE_COMPLETE = 4;
 var request, datos;
+var codigoCliente;
+var codigo;
+var codigoProducto;
 
-//Muestra los clientes en la vista de clientes en factura y ademas agrega uno nuevo//
+//ControlCliente:  Muestra los registros en la ventana modal cliente y agrega nuevo cliente//
 $("#btn_agregar").click(function (e) {
     e.stopImmediatePropagation();
     datos = document.forms["Cliente"];
     datos.addEventListener("submit", cargarContenido, false);
 
 })
-var codigoCliente;
-////Muestra los clientes en la vista de clientes en factura//
+
+////Factura: Muestra los regsitros en la ventana modal Cliente//
 $(".btn_Cliente1").click(function (e) {
     e.stopImmediatePropagation();
     $.ajax({
@@ -24,7 +27,7 @@ $(".btn_Cliente1").click(function (e) {
     });
 
 });
-//Muestra los productos en la vista de producto en factura//
+//Factura: Muestra los productos en la ventana modal producto//
 $("#btn_Producto").click(function (e) {
     e.stopImmediatePropagation();
     $.ajax({
@@ -38,7 +41,7 @@ $("#btn_Producto").click(function (e) {
 
     });
 });
-//Agrega los datos generales en la vista de factura//
+//Factura: Muestra el formulario de registros de una factura//
 $("#datosGenerales").click(function (e) {
     e.stopImmediatePropagation();
     $.ajax({
@@ -55,7 +58,7 @@ $("#datosGenerales").click(function (e) {
 
 });
 
-//Escucha el evento de agregar cliente a la vista principal//
+//ControlCliente: Al seleccionar un cliente este se agregara al formulario de encabezado de factura//
 $(document).on('click', '.agregarCliente', function (e) {
     e.preventDefault();
     e.stopImmediatePropagation();
@@ -74,9 +77,7 @@ $(document).on('click', '.agregarCliente', function (e) {
 
 
 });
-
-var codigo;
-var codigoProducto;
+//ControlProducto: Al seleccionar los productos seran mostrados en el encabezado de la fractura//
 $(document).on('click', '.agregarProducto', function (e) {
     e.stopImmediatePropagation();
     e.preventDefault();
@@ -85,7 +86,7 @@ $(document).on('click', '.agregarProducto', function (e) {
 
     $.ajax({
 
-        url: "ControladorProducto", type: 'POST', data: 'btn=4' + '&event=2&cantidad=0&codigoproduc=' + codigoProducto,
+        url: "ControladorProducto", type: 'POST', data: 'btn=4' + '&event=SeleccionarProducto&cantidad=0&codigoproduc=' + codigoProducto,
         success: function (data) {
             $("#datosGenerales1").html(data);
         }, error: function (xml, data) {
@@ -95,7 +96,7 @@ $(document).on('click', '.agregarProducto', function (e) {
     });
 
 });
-
+//ControladorProducto: Enviara los registros de una factura y los hara visibles en una tabla//
 $(document).on('click', '#registrosProduct', function (e) {
     e.stopImmediatePropagation();
     e.preventDefault();
@@ -111,7 +112,24 @@ $(document).on('click', '#registrosProduct', function (e) {
                 '&codigoprducto=' + codigoprducto +
                 '&cantidad=' + cantidad +
                 '&preciototal1=' + preciototal +
-                '&event=3',
+                '&event=AgregarRegistro',
+        success: function (data) {
+            $("#tablaregistro").html(data);
+        }, error: function (xml, data) {
+            swal('Mensaje del sistema', 'Error', 'error');
+        }
+
+    });
+
+});
+//ControlRegistro: cancelara la factura antes de guardar en la base de datos//
+$(document).on('click', '#cancelarFactura', function (e) {
+    e.stopImmediatePropagation();
+    e.preventDefault();
+
+    $.ajax({
+        url: "ControlRegistro", type: 'POST', data: 'btn=4' +
+                '&event=cancelarFactura',
 //        url: "ControlRegistro", type: 'POST', data: 'btn=4' + '&event=3',
         success: function (data) {
             $("#tablaregistro").html(data);
@@ -158,13 +176,13 @@ $(document).on('click', '#registrosProduct', function (e) {
 //});
 //Escucha el evento de agregar Producto a la vista principal//
 
-
+//ControladorProducto: lee la informacion de cantidad para mostrar el total//
 $(document).on('keyup', '.cantidad', function (e) {
     e.stopImmediatePropagation();
     var cantidad = $(".cantidad").val();
 
     $.ajax({
-        url: "ControladorProducto", type: 'POST', data: 'event=2' + '&cantidad=' + cantidad + '&codigoproduc=' + codigoProducto,
+        url: "ControladorProducto", type: 'POST', data: 'event=SeleccionarProducto' + '&cantidad=' + cantidad + '&codigoproduc=' + codigoProducto,
         success: function (data) {
             $("#datosGenerales1").html(data);
         }, error: function (xml, data) {
@@ -175,28 +193,27 @@ $(document).on('keyup', '.cantidad', function (e) {
 });
 
 
-//Elimina los clientes//
+//ControlCliente: Elimina los clientes//
 $(document).on('click', '.btn_Eliminar', function (e) {
     e.preventDefault();
     e.stopImmediatePropagation();
     var codigoCliente = $(this).parent().parent().children().first().text();
-
-    var opcion = confirm("Deseas eliminar el cliente " + codigoCliente + "? ");
+var opcion = confirm("Deseas eliminar el Cliente " + codigoCliente + "? ");
     if (opcion === true) {
         $.ajax({
             //trabajando
-            url: "ControlCliente", type: 'POST', data: 'event=1' + '&Eliminar=' + codigoCliente,
+            url: "ControlCliente", type: 'POST', data: 'event=btn_EliminarCliente' + '&Eliminar=' + codigoCliente,
             success: function (data) {
                 $("#data2").html(data);
             }, error: function (xml, data) {
                 swal('Mensaje del sistema', 'Error', 'error');
             }
         });
-
-
     }
+
+    
 });
-var codigoCliente;
+//ControlCliente:  Modifica Los clientes ya registrado//
 $(document).on('click', '#btn_modificarCliente1', function (e) {
     e.preventDefault();
     e.stopImmediatePropagation();
@@ -207,8 +224,8 @@ $(document).on('click', '#btn_modificarCliente1', function (e) {
     var direccion = $("#direccionClien").val();
     alert("Modificado con exito");
     $.ajax({
-        //trabajando
-        url: "ControlCliente", type: 'POST', data: 'event=4'
+
+        url: "ControlCliente", type: 'POST', data: 'event=ModificarCliente'
                 + '&ModificarClien=' + codigoCliente
                 + '&nombre=' + nombre
                 + '&apellido=' + apellido
@@ -223,6 +240,7 @@ $(document).on('click', '#btn_modificarCliente1', function (e) {
 
 
 });
+//ControlCliente: llenara los campos para ser modificados//
 $(document).on('click', '.btn_ModificarClienta', function (e) {
     e.preventDefault();
     e.stopImmediatePropagation();
@@ -231,7 +249,7 @@ $(document).on('click', '.btn_ModificarClienta', function (e) {
 
     $.ajax({
         //trabajando
-        url: "ControlCliente", type: 'POST', data: 'event=3' + '&Modificar=' + codigoCliente,
+        url: "ControlCliente", type: 'POST', data: 'event=Cambiarnombre' + '&Modificar=' + codigoCliente,
         success: function (data) {
             $("#data2").html(data);
         }, error: function (xml, data) {
@@ -242,20 +260,22 @@ $(document).on('click', '.btn_ModificarClienta', function (e) {
 
 
 });
+//ControlRegistro: Elimina los productos que ya estan agregados en las ventas//
 $(document).on('click', '.btn_EliminarProducto', function (e) {
     e.preventDefault();
     e.stopImmediatePropagation();
-    var codigoCliente = $(".btn_EliminarProducto").val();
-
-    var opcion = confirm("Deseas eliminar el cliente " + codigoCliente + "? ");
-    if (opcion === true) {
+   var idProducto = $(this).parent().parent().children().first().text();
         $.ajax({
-            //trabajando
-            url: "ControlCliente", type: 'POST', data: 'event=1' + '&Eliminar=' + codigoCliente,
-        });
+        url: "ControlRegistro", type: 'POST', data: 'btn=4' +
+                '&event=eliminarId' + '&Eliminar=' + idProducto,
 
+        success: function (data) {
+            $("#tablaregistro").html(data);
+        }, error: function (xml, data) {
+            swal('Mensaje del sistema', 'Error', 'error');
+        }
 
-    }
+    });
 });
 
 
