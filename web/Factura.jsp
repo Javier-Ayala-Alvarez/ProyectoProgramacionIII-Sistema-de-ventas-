@@ -22,13 +22,11 @@
         <ul>
 
 
-            <li> <input type="submit" name="ReFactura" value="Nueva Factura" id="datosGenerales" class="btn-enviar"></li>
+            <li> <input type="submit" name="ReFactura" value="Nueva Factura" id="datosGenerales" class="btn-enviar "></li>
 
 
             <li> 
-                <form action="javascript:abrirCliente()" method="post">
-                    <input type="submit" name="ReFactura" value="Cliente" class="btn-enviar btn_Cliente1">
-                </form>
+                
             </li>
             <li>
                 <form action="index.html" method="post">

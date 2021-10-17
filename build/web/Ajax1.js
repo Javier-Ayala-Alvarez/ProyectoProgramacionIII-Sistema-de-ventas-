@@ -51,6 +51,7 @@ $("#datosGenerales").click(function (e) {
         }
 
     });
+    
 
 });
 
@@ -99,25 +100,17 @@ $(document).on('click', '#registrosProduct', function (e) {
     e.stopImmediatePropagation();
     e.preventDefault();
     var codigoprducto = $(".codigopro").val();
-    var codigofactura = $("#factura").val();
-    var producto = $("#producto").val();
+    var producto = $("#producto1").val();
     var cantidad = $("#cantidad1").val();
-    var codigoEmpleado = $("#codigoEmpleado").val();
-    var precio = $("#precioUni").val();
-    var codigoCliente = $("#codigoCliente").val();
-    var fecha = $("#fecha").val();
-    alert("fecha" + fecha + "?");
-
+    var precio = $("#precioUni1").val();
+    var preciototal = $("#preciototal1").val();
     $.ajax({
         url: "ControlRegistro", type: 'POST', data: 'btn=4' +
                 '&producto=' + producto +
-                '&codigofactura=' + codigofactura +
                 '&precioUni=' + precio +
                 '&codigoprducto=' + codigoprducto +
                 '&cantidad=' + cantidad +
-                '&codigoEmpleado=' + codigoEmpleado +
-                '&codigoCliente=' + codigoCliente +
-                '&fecha=' + fecha +
+                '&preciototal1=' + preciototal +
                 '&event=3',
 //        url: "ControlRegistro", type: 'POST', data: 'btn=4' + '&event=3',
         success: function (data) {
@@ -129,6 +122,40 @@ $(document).on('click', '#registrosProduct', function (e) {
     });
 
 });
+//$(document).on('click', '#registrosProduct', function (e) {
+//    e.stopImmediatePropagation();
+//    e.preventDefault();
+//    var codigoprducto = $(".codigopro").val();
+//    var codigofactura = $("#factura").val();
+//    var producto = $("#producto").val();
+//    var cantidad = $("#cantidad1").val();
+//    var codigoEmpleado = $("#codigoEmpleado").val();
+//    var precio = $("#precioUni").val();
+//    var codigoCliente = $("#codigoCliente").val();
+//    var fecha = $("#fecha").val();
+//    alert("fecha" + fecha + "?");
+//
+//    $.ajax({
+//        url: "ControlRegistro", type: 'POST', data: 'btn=4' +
+//                '&producto=' + producto +
+//                '&codigofactura=' + codigofactura +
+//                '&precioUni=' + precio +
+//                '&codigoprducto=' + codigoprducto +
+//                '&cantidad=' + cantidad +
+//                '&codigoEmpleado=' + codigoEmpleado +
+//                '&codigoCliente=' + codigoCliente +
+//                '&fecha=' + fecha +
+//                '&event=3',
+////        url: "ControlRegistro", type: 'POST', data: 'btn=4' + '&event=3',
+//        success: function (data) {
+//            $("#tablaregistro").html(data);
+//        }, error: function (xml, data) {
+//            swal('Mensaje del sistema', 'Error', 'error');
+//        }
+//
+//    });
+//
+//});
 //Escucha el evento de agregar Producto a la vista principal//
 
 

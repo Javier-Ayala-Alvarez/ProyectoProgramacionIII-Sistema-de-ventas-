@@ -69,7 +69,7 @@ public class RegistrosDao {
         }
         return this.registroList;
     }
-    public ArrayList<Registros> getRegistros1(int codigo) throws SQLException {
+    public ArrayList<Registros> getRegistros1(String codigo) throws SQLException {
 
         this.registroList = new ArrayList<>();
 
@@ -82,7 +82,7 @@ public class RegistrosDao {
                     + "INNER JOIN registros r ON r.idventa = v.idventa "
                     + "INNER JOIN producto pr ON r.idproducto = pr.idproducto "
                     + "WHERE v.estado = 0 and r.idventa = "
-                    + "(SELECT idventa FROM venta WHERE idventa = '"+codigo+"')"
+                    + "(SELECT idventa FROM venta WHERE nfactura = '"+codigo+"')"
                     + "GROUP BY r.idregistros, pr.codigoproducto, pr.nombreproducto, r.cantidadproducto, pr.precioventa";
             this.ps = accesoDB.prepareStatement(this.sql);
             this.rs = this.ps.executeQuery();

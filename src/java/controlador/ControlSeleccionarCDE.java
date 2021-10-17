@@ -57,7 +57,7 @@ public class ControlSeleccionarCDE extends HttpServlet {
                     out1.println(" <div class='column is-one-third'>");
                     out1.println("Fecha: </td><td><input type='date'  name='fecha' id='fecha' class='input is-link' /></td><td>");
                     out1.println("<div class='column is-one-third'>");
-                    out1.println("Codigo Empleado: </td><td><input type='text'  name='codigoEmpleado' id='codigoEmpleado' class='input is-link' /></td><td></td><td>");
+                    out1.println("Codigo Empleado: </td><td><input type='text'  name='codigoEmpleado' id='codigoEmpleado' value='CE0001' class='input is-link' /></td><td></td><td>");
                     out1.println("Empleado:</td><td><input type='text'  name='nombreEmpleado' id='nombreEmpleado' class='input is-link' /></td><td><tr></table></div>");
 
                 } catch (SQLException ex) {

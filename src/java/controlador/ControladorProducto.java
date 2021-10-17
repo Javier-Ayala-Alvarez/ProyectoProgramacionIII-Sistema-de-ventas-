@@ -30,7 +30,6 @@ import modelo.entidades.Venta;
 @WebServlet(name = "ControladorProducto", urlPatterns = {"/ControladorProducto"})
 public class ControladorProducto extends HttpServlet {
 
-    
     private Producto registroproduc;
     private Producto registroproduc1;
     private DaoProducto daoProducto;
@@ -45,61 +44,57 @@ public class ControladorProducto extends HttpServlet {
         this.venta = new Venta();
         this.daoVenta = new VentaDao();
 
-        
-            int idCliente, idProducto, id=0;
+        int idCliente, idProducto, id = 0;
 
-           
-             if (request.getParameter("event").equals("2")) {
-                try {
-                    this.registroproduc = daoProducto.getSelectTo(request.getParameter("codigoproduc"));
-                    idProducto = registroproduc.getIdProducto();
-
-                } catch (SQLException ex) {
-
-                }
-            }
-          
-            double total = 0;
+        if (request.getParameter("event").equals("2")) {
             try {
-                this.registroproduc1 = daoProducto.getMax();
-                 venta = daoVenta.getSelectMax();
-                 id = venta.getMax() + 1;
-            } catch (SQLException ex) {
-                Logger.getLogger(ControladorProducto.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-           
-            total = Integer.parseInt(request.getParameter("cantidad")) * registroproduc.getPrecioVenta();
+                this.registroproduc = daoProducto.getSelectTo(request.getParameter("codigoproduc"));
+                idProducto = registroproduc.getIdProducto();
 
-            response.setContentType("text/html; charset=iso-8859-1");
-            PrintWriter out1 = response.getWriter();
-            out1.println("<div  class='form-register'>");
-            out1.println("<script src=https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js></script><script src=Ajax1.js></script> ");
-            out1.println("<link rel='stylesheet' type='text/css' href='css/EstiloFactura.css'>");
-            out1.println("<table><tr ><td><td><td><td><td><td><td><td><td><td><td><td align='center' class='column is-one-third'>N° Factura<td>");
-            out1.println("<form  name='Dato'> ");
-            
-            out1.println("<input type='text'  name='factura' placeholder='Numero Factura' id='factura' value=" + crearCodigo("NF-", id) + " class='input is-success' readonly/>  ");
-            out1.println("</td></tr><tr><td class='column is-one-third'>");
-            out1.println("Codigo:</td><td><input type='text'  name='codigopro' id='codigopro' class='input is-success codigopro' value=" + registroproduc.getCodigoProducto() + " readonly/></td><td>");
-           out1.println("<td class='column is-one-third'>");
-            out1.println("Producto:</td><td><input type='text'  name='producto' placeholder='Producto' class='input is-success' value=" + registroproduc.getNombreProducto() + " readonly/></td>");
-            out1.println(" <td>");
-            out1.println("<button class='button is-success is-active'><a href='javascript:abrirProducto()' id='btn_Producto'>Buscar</a></button></td>");
-            out1.println("<td class='column is-one-third'>");
-            out1.println(" Cantidad:</td><td> <input type='number'  name='cantidad' value=" + Integer.parseInt(request.getParameter("cantidad")) + " class='input is-success cantidad'/></td>");
-            out1.println("<td align='center'>");
-            out1.println("Precio Unitario:</td><td> <input type='text'  name='precioUni' placeholder='Precio Unitario' class='input is-success' value=" + registroproduc.getPrecioVenta() + "  readonly/></td>");
-            out1.println("<td align='center'>");
-            out1.println("Precio Total: </td><td><input type='text'  name='precioTotal' placeholder='Precio Total' value=" + total + " class='input is-success' readonly /></td>");
-            out1.println("<td align='center'>");
-            out1.println("<input type='submit' name='ReFactura' value='Agregar a Carrito' class='button is-link is-active' id='registrosProduct'></td></tr>");
-            out1.println("</form>");
-            out1.println("</table>");
-            out1.println("</div>");
-            
-           
-        
+            } catch (SQLException ex) {
+
+            }
+        }
+
+        double total = 0;
+        try {
+            this.registroproduc1 = daoProducto.getMax();
+            venta = daoVenta.getSelectMax();
+            id = venta.getMax() + 1;
+        } catch (SQLException ex) {
+            Logger.getLogger(ControladorProducto.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        total = Integer.parseInt(request.getParameter("cantidad")) * registroproduc.getPrecioVenta();
+        response.setContentType("text/html; charset=iso-8859-1");
+        PrintWriter out1 = response.getWriter();
+        out1.println("<div  class='form-register'>");
+        out1.println("<script src=https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js></script><script src=Ajax1.js></script> ");
+        out1.println("<link rel='stylesheet' type='text/css' href='css/EstiloFactura.css'>");
+        out1.println("<table><tr ><td><form action='javascript:abrirCliente()' method='post'>"
+                + "                    <input type='submit' name='datos' value='Encabezado' class='btn-enviar btn_Cliente1'>"
+                + "                </form><td><td><td><td><td><td><td><td><td><td><td align='center' class='column is-one-third'>Factura<td>");
+        out1.println("<form  name='Dato'> ");
+        out1.println("<input type='text'  name='factura' placeholder='Numero Factura' id='factura' value=" + crearCodigo("NF-", id) + " class='input is-success' readonly/>  ");
+        out1.println("</td></tr><tr><td class='column is-one-third'>");
+        out1.println("Codigo:</td><td><input type='text'  name='codigopro' id='codigopro' class='input is-success codigopro' value=" + registroproduc.getCodigoProducto() + " readonly/></td><td>");
+        out1.println("<td class='column is-one-third'>");
+        out1.println("Producto:</td><td><input type='text'  name='producto' placeholder='Producto' id='producto1' class='input is-success' value=" + registroproduc.getNombreProducto() + " readonly/></td>");
+        out1.println(" <td>");
+        out1.println("<button class='button is-success is-active'><a href='javascript:abrirProducto()' id='btn_Producto'>Buscar</a></button></td>");
+        out1.println("<td class='column is-one-third'>");
+        out1.println(" Cantidad:</td><td> <input type='number' id='cantidad1'  name='cantidad1' value=" + Integer.parseInt(request.getParameter("cantidad")) + " class='input is-success cantidad'/></td>");
+        out1.println("<td align='center'>");
+        out1.println("Precio Unitario:</td><td> <input type='text'  name='precioUni' id='precioUni1' placeholder='Precio Unitario' class='input is-success' value=" + registroproduc.getPrecioVenta() + "  readonly/></td>");
+        out1.println("<td align='center'>");
+        out1.println("Precio Total: </td><td><input type='text'  name='precioTotal' id='preciototal1' placeholder='Precio Total' value=" + total + " class='input is-success' readonly /></td>");
+        out1.println("<td align='center'>");
+        out1.println("<input type='submit' name='ReFactura' value='Agregar a Carrito' class='button is-link is-active' id='registrosProduct'></td></tr>");
+        out1.println("</form>");
+        out1.println("</table>");
+        out1.println("</div>");
+        out1.println("<script> function abrirCliente() {document.getElementById('ventClien').style.display = 'block';'}'"
+                + "                    function cerrarCliente() { document.getElementById('ventClien').style.display = 'none';}</script>");
 
     }
 
