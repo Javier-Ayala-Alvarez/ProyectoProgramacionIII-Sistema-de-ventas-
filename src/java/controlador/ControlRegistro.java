@@ -1,4 +1,3 @@
-
 package controlador;
 
 import java.io.IOException;
@@ -62,23 +61,6 @@ public class ControlRegistro extends HttpServlet {
                 if (request.getParameter("event").equals("AgregarRegistro")) {
                     response.setContentType("text/html; charset=iso-8859-1");
 
-//                    try {
-//                       String codigofactura = request.getParameter("codigofactura");
-//                        ventasList1 = daoVenta.getVentaTo1(codigofactura);
-//                        if (ventasList1 == null) {
-//                            cliente = daoCliente.getSelectTo(request.getParameter("codigoCliente"));
-//
-//                            empleado = daoEmpleado.getselectAllTo(request.getParameter("codigoEmpleado"));
-//                            ventasList1 = daoVenta.getSelectMax();
-//                            int id = ventasList1.getMax() + 1;
-//                            // public Venta(int idFactura, String nFactura, Date fechaVenta, Cliente cliente, Empleados empleado) {
-//
-//                            ventasList1 = new Venta(id, request.getParameter("codigofactura"), Date.valueOf(request.getParameter("fecha")), 0, cliente, empleado);
-//                            daoVenta.insert(ventasList1);
-//                        }
-//                    } catch (SQLException ex) {
-//
-//                    }
                     if (lista.size() < 6) {
                         if (!request.getParameter("codigoprducto").equals("null")) {
                             if (Integer.parseInt(request.getParameter("cantidad")) > 0) {
@@ -98,6 +80,32 @@ public class ControlRegistro extends HttpServlet {
                         out1.println("<script>alert('Debe generar una nueva Factura'); </script>");
                     }
 
+                }
+                //ControlRegistros: Agregara la factura a la base de datos
+                if (request.getParameter("event").equals("Facturar")) {
+                    if (!request.getParameter("codigoEmpleado").isEmpty()) {
+                        if (!request.getParameter("codigoCliente").isEmpty()) {
+                            if (!this.lista.isEmpty()) {
+                                try {
+                                    cliente = daoCliente.getSelectTo(request.getParameter("codigoCliente"));
+                                    empleado = daoEmpleado.getselectAllTo(request.getParameter("codigoEmpleado"));
+                                    ventasList1 = daoVenta.getSelectMax();
+                                    int id = ventasList1.getMax() + 1;
+                                    ventasList1 = new Venta(id, request.getParameter("codigofactura"), Date.valueOf(request.getParameter("fecha")), 0, cliente, empleado);
+                                    daoVenta.insert(ventasList1);
+                                    out1.println("<script>alert('Factura Guardada con exito'); </script>");
+                                } catch (SQLException ex) {
+                                    out1.println("<script>alert('Se ha producido un error'); </script>");
+                                }
+                            } else {
+                                out1.println("<script>alert('Debe agregar un registro'); </script>");
+                            }
+                        } else {
+                            out1.println("<script>alert('Debe agregar un cliente'); </script>");
+                        }
+                    } else {
+                        out1.println("<script>alert('Debe agregar un Empleado'); </script>");
+                    }
                 }
                 if (request.getParameter("event").equals("cancelarFactura")) {
                     this.lista.clear();
@@ -127,7 +135,7 @@ public class ControlRegistro extends HttpServlet {
                 out1.println("<div  class='form-register1'>");
                 out1.println("<table><tr><td>");
                 out1.println(" <form>");
-                out1.println("<td><input type='submit' name='ReFactura' value='Facturar' class='button is-link is-active'>");
+                out1.println("<td><input type='submit' name='ReFactura' value='Facturar' id='Facturar' class='button is-link is-active'>");
                 out1.println("<td> <input type = 'submit' name = 'ReFactura' id='cancelarFactura' value = 'Cancelar' class='button is-danger'>");
                 out1.println("<td class='column is-one-third'> Total:");
                 out1.println("<td> <input type='text'  name='Usuario' placeholder='Total' value='" + this.total + "' class='input is-success'/>");

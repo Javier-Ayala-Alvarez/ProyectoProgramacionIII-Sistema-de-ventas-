@@ -140,40 +140,32 @@ $(document).on('click', '#cancelarFactura', function (e) {
     });
 
 });
-//$(document).on('click', '#registrosProduct', function (e) {
-//    e.stopImmediatePropagation();
-//    e.preventDefault();
-//    var codigoprducto = $(".codigopro").val();
-//    var codigofactura = $("#factura").val();
-//    var producto = $("#producto").val();
-//    var cantidad = $("#cantidad1").val();
-//    var codigoEmpleado = $("#codigoEmpleado").val();
-//    var precio = $("#precioUni").val();
-//    var codigoCliente = $("#codigoCliente").val();
-//    var fecha = $("#fecha").val();
-//    alert("fecha" + fecha + "?");
-//
-//    $.ajax({
-//        url: "ControlRegistro", type: 'POST', data: 'btn=4' +
-//                '&producto=' + producto +
-//                '&codigofactura=' + codigofactura +
-//                '&precioUni=' + precio +
-//                '&codigoprducto=' + codigoprducto +
-//                '&cantidad=' + cantidad +
-//                '&codigoEmpleado=' + codigoEmpleado +
-//                '&codigoCliente=' + codigoCliente +
-//                '&fecha=' + fecha +
-//                '&event=3',
-////        url: "ControlRegistro", type: 'POST', data: 'btn=4' + '&event=3',
-//        success: function (data) {
-//            $("#tablaregistro").html(data);
-//        }, error: function (xml, data) {
-//            swal('Mensaje del sistema', 'Error', 'error');
-//        }
-//
-//    });
-//
-//});
+//Guardar la factura
+$(document).on('click', '#Facturar', function (e) {
+    e.stopImmediatePropagation();
+    e.preventDefault();
+    var codigofactura = $("#factura").val();
+    var codigoEmpleado = $("#codigoEmpleado").val();
+    var codigoCliente = $("#codigoCliente").val();
+    var fecha = $("#fecha").val();
+  
+    $.ajax({
+        url: "ControlRegistro", type: 'POST', data: 'btn=4' +
+                '&codigofactura=' + codigofactura +
+                '&codigoEmpleado=' + codigoEmpleado +
+                '&codigoCliente=' + codigoCliente +
+                '&fecha=' + fecha +
+                '&event=Facturar',
+//        url: "ControlRegistro", type: 'POST', data: 'btn=4' + '&event=3',
+        success: function (data) {
+            $("#tablaregistro").html(data);
+        }, error: function (xml, data) {
+            swal('Mensaje del sistema', 'Error', 'error');
+        }
+
+    });
+
+});
 //Escucha el evento de agregar Producto a la vista principal//
 
 //ControladorProducto: lee la informacion de cantidad para mostrar el total//
