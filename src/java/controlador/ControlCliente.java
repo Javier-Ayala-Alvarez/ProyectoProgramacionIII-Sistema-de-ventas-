@@ -44,14 +44,25 @@ public class ControlCliente extends HttpServlet {
                 this.registroList = daoCliente.getMax();
                 int id = registroList.getMax() + 1;
                 cliente = new Cliente(id, crearCodigo("CE-", id), request.getParameter("nombre"), request.getParameter("apellido"), request.getParameter("apellido"), request.getParameter("direccion"));
-                daoCliente.insert(cliente);
+                if((daoCliente.insert(cliente)) == false){
+                     out1.println("<script>alert('Se produjo un error intente Nuevamente'); </script>");
+                }else{
+                     
+                     out1.println("<script>alert('Insertado Correctamente, Hacer clic en recargar'); </script>");
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(ControlCliente.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         if (request.getParameter("event").equals("btn_EliminarCliente")) {
             //ControlCliente: Eliminar Un cliente
-            daoCliente.delete(request.getParameter("Eliminar"));
+            
+            if(daoCliente.delete(request.getParameter("Eliminar"))==false){
+               out1.println("<script>alert('Cliente tiene asignada una factura (no se puede eliminar)'); </script>");
+            }else{
+            out1.println("<script>alert('Eliminado con exito'); </script>");
+            }
+            
         }
         if (request.getParameter("event").equals("ModificarCliente")) {
             //ControlCliente: Modificar Un cliente
@@ -65,7 +76,7 @@ public class ControlCliente extends HttpServlet {
                 registroList.setDireccion(request.getParameter("direccion"));
                 daoCliente.update(registroList);
             } catch (SQLException ex) {
-                Logger.getLogger(ControlCliente.class.getName()).log(Level.SEVERE, null, ex);
+                out1.println("<script>alert('Se produjo un error intente Nuevamente'); </script>");
             }
 
         }

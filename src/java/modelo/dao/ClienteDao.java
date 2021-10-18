@@ -1,5 +1,6 @@
 package modelo.dao;
 
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,12 +24,12 @@ public class ClienteDao {
     }
 
     public boolean insert(Cliente obj) {
-
-        String sql = "insert into cliente(idcliente,codigocliente,nombre"
-                + ",apellido,telefonocliente,direccioncliente)VALUES(?,?,?,?,?,?)";
-
         try {
-            con = conectar.getConexion();
+             con = conectar.getConexion();
+            String sql = "insert into cliente(idcliente,codigocliente,nombre"
+                    + ",apellido,telefonocliente,direccioncliente)VALUES(?,?,?,?,?,?)";
+
+           
             ps = con.prepareStatement(sql);
             ps.setInt(1, obj.getIdCliente());
             ps.setString(2, obj.getCodigoCliente());
@@ -43,10 +44,11 @@ public class ClienteDao {
         } finally {
             try {
                 ps.close();
+                this.conectar.cerrarConexiones();
             } catch (Exception ex) {
 
             }
-            this.conectar.cerrarConexiones();
+            
         }
         return false;
     }
@@ -60,6 +62,7 @@ public class ClienteDao {
             ps.execute();
             return true;
         } catch (Exception e) {
+
             e.printStackTrace();
         } finally {
             try {
@@ -73,7 +76,7 @@ public class ClienteDao {
     }
 
     public boolean update(Cliente obj) {
-        String sql = "update cliente set idcliente=?, codigocliente =?, nombre =?, apellido =?, telefonocliente =?, direccioncliente =? where idcliente= '" + obj.getIdCliente()+"'";
+        String sql = "update cliente set idcliente=?, codigocliente =?, nombre =?, apellido =?, telefonocliente =?, direccioncliente =? where idcliente= '" + obj.getIdCliente() + "'";
         try {
             con = conectar.getConexion();
             ps = con.prepareStatement(sql);

@@ -26,20 +26,25 @@ public class ControlSeleccionarCDE extends HttpServlet {
         try (PrintWriter out = response.getWriter()) {
 
             try {
-
+                String nombre ="";
+                if(!request.getParameter("codigo").equals("0")){
                 this.registroList = daoCliente.getSelectTo(request.getParameter("codigo"));
+                nombre = registroList.getNombre();
                 //ControladorProductos: Mostrara el encabezado de la factura
+                }
 
                 out1.println("<script src=https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js></script><script src=Ajax1.js></script> ");
                 out1.println("<link rel='stylesheet' type='text/css' href='css/EstiloFactura.css'>");
                 out1.println(" <div class='column is-one-third'><table class='TABLE1'><tr><td>");
                 out1.println("Codigo Cliente:</td><td><input type='text'  name='codigopro' id='codigoCliente' value='" + request.getParameter("codigo") + "' class='input is-link' /></td><td>"
-                        + "<div class='column is-one-third'>Cliente:</td><td><input type='text'  name='nombreCliente' id='nombreCliente' value='" + registroList.getNombre() + "' class='input is-link' /></td><td>");
+                        +"<button class='button is-success is-active btn_Cliente1'><a href='javascript:abrirCliente()'>Buscar</a></button></td>"
+                        + "<td><div class='column is-one-third'>Cliente:</td><td><input type='text'  name='nombreCliente' id='nombreCliente' value='"+nombre+"'  class='input is-link' /></td><td>");
                 out1.println(" <div class='column is-one-third'>");
                 out1.println("Fecha: </td><td><input type='date'  name='fecha' id='fecha' class='input is-link' /></td><td>");
                 out1.println("<div class='column is-one-third'>");
                 out1.println("Codigo Empleado: </td><td><input type='text'  name='codigoEmpleado' id='codigoEmpleado' value='CE0001' class='input is-link' /></td><td></td><td>");
                 out1.println("Empleado:</td><td><input type='text'  name='nombreEmpleado' id='nombreEmpleado' class='input is-link' /></td><td><tr></table></div>");
+                 
 
             } catch (SQLException ex) {
 

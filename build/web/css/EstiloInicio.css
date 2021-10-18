@@ -2,18 +2,18 @@
 *{
     margin:0;
     padding:0;
-   
+
 }
 .HTML{
-     margin: auto;
+    margin: auto;
 
 }
 body{
-    
-     
-     width: 100%;
+
+
+    width: 100%;
     margin: auto;
-     font-family: sans-serif;
+    font-family: sans-serif;
 }
 
 
@@ -32,7 +32,7 @@ nav{
 
 
 nav > ul {
-    
+
     left: -2cm;
     display: table;
     width:35cm;
@@ -58,11 +58,11 @@ nav > ul> li > ul{
     right:0;
     overflow: hidden;
     height: 0%;
-        -webkit-transition: all .3s ease;
-        -moz-transition: all .3s ease;
-        -ms-transition: all .3s ease;
-        -o-transition: all .3s ease;
-         transition: all .3s ease;
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    transition: all .3s ease;
 }
 nav> ul li a {
 
@@ -74,17 +74,17 @@ nav> ul li a {
 
     text-align: center;
     text-decoration: none;
-        -webkit-transition: all .3s ease;
-        -moz-transition: all .3s ease;
-        -ms-transition: all .3s ease;
-        -o-transition: all .3s ease;
-         transition: all .3s ease;
+    -webkit-transition: all .3s ease;
+    -moz-transition: all .3s ease;
+    -ms-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    transition: all .3s ease;
 }
 
 
 nav> ul> li> ul> li a:hover{
     background:#0774d9;
-    
+
 }
 
 
@@ -92,7 +92,7 @@ nav> ul> li> ul> li a:hover{
     width: 5%;
     height: 19.5CM;
     background:#2D0A02; 
-        position: fixed;
+    position: fixed;
 }
 
 .imgRedonda {
@@ -102,9 +102,9 @@ nav> ul> li> ul> li a:hover{
     border:10px solid #666;
 }
 .letra{
- border-radius:10px;
-  border:10px solid #666;   
-  padding: 0.23cm;
+    border-radius:10px;
+    border:10px solid #666;   
+    padding: 0.23cm;
     margin: 0.70cm;
 }
 
@@ -124,85 +124,37 @@ nav> ul> li> ul> li a:hover{
 .btn-enviar:hover
 {
 
-transform: scale(1.1);
+    transform: scale(1.1);
 }
 .li1:hover
 {
-transform: scale(1.05);
+    transform: scale(1.05);
     background: #FA1F0C;
 }
 
-.TEXTE {
-    margin: auto;
-    width: 3cm;
-    height: 0.75CM;
-    font-family: Oswald;
-    border-color: BLACK;
-    background-color: #FFF;
-}
-.TEXT{
-    margin: auto;
-    width: 5cm;
-    height: 0.70CM;
-    font-family: Oswald;
-    border-color: BLACK;
-    background-color: #FFF;
-}
 
 
 .TABLE3{
-        top: +140px;
+    top: +140px;
     position: absolute;
     left: 5cm;
     height:2cm;
     right: 0;
     margin:auto;
-     width:33cm;
+    width:33cm;
     max-width: 25cm;
-    color: black; 
-   
-    font-family:cursive;
-    border: 2px;
- border-radius:2px;
- border-color:black;
- border-spacing:0.025;
- 
-    height: auto;
-        color: black;
-     }
-
-.grafica{
-            top: +140px;
-    position: absolute;
-    left: 5cm;
-    right: 0;
-    margin:auto;
-    max-width: 1000px;
-    color: black; 
-    background-color: #2D0A02  ;
-    font-family:cursive;
-    border: 5px;
- border-radius:6px;
- border-color:indianred;
- border-spacing:0.25;
- width: auto;
-    height: inherit;
-        color: #fff;
-     
 }
-
-     .PRO {
+.TABLEconfiguraciones{
     top: +140px;
     position: absolute;
-    left: 7cm;
+    left: 5cm;
+    height:2cm;
     right: 0;
- width: 7%;
-    height: 10CM;
-    border-width: 10px;
-    
-    padding: 0px;
-    background-color: #DDDDEE  ;
+    margin:auto;
+    width:15cm;
+    max-width: 15cm;
 }
+
 
 
 .div1 {
@@ -223,7 +175,7 @@ transform: scale(1.05);
 
 .TABLE1{
 
-        top: +140px;
+    top: +140px;
     position: relative;
     left: 2.5cm;
     right: 0;
@@ -234,48 +186,10 @@ transform: scale(1.05);
     background-color: #2D0A02  ;
     font-family:arial;
     border: 5px;
- border-radius:6px;
- border-color:red;
- border-spacing:0.25;
- width: auto;
+    border-radius:6px;
+    border-color:red;
+    border-spacing:0.25;
+    width: auto;
     height: auto;
-        color: #fff;
-     }
-.TABLE4{
-        top: +140px;
-    position: absolute;
-    left: 10cm;
-    right: 0;
-    margin:auto;
-    width: 100%;
-    max-width: 1000px;
-    color: black; 
-    background-color: #2D0A02  ;
-    font-family:cursive;
-    border: 5px;
- border-radius:6px;
- border-color:indianred;
- border-spacing:0.25;
- width: auto;
-    height: auto;
-        color: #fff;
-     }
-.TABLE5{
-        top: +140px;
-    position: absolute;
-    left: 20cm;
-    right: 0;
-    margin:auto;
-    width: 100%;
-    max-width: 1000px;
-    color: black; 
-    background-color: #2D0A02  ;
-    font-family:cursive;
-    border: 5px;
- border-radius:6px;
- border-color:indianred;
- border-spacing:0.25;
- width: auto;
-    height: auto;
-        color: #fff;
-     }
+    color: #fff;
+}

@@ -31,7 +31,7 @@ public class ControlRegistro extends HttpServlet {
     private ArrayList<Registros> registroPro;
     private VentaDao daoVenta;
     private ArrayList<Venta> ventasList;
-    private Venta ventasList1;
+    private Venta ventasList1, ventasList2;
     private Empleados empleado;
     private EmpleadoDao daoEmpleado;
     private Cliente cliente;
@@ -48,6 +48,7 @@ public class ControlRegistro extends HttpServlet {
         this.daoProducto = new DaoProducto();
         this.daoVenta = new VentaDao();
         this.ventasList1 = new Venta();
+        this.ventasList2 = new Venta();
         this.ventasList = new ArrayList<>();
         this.registroPro = new ArrayList<>();
         this.empleado = new Empleados();
@@ -70,6 +71,7 @@ public class ControlRegistro extends HttpServlet {
                                 registroVenta.setPrecioVentaProducto(Double.parseDouble(request.getParameter("precioUni")));
                                 registroVenta.setPrecioTotalProducto(Double.parseDouble(request.getParameter("preciototal1")));
                                 this.lista.add(registroVenta);
+
                             } else {
                                 out1.println("<script>alert('Ingrese cantidad'); </script>");
                             }
@@ -84,21 +86,36 @@ public class ControlRegistro extends HttpServlet {
                 //ControlRegistros: Agregara la factura a la base de datos
                 if (request.getParameter("event").equals("Facturar")) {
                     if (!request.getParameter("codigoEmpleado").isEmpty()) {
-                        if (!request.getParameter("codigoCliente").isEmpty()) {
-                            if (!this.lista.isEmpty()) {
-                                try {
-                                    cliente = daoCliente.getSelectTo(request.getParameter("codigoCliente"));
-                                    empleado = daoEmpleado.getselectAllTo(request.getParameter("codigoEmpleado"));
-                                    ventasList1 = daoVenta.getSelectMax();
-                                    int id = ventasList1.getMax() + 1;
-                                    ventasList1 = new Venta(id, request.getParameter("codigofactura"), Date.valueOf(request.getParameter("fecha")), 0, cliente, empleado);
-                                    daoVenta.insert(ventasList1);
-                                    out1.println("<script>alert('Factura Guardada con exito'); </script>");
-                                } catch (SQLException ex) {
-                                    out1.println("<script>alert('Se ha producido un error'); </script>");
+                        if (!request.getParameter("codigoCliente").equals("0")) {
+                            if (!request.getParameter("fecha").isEmpty()) {
+                                if (!this.lista.isEmpty()) {
+                                    try {
+                                        cliente = daoCliente.getSelectTo(request.getParameter("codigoCliente"));
+                                        empleado = daoEmpleado.getselectAllTo(request.getParameter("codigoEmpleado"));
+                                        ventasList1 = daoVenta.getSelectMax();
+                                        int id = ventasList1.getMax() + 1;
+                                        ventasList1 = new Venta(id, request.getParameter("codigofactura"), Date.valueOf(request.getParameter("fecha")), 0, cliente, empleado);
+                                        //ventasList2 =  daoVenta.getVentaTo1( request.getParameter("codigofactura"));
+                                        if (daoVenta.getVentaTo1(request.getParameter("codigofactura"))) {
+                                            out1.println("<script>alert('Generar nuevo correlativo'); </script>");
+                                        } else {
+                                            if (daoVenta.insert(ventasList1) == true) {
+                                                this.lista.clear();
+                                                this.registroVenta = null;
+                                                out1.println("<script>alert('Factura Guardada con exito'); </script>");
+                                            } else {
+                                                out1.println("<script>alert('Verifique que los datos han sido ingresados correctamente'); </script>");
+                                            }
+
+                                        }
+                                    } catch (SQLException ex) {
+                                        out1.println("<script>alert('Se ha producido un error'); </script>");
+                                    }
+                                } else {
+                                    out1.println("<script>alert('Debe agregar un registro'); </script>");
                                 }
                             } else {
-                                out1.println("<script>alert('Debe agregar un registro'); </script>");
+                                out1.println("<script>alert('Debe de agregar fecha'); </script>");
                             }
                         } else {
                             out1.println("<script>alert('Debe agregar un cliente'); </script>");

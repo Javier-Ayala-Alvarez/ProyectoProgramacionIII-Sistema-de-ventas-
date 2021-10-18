@@ -18,10 +18,16 @@
 </head>
 <body>
     <!-- OPCCIONES ... -->
-    <nav>
+    <nav id="menu">
         <ul>
              <!-- Boton pata nuevaFactura ... -->
-            <li> <input type="submit" name="ReFactura" value="Nueva Factura" id="datosGenerales" class="btn-enviar "></li>
+             
+            <li> 
+            
+                    <input type="submit" name="ReFactura" value="Nueva Factura" id="datosGenerales" class="btn-enviar ">
+                
+            </li>
+             
             <li>
                  <!-- Boton para cerrar Factura... -->
                 <form action="index.html" method="post">

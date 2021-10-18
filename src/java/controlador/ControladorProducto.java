@@ -62,9 +62,7 @@ public class ControladorProducto extends HttpServlet {
         out1.println("<div  class='form-register'>");
         out1.println("<script src=https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js></script><script src=Ajax1.js></script> ");
         out1.println("<link rel='stylesheet' type='text/css' href='css/EstiloFactura.css'>");
-        out1.println("<table><tr ><td><form action='javascript:abrirCliente()' method='post'>"
-                + "                    <input type='submit' name='datos' value='Encabezado' class='btn-enviar btn_Cliente1'>"
-                + "                </form><td><td><td><td><td><td><td><td><td><td><td align='center' class='column is-one-third'>Factura<td>");
+        out1.println("<table><tr ><td><td><td><td><td><td><td><td><td><td><td><td align='center' class='column is-one-third'>Factura<td>");
         out1.println("<form  name='Dato'> ");
         out1.println("<input type='text'  name='factura' placeholder='Numero Factura' id='factura' value=" + crearCodigo("NF-", id) + " class='input is-success' readonly/>  ");
         out1.println("</td></tr><tr><td class='column is-one-third'>");
@@ -84,8 +82,7 @@ public class ControladorProducto extends HttpServlet {
         out1.println("</form>");
         out1.println("</table>");
         out1.println("</div>");
-        out1.println("<script> function abrirCliente() {document.getElementById('ventClien').style.display = 'block';'}'"
-                + "                    function cerrarCliente() { document.getElementById('ventClien').style.display = 'none';}</script>");
+        
 
     }
 

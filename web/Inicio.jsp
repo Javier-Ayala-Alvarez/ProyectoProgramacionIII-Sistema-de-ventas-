@@ -92,13 +92,8 @@
                     <li><a class="li1"></i></span>Configuraciones</a>
                         <ul> 
                             <center>
-                                <form method="post">
-                                    <li><input type="submit" name="BOTON" value="Modificar" class="btn-enviar"></li>
-                                    <li><input type="submit" name="BOTON" value="Consultar" class="btn-enviar"></li>
-
-
-
-
+                                <form action="ControlConfiguraciones" method="post">
+                                    <li><input type="submit" name="BOTON" value="Mostrar" class="btn-enviar"></li>
                                 </form>
                         </ul>
                     </li>

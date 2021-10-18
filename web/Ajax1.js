@@ -44,8 +44,10 @@ $("#btn_Producto").click(function (e) {
 //Factura: Muestra el formulario de registros de una factura//
 $("#datosGenerales").click(function (e) {
     e.stopImmediatePropagation();
+    
     $.ajax({
-        url: "ControladorProducto", type: 'POST', data: '&event=0&cantidad=0',
+        
+        url: "ControladorProducto", type: 'POST', data: '&event=0&cantidad=0&codigo=0',
         success: function (data) {
 
             $("#datosGenerales1").html(data);
@@ -54,7 +56,7 @@ $("#datosGenerales").click(function (e) {
         }
 
     });
-    
+    mostrar1();
 
 });
 
@@ -77,6 +79,21 @@ $(document).on('click', '.agregarCliente', function (e) {
 
 
 });
+
+function mostrar1(){
+    $.ajax({
+
+        url: "ControlSeleccionarCDE", type: 'POST', data: 'codigo=0',
+
+        success: function (data) {
+            $("#datosCliente").html(data);
+        }, error: function (xml, data) {
+            swal('Mensaje del sistema', 'Error', 'error');
+        }
+
+    });
+    
+}
 //ControlProducto: Al seleccionar los productos seran mostrados en el encabezado de la fractura//
 $(document).on('click', '.agregarProducto', function (e) {
     e.stopImmediatePropagation();
@@ -166,6 +183,7 @@ $(document).on('click', '#Facturar', function (e) {
     });
 
 });
+
 //Escucha el evento de agregar Producto a la vista principal//
 
 //ControladorProducto: lee la informacion de cantidad para mostrar el total//
@@ -205,6 +223,21 @@ var opcion = confirm("Deseas eliminar el Cliente " + codigoCliente + "? ");
 
     
 });
+
+function mostrar(){
+    codigoCliente = $(this).parent().parent().children().first().text();
+    $.ajax({
+
+        url: "ControlSeleccionarCDE", type: 'POST', data: 'codigo=' + codigoCliente,
+
+        success: function (data) {
+            $("#datosCliente").html(data);
+        }, error: function (xml, data) {
+            swal('Mensaje del sistema', 'Error', 'error');
+        }
+
+    });
+}
 //ControlCliente:  Modifica Los clientes ya registrado//
 $(document).on('click', '#btn_modificarCliente1', function (e) {
     e.preventDefault();
@@ -276,7 +309,7 @@ function cargarContenido(event) {
 
     event.preventDefault();
     inicializarXHMHttpRequest();
-    alert("Se a agregado con exito")
+    alert("Se a agregado con exito debes hacer clic en recargar")
     request.open("POST", "ControlCliente", true);
     request.setRequestHeader("content-type", "application/x-www-form-urlencoded")
     request.send(crear_query_string());
