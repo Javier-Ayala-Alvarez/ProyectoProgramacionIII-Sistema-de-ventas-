@@ -60,8 +60,30 @@ public class EmpresaDao {
     }
 
     public boolean update(Empresa obj) {
-        String sql = "UPDATE empresa SET idempresa = ? , codigoempresa = ? , nombreempresa = ?, dirrecionempresa = ?, correoempresa = ? WHERE idempresa = '" + obj.getIdEmpresa()+"'";
-        return alterarRegistro(sql, obj);
+        String sql = "UPDATE empresa SET idempresa =?, codigoempresa =?, nombreempresa =?, dirrecionempresa =?, correoempresa =? WHERE idempresa= '" + obj.getIdEmpresa()+"'";
+         try {
+            con = conectar.getConexion();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, obj.getIdEmpresa());
+            ps.setString(2, obj.getCodigoEmpresa());
+            ps.setString(3, obj.getNombre());
+            ps.setString(4, obj.getDireccion());
+            ps.setString(5, obj.getCorreo());
+            ps.execute();
+            return true;
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        } finally {
+            try {
+                ps.close();
+            } catch (Exception ex) {
+
+            }
+            conectar.cerrarConexiones();
+        }
+        return false;
+    
     }
 
     private ArrayList<Empresa> select(String sql) {
