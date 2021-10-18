@@ -19,21 +19,21 @@ public class EmpresaDao {
     }
 
     public Empresa selectAllto(String codigo) {
-        String sql = "SELECT * fROM empresa where codigoempresa='" + codigo + "'";
+        String sql = "SELECT * FROM empresa where codigoempresa='" + codigo + "'";
 
-        Empresa obj = null;
         try {
             con = conectar.getConexion();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
-
-            obj = new Empresa();
-            obj.setIdEmpresa(rs.getInt("idEmpresa"));
-            obj.setCodigoEmpresa(rs.getString("codigoEmpresa"));
-            obj.setNombre(rs.getString("nombreEmpresa"));
-            obj.setDireccion(rs.getString("dirrecionEmpresa"));
-            obj.setCorreo(rs.getString("correoEmpresa"));
-            return obj;
+            if (this.rs.next()) {
+                Empresa obj = new Empresa();
+                obj.setIdEmpresa(rs.getInt("idempresa"));
+                obj.setCodigoEmpresa(rs.getString("codigoempresa"));
+                obj.setNombre(rs.getString("nombreempresa"));
+                obj.setDireccion(rs.getString("dirrecionempresa"));
+                obj.setCorreo(rs.getString("correoempresa"));
+                return obj;
+            }
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -46,7 +46,7 @@ public class EmpresaDao {
             conectar.cerrarConexiones();
         }
 
-        return obj;
+       return null;
     }
 
     public ArrayList<Empresa> selectAll() {
@@ -60,8 +60,8 @@ public class EmpresaDao {
     }
 
     public boolean update(Empresa obj) {
-        String sql = "UPDATE empresa SET idempresa =?, codigoempresa =?, nombreempresa =?, dirrecionempresa =?, correoempresa =? WHERE idempresa= '" + obj.getIdEmpresa()+"'";
-         try {
+        String sql = "UPDATE empresa SET idempresa =?, codigoempresa =?, nombreempresa =?, dirrecionempresa =?, correoempresa =? WHERE idempresa= '" + obj.getIdEmpresa() + "'";
+        try {
             con = conectar.getConexion();
             ps = con.prepareStatement(sql);
             ps.setInt(1, obj.getIdEmpresa());
@@ -83,7 +83,7 @@ public class EmpresaDao {
             conectar.cerrarConexiones();
         }
         return false;
-    
+
     }
 
     private ArrayList<Empresa> select(String sql) {

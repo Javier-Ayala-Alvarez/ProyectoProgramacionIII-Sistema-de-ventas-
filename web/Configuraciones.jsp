@@ -36,7 +36,7 @@
                     </div> 
                     <div class="column">
                        
-                        <input type="submit" name="btn_Guardar" value="Guardar" class="button is-success is-active">
+                        <input type="submit" name="btn_Actualizar" value="Actualizar" class="button is-success is-active">
                     </div> 
                 </td></tr>
         </from>

@@ -7,43 +7,38 @@ package controlador;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modelo.dao.ClienteDao;
 import modelo.dao.EmpresaDao;
+import modelo.entidades.Cliente;
 import modelo.entidades.Empresa;
 
-@WebServlet(name = "ControlConfiguraciones", urlPatterns = {"/ControlConfiguraciones"})
-public class ControlConfiguraciones extends HttpServlet {
-private EmpresaDao daoEmpresa;
-    private ArrayList<Empresa> registroList;
-     private Empresa registroList1;
+@WebServlet(name = "ControlClienteAdmin", urlPatterns = {"/ControlClienteAdmin"})
+public class ControlClienteAdmin extends HttpServlet {
+
+    private ClienteDao daoCliente;
+    private ArrayList<Cliente> registroList;
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         this.registroList = new ArrayList();
-        this.registroList1 = new Empresa();
-        
-        this.daoEmpresa = new EmpresaDao();
+        this.daoCliente = new ClienteDao();
         try (PrintWriter out = response.getWriter()) {
-          
-            if(request.getParameter("btn_Actualizar") != null){
-                this.registroList1 = daoEmpresa.selectAllto(request.getParameter("codigo"));
-               registroList1.setIdEmpresa(registroList1.getIdEmpresa());
-                registroList1.setCodigoEmpresa(request.getParameter("codigo"));
-                registroList1.setNombre(request.getParameter("nombre"));
-                registroList1.setCorreo(request.getParameter("correo"));
-                registroList1.setDireccion(request.getParameter("direccion"));
-                daoEmpresa.update(registroList1);
-            
-            }
-            
-            this.registroList = daoEmpresa.selectAll();
+
+            this.registroList = daoCliente.getSelect();
             request.setAttribute("registroList", this.registroList);
-           request.getRequestDispatcher("Configuraciones.jsp").forward(request, response);
+            request.getRequestDispatcher("ClienteAdmin.jsp").forward(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(ControlClienteAdmin.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

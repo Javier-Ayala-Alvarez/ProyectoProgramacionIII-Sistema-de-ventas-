@@ -71,7 +71,7 @@
                     <li><a class="li1"></i></span>Cliente</a>
                         <ul> 
                             <center>
-                                <form method="post">
+                                <form action="ControlClienteAdmin" method="post">
                                     <li><input type="submit" name="BOTON" value="Consulta" class="btn-enviar"></li>
 
                                 </form>

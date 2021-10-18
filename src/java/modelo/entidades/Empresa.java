@@ -13,6 +13,9 @@ public class Empresa {
     private ArrayList<Producto> productos;
     private ArrayList<Venta>ventas;
     private ArrayList<Empleados> empleados;
+
+    public Empresa() {
+    }
     
 
     public Empresa(int IdEmpresa, String nombre, String direccion, String correo) {
@@ -31,34 +34,6 @@ public class Empresa {
         this.nombre = nombre;
         this.direccion = direccion;
         this.correo = correo;
-    }
-
-    public Empresa(String nombre, String direccion, String correo) {
-        this.nombre = nombre;
-        this.direccion = direccion;
-        this.correo = correo;
-        gastosEmpresa =new ArrayList();
-        productos = new ArrayList();
-        ventas = new ArrayList();
-         empleados = new ArrayList();
-    }
-
-    public Empresa() {
-         gastosEmpresa =new ArrayList();
-         productos = new ArrayList();
-         ventas = new ArrayList();
-          empleados = new ArrayList();
-    }
-
-    public Empresa(String codigoEmpresa, String nombre, String direccion, String correo, ArrayList<GastoEmpresa> gastosEmpresa, ArrayList<Producto> productos, ArrayList<Venta> ventas, ArrayList<Empleados> empleados) {
-        this.codigoEmpresa = codigoEmpresa;
-        this.nombre = nombre;
-        this.direccion = direccion;
-        this.correo = correo;
-        this.gastosEmpresa = gastosEmpresa;
-        this.productos = productos;
-        this.ventas = ventas;
-        this.empleados = empleados;
     }
 
     public String getCodigoEmpresa() {
