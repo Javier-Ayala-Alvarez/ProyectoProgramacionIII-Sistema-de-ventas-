@@ -67,12 +67,18 @@ public class ControlRegistro extends HttpServlet {
                     if (lista.size() < 6) {
                         if (!request.getParameter("codigoprducto").equals("null")) {
                             if (Integer.parseInt(request.getParameter("cantidad")) > 0) {
+                                 producto = daoProducto.getSelectTo(request.getParameter("codigoprducto"));
+                                 if(producto.getCantidad() >= Integer.parseInt(request.getParameter("cantidad"))){
                                 registroVenta.setCodigoProducto(request.getParameter("codigoprducto"));
                                 registroVenta.setNombreProducto(request.getParameter("producto"));
                                 registroVenta.setCantidadProducto(Integer.parseInt(request.getParameter("cantidad")));
                                 registroVenta.setPrecioVentaProducto(Double.parseDouble(request.getParameter("precioUni")));
                                 registroVenta.setPrecioTotalProducto(Double.parseDouble(request.getParameter("preciototal1")));
                                 this.lista.add(registroVenta);
+                                 
+                                 }else{
+                                     out1.println("<script>alert('Cantidad ingresada sobrepasa la existencia de: "+producto.getCantidad()+"'); </script>");
+                                 }
 
                             } else {
                                 out1.println("<script>alert('Ingrese cantidad'); </script>");
