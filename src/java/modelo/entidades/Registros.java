@@ -8,10 +8,28 @@ public class Registros {
     private double precioTotalProducto;
     Producto producto = new Producto();
     
+    private int max;
+    
     Venta venta;
     public Registros() {
         
     }
+
+    public Registros(int idRegistros, int cantidadProducto, Venta venta, Producto producto) {
+        this.idRegistros = idRegistros;
+        this.cantidadProducto = cantidadProducto;
+        this.venta = venta;
+        this.producto = producto;
+    }
+
+    public int getMax() {
+        return max;
+    }
+
+    public void setMax(int max) {
+        this.max = max;
+    }
+    
 
     public Registros(int cantidadProducto, double precioTotalProducto) {
         this.cantidadProducto = cantidadProducto;

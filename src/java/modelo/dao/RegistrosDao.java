@@ -9,7 +9,6 @@ package modelo.dao;
  *
  * @author JOSUE GARCIA
  */
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -50,7 +49,7 @@ public class RegistrosDao {
                     + "INNER JOIN registros r ON r.idventa = v.idventa "
                     + "INNER JOIN producto pr ON r.idproducto = pr.idproducto "
                     + "WHERE v.estado = 0 and r.idventa = "
-                    + "(SELECT idventa FROM venta WHERE nfactura = '"+codigo+"')"
+                    + "(SELECT idventa FROM venta WHERE nfactura = '" + codigo + "')"
                     + "GROUP BY pr.codigoproducto, pr.nombreproducto, r.cantidadproducto, pr.precioventa";
             this.ps = accesoDB.prepareStatement(this.sql);
             this.rs = this.ps.executeQuery();
@@ -69,20 +68,21 @@ public class RegistrosDao {
         }
         return this.registroList;
     }
+
     public ArrayList<Registros> getRegistros1(String codigo) throws SQLException {
 
         this.registroList = new ArrayList<>();
 
         try {
             this.accesoDB = this.conexion.getConexion();
-             this.sql = "SELECT r.idregistros id, pr.codigoproducto codigo, pr.nombreproducto producto, r.cantidadproducto cantidad, pr.precioventa precio,"
+            this.sql = "SELECT r.idregistros id, pr.codigoproducto codigo, pr.nombreproducto producto, r.cantidadproducto cantidad, pr.precioventa precio,"
                     + " SUM ( r.cantidadproducto * pr.precioventa ) "
                     + "total FROM venta v INNER JOIN cliente cl ON v.idcliente = cl.idcliente "
                     + "INNER JOIN empleado e ON v.idempleado = e.idempleado "
                     + "INNER JOIN registros r ON r.idventa = v.idventa "
                     + "INNER JOIN producto pr ON r.idproducto = pr.idproducto "
                     + "WHERE v.estado = 0 and r.idventa = "
-                    + "(SELECT idventa FROM venta WHERE nfactura = '"+codigo+"')"
+                    + "(SELECT idventa FROM venta WHERE nfactura = '" + codigo + "')"
                     + "GROUP BY r.idregistros, pr.codigoproducto, pr.nombreproducto, r.cantidadproducto, pr.precioventa";
             this.ps = accesoDB.prepareStatement(this.sql);
             this.rs = this.ps.executeQuery();
@@ -103,4 +103,52 @@ public class RegistrosDao {
         return this.registroList;
     }
 
+    public boolean insert(Registros obj) {
+        String sql = "insert into registros(idregistros, cantidadproducto,idventa,idproducto)VALUES(?,?,?,?)";
+        try {
+            accesoDB = conexion.getConexion();
+            ps = accesoDB.prepareStatement(sql);
+            ps.setInt(1, obj.getIdRegistros());
+            ps.setInt(2, obj.getCantidadProducto());
+            
+            ps.setInt(3, obj.getVenta().getIdFactura());
+            ps.setInt(4, obj.getProducto().getIdProducto());
+            ps.execute();
+
+            return true;
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        } finally {
+            try {
+                ps.close();
+            } catch (Exception ex) {
+
+            }
+            conexion.cerrarConexiones();
+        }
+        return false;
+    }
+    
+    public Registros getSelectMax() throws SQLException {
+
+        
+
+        try {
+            this.accesoDB = this.conexion.getConexion();
+            this.sql = "SELECT MAX(idregistros) max from Registros";
+            this.ps = accesoDB.prepareStatement(this.sql);
+            this.rs = this.ps.executeQuery();
+            while (this.rs.next()) {
+                Registros registro = new Registros();
+                registro.setMax(rs.getInt("max"));
+
+                return registro;
+            }
+            this.conexion.cerrarConexiones();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ERROR" + e, "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+        return this.registros;
+    }
 }

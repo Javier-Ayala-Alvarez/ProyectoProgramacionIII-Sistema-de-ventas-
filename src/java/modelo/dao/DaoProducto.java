@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import modelo.conexion.Conexion;
 import modelo.entidades.Cliente;
+import modelo.entidades.Empresa;
 import modelo.entidades.Producto;
 
 /**
@@ -19,20 +20,20 @@ import modelo.entidades.Producto;
  * @author Francisco Javier
  */
 public class DaoProducto {
+
     private static Conexion conectar;
-    
+
     Connection con;
     PreparedStatement ps;
     ResultSet rs;
-     private Producto registros;
+    private Producto registros;
     private ArrayList<Producto> registroList;
 
-    
-    public DaoProducto(){
+    public DaoProducto() {
         this.conectar = new Conexion();
     }
 
-public Producto getMax() throws SQLException {
+    public Producto getMax() throws SQLException {
 
         this.registroList = new ArrayList<>();
 
@@ -53,48 +54,58 @@ public Producto getMax() throws SQLException {
         }
         return null;
     }
-public ArrayList<Producto> getSelect() throws SQLException {
+
+    public ArrayList<Producto> getSelect() throws SQLException {
 
         this.registroList = new ArrayList<>();
 
         try {
             con = conectar.getConexion();
             String sql = "SELECT * FROM producto";
-           ps = con.prepareStatement(sql);
+            ps = con.prepareStatement(sql);
             this.rs = this.ps.executeQuery();
             while (this.rs.next()) {
                 Producto producto = new Producto();
                 producto.setIdProducto(rs.getInt("idproducto"));
-            producto.setCodigoProducto(rs.getString("codigoproducto"));
+                producto.setCodigoProducto(rs.getString("codigoproducto"));
                 producto.setNombreProducto(rs.getString("nombreproducto"));
-                producto.setPrecioVenta(rs.getDouble("precioventa"));
+                producto.setPrecioCompra(rs.getDouble("preciocompra"));
                 producto.setCantidad(rs.getInt("cantidad"));
-               this.registroList.add(producto);
+                producto.setFechaVencimiento(rs.getDate("fechavencimiento"));
+                producto.setEstado(rs.getInt("estado"));
+                producto.setPrecioVenta(rs.getDouble("precioventa"));
+                producto.setEmpresa(new Empresa(rs.getInt("idempresa")));
+                this.registroList.add(producto);
             }
             this.conectar.cerrarConexiones();
         } catch (Exception e) {
-  
+
         }
         return this.registroList;
     }
-public Producto getSelectTo(String codigo) throws SQLException {
+
+    public Producto getSelectTo(String codigo) throws SQLException {
 
         this.registroList = new ArrayList<>();
 
         try {
             con = conectar.getConexion();
-            String sql = "SELECT * FROM producto WHERE codigoproducto ='"+codigo+"'";
+            String sql = "SELECT * FROM producto WHERE codigoproducto ='" + codigo + "'";
             ps = con.prepareStatement(sql);
             this.rs = this.ps.executeQuery();
-            if(this.rs.next()){
-                
-                 Producto producto = new Producto();
+            if (this.rs.next()) {
+
+                Producto producto = new Producto();
                 producto.setIdProducto(rs.getInt("idproducto"));
                 producto.setCodigoProducto(rs.getString("codigoproducto"));
                 producto.setNombreProducto(rs.getString("nombreproducto"));
-                producto.setPrecioVenta(rs.getDouble("precioventa"));
+                producto.setPrecioCompra(rs.getDouble("preciocompra"));
                 producto.setCantidad(rs.getInt("cantidad"));
-               
+                producto.setFechaVencimiento(rs.getDate("fechavencimiento"));
+                producto.setEstado(rs.getInt("estado"));
+                producto.setPrecioVenta(rs.getDouble("precioventa"));
+                producto.setEmpresa(new Empresa(rs.getInt("idempresa")));
+
                 return producto;
             }
             this.conectar.cerrarConexiones();
@@ -102,6 +113,37 @@ public Producto getSelectTo(String codigo) throws SQLException {
         }
         return null;
     }
+
+    public boolean update(Producto obj) {
+        String sql = "update producto set idproducto =?, codigoproducto =?, nombreproducto =?, preciocompra =?, cantidad =?, fechavencimiento =?, estado =? ,precioventa =?, idempresa =? where idproducto=" + obj.getIdProducto();
+        try {
+            con = conectar.getConexion();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, obj.getIdProducto());
+            ps.setString(2, obj.getCodigoProducto());
+            ps.setString(3, obj.getNombreProducto());
+            ps.setDouble(4, obj.getPrecioCompra());
+            ps.setInt(5, obj.getCantidad());
+            ps.setDate(6, new java.sql.Date(obj.getFechaVencimiento().getTime()));
+            ps.setInt(7, obj.getEstado());
+            ps.setDouble(8, obj.getPrecioVenta());
+            ps.setInt(9, obj.getEmpresa().getIdEmpresa());
+
+            ps.execute();
+
+            return true;
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        } finally {
+            try {
+                ps.close();
+            } catch (Exception ex) {
+
+            }
+            conectar.cerrarConexiones();
+        }
+        return false;
+    }
+
 }
-
-

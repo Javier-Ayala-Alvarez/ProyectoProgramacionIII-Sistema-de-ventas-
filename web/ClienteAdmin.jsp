@@ -12,7 +12,7 @@
 
             <H1>
                 <font  color="#B76103" > 
-                Registros</H1><TR><TD bgcolor="#3EB429" >
+                CLIENTE</H1><TR><TD bgcolor="#3EB429" >
             <H4 ><font color="#fff">CODIGO<TD bgcolor="#3EB429" >
                     <H4><font color="#fff">NOMBRE<TD bgcolor="#3EB429" >
                             <H4><font color="#fff">APELLIDO<TD bgcolor="#3EB429" >

@@ -37,6 +37,7 @@ public class ControlRegistro extends HttpServlet {
     private Cliente cliente;
     private ClienteDao daoCliente;
     private DaoProducto daoProducto;
+    private Producto producto;
     private Registros registroVenta;
     private List<Registros> lista = new ArrayList();
     private double total = 0;
@@ -46,6 +47,7 @@ public class ControlRegistro extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         this.daoRegistro = new RegistrosDao();
         this.daoProducto = new DaoProducto();
+        this.producto = new Producto();
         this.daoVenta = new VentaDao();
         this.ventasList1 = new Venta();
         this.ventasList2 = new Venta();
@@ -100,9 +102,34 @@ public class ControlRegistro extends HttpServlet {
                                             out1.println("<script>alert('Generar nuevo correlativo'); </script>");
                                         } else {
                                             if (daoVenta.insert(ventasList1) == true) {
+                                                out1.println("<script>alert('Factura Guardada con exito'); </script>");
+                                                for (int x = 0; x < lista.size(); x++) {
+                                                    //Agregar a registro//
+                                                    registroVenta = daoRegistro.getSelectMax();
+                                                    int id1 = registroVenta.getMax() + 1;
+                                                    String codigo = lista.get(x).getProducto().getCodigoProducto();
+                                                    producto = daoProducto.getSelectTo(codigo);
+                                                    registroVenta = new Registros(id1, lista.get(x).getCantidadProducto(), ventasList1, producto);
+                                                    daoRegistro.insert(registroVenta);
+                                                    //fin de agregrar a registro//
+                                                    //Modificar Producto//
+                                                    producto.setIdProducto(producto.getIdProducto());
+                                                    producto.setCodigoProducto(producto.getCodigoProducto());
+                                                    producto.setNombreProducto(producto.getNombreProducto());
+                                                    producto.setPrecioCompra(producto.getPrecioCompra());
+                                                    
+                                                    producto.setCantidad(producto.getCantidad() - lista.get(x).getCantidadProducto());
+                                                    producto.setFechaVencimiento(producto.getFechaVencimiento());
+                                                    producto.setEstado(producto.getEstado());
+                                                    producto.setEmpresa(producto.getEmpresa());
+                                                    daoProducto.update(producto);
+                                                    
+                                                    //fin de modificar producto//
+                                                }
+
                                                 this.lista.clear();
                                                 this.registroVenta = null;
-                                                out1.println("<script>alert('Factura Guardada con exito'); </script>");
+
                                             } else {
                                                 out1.println("<script>alert('Verifique que los datos han sido ingresados correctamente'); </script>");
                                             }

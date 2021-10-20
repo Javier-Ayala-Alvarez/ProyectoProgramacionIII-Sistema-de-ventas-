@@ -1,46 +1,46 @@
-
 package modelo.entidades;
+
 import java.util.Date;
+import modelo.dao.EmpresaDao;
 
 public class Producto {
-  private int idProducto;
-  private String codigoProducto;
-  private String nombreProducto;
-  private double precioCompra;
-  private int cantidad;
-  private Date fechaVencimiento;
-  private int max;
-  
-  private int estado;
-  private double gananciaUni;
-  private double iva;
-  private double precioVenta;
-  private Empresa empresa;
+
+    private int idProducto;
+    private String codigoProducto;
+    private String nombreProducto;
+    private double precioCompra;
+    private int cantidad;
+    private Date fechaVencimiento;
+    private int max;
+
+    private int estado;
+    private double gananciaUni;
+    private double iva;
+    private double precioVenta;
+    private Empresa empresa;
 
     public Producto() {
-        
+
     }
 
     public Producto(int idProducto) {
         this.idProducto = idProducto;
     }
 
-    public Producto(String codigoProducto, String nombreProducto, double precioCompra, int cantidad, Date fechaVencimiento, int max,  int estado, double gananciaUni, double iva, double precioVenta, Empresa empresa) {
+    public Producto(String codigoProducto, String nombreProducto, double precioCompra, int cantidad, Date fechaVencimiento, int max, int estado, double gananciaUni, double iva, double precioVenta, Empresa empresa) {
         this.codigoProducto = codigoProducto;
         this.nombreProducto = nombreProducto;
         this.precioCompra = precioCompra;
         this.cantidad = cantidad;
         this.fechaVencimiento = fechaVencimiento;
         this.max = max;
-       
+
         this.estado = estado;
         this.gananciaUni = gananciaUni;
         this.iva = iva;
         this.precioVenta = precioVenta;
         this.empresa = empresa;
     }
-    
-
 
     public int getIdProducto() {
         return idProducto;
@@ -83,8 +83,6 @@ public class Producto {
         return cantidad;
     }
 
-
-
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
@@ -104,8 +102,6 @@ public class Producto {
     public void setMax(int max) {
         this.max = max;
     }
-
-  
 
     public int getEstado() {
         return estado;
@@ -140,13 +136,14 @@ public class Producto {
     }
 
     public Empresa getEmpresa() {
+        EmpresaDao daoEmpresa = new EmpresaDao();
+        empresa = daoEmpresa.selectId(empresa.getIdEmpresa());
+
         return empresa;
     }
-
-
 
     public void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
     }
-    
+
 }
