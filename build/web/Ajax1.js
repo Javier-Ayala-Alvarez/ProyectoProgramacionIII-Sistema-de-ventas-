@@ -32,7 +32,7 @@ $("#btn_Producto").click(function (e) {
     e.stopImmediatePropagation();
     $.ajax({
 
-        url: "ControlProducto", type: 'POST', data: 'btn=4&opccion=todo',
+        url: "ControlProducto", type: 'POST', data: 'btn=4&dato=null',
         success: function (data) {
             $("#producto").html(data);
         }, error: function (xml, data) {
@@ -45,10 +45,12 @@ $("#btn_Producto").click(function (e) {
 //Factura: filtra los productos en la ventana modal producto//
 $(document).on('keyup', '#filtrar', function (e) {
     e.stopImmediatePropagation();
-    var dato = $("#filtrar").val();
+    
+    var dato = $(".filtrar").val();
+    $("#filtrar").focus();
     $.ajax({
 
-        url: "ControlProducto", type: 'POST', data: 'btn=4&opccion=filtrar&dato'+dato,
+        url: "ControlProducto", type: 'POST', data: 'btn=4&dato=' + dato,
         success: function (data) {
             $("#producto").html(data);
         }, error: function (xml, data) {
@@ -56,13 +58,14 @@ $(document).on('keyup', '#filtrar', function (e) {
         }
 
     });
+    $("#filtrar").focus();
 });
 //Factura: Muestra el formulario de registros de una factura//
 $("#datosGenerales").click(function (e) {
     e.stopImmediatePropagation();
-    
+
     $.ajax({
-        
+
         url: "ControladorProducto", type: 'POST', data: '&event=0&cantidad=0&codigo=0',
         success: function (data) {
 
@@ -96,7 +99,7 @@ $(document).on('click', '.agregarCliente', function (e) {
 
 });
 
-function mostrar1(){
+function mostrar1() {
     $.ajax({
 
         url: "ControlSeleccionarCDE", type: 'POST', data: 'codigo=0',
@@ -108,7 +111,7 @@ function mostrar1(){
         }
 
     });
-    
+
 }
 //ControlProducto: Al seleccionar los productos seran mostrados en el encabezado de la fractura//
 $(document).on('click', '.agregarProducto', function (e) {
@@ -180,8 +183,8 @@ $(document).on('click', '#Facturar', function (e) {
     var codigofactura = $("#factura").val();
     var codigoEmpleado = $("#codigoEmpleado").val();
     var codigoCliente = $("#codigoCliente").val();
-    var fecha = $("#fecha").val();
-  
+    var fecha = new Date();
+    fecha = (fecha.getFullYear() + "-" + (fecha.getMonth() + 1) + "-" + fecha.getDate());
     $.ajax({
         url: "ControlRegistro", type: 'POST', data: 'btn=4' +
                 '&codigofactura=' + codigofactura +
@@ -224,7 +227,7 @@ $(document).on('click', '.btn_Eliminar', function (e) {
     e.preventDefault();
     e.stopImmediatePropagation();
     var codigoCliente = $(this).parent().parent().children().first().text();
-var opcion = confirm("Deseas eliminar el Cliente " + codigoCliente + "? ");
+    var opcion = confirm("Deseas eliminar el Cliente " + codigoCliente + "? ");
     if (opcion === true) {
         $.ajax({
             //trabajando
@@ -237,10 +240,10 @@ var opcion = confirm("Deseas eliminar el Cliente " + codigoCliente + "? ");
         });
     }
 
-    
+
 });
 
-function mostrar(){
+function mostrar() {
     codigoCliente = $(this).parent().parent().children().first().text();
     $.ajax({
 
@@ -305,8 +308,8 @@ $(document).on('click', '.btn_ModificarClienta', function (e) {
 $(document).on('click', '.btn_EliminarProducto', function (e) {
     e.preventDefault();
     e.stopImmediatePropagation();
-   var idProducto = $(this).parent().parent().children().first().text();
-        $.ajax({
+    var idProducto = $(this).parent().parent().children().first().text();
+    $.ajax({
         url: "ControlRegistro", type: 'POST', data: 'btn=4' +
                 '&event=eliminarId' + '&Eliminar=' + idProducto,
 

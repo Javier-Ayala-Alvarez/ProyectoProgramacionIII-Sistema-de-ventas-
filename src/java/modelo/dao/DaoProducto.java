@@ -60,7 +60,7 @@ public class DaoProducto {
 
         try {
             con = conectar.getConexion();
-            String sql = "SELECT * FROM producto WHERE nombreproducto LIKE '%"+dato+"%'or codigoproducto LIKE '%"+dato+"%' or nombreproducto LIKE '%"+dato+"%'";
+            String sql = "SELECT * FROM producto WHERE cantidad > 0 and nombreproducto LIKE '%"+dato+"%'or codigoproducto LIKE '%"+dato+"%' ";
             ps = con.prepareStatement(sql);
             this.rs = this.ps.executeQuery();
             while (this.rs.next()) {
@@ -80,7 +80,7 @@ public class DaoProducto {
         } catch (Exception e) {
 
         }
-        return null;
+        return  this.registroList;
     }
 
     public ArrayList<Producto> getSelect() throws SQLException {

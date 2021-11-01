@@ -25,11 +25,9 @@ public class ClienteDao {
 
     public boolean insert(Cliente obj) {
         try {
-             con = conectar.getConexion();
+            con = conectar.getConexion();
             String sql = "insert into cliente(idcliente,codigocliente,nombre"
                     + ",apellido,telefonocliente,direccioncliente)VALUES(?,?,?,?,?,?)";
-
-           
             ps = con.prepareStatement(sql);
             ps.setInt(1, obj.getIdCliente());
             ps.setString(2, obj.getCodigoCliente());
@@ -40,17 +38,17 @@ public class ClienteDao {
             ps.execute();
             return true;
         } catch (Exception e) {
-            e.printStackTrace();
+            return false;
         } finally {
             try {
                 ps.close();
                 this.conectar.cerrarConexiones();
             } catch (Exception ex) {
-
+                return false;
             }
-            
+
         }
-        return false;
+
     }
 
     public boolean delete(String codigo) {

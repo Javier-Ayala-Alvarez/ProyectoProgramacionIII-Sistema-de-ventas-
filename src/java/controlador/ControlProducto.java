@@ -39,18 +39,24 @@ public class ControlProducto extends HttpServlet {
                 response.setContentType("text/html; charset=iso-8859-1");
                 PrintWriter out1 = response.getWriter();
 
-                if ((request.getParameter("opccion").equals("todo"))) {
-                    this.registroList = daoProducto.getSelect();
-                } else if ((request.getParameter("opccion").equals("filtrar"))) {
-                    String dato =request.getParameter("dato"); 
-                    this.registroList = daoProducto.buscar(request.getParameter("dato"));
-                    if (registroList.equals(null)) {
+                    registroList.clear();
+                    if (!request.getParameter("dato").equals("")&&!request.getParameter("dato").equals("null")) {
+                        this.registroList = daoProducto.buscar(request.getParameter("dato"));
+                    } else {
                         this.registroList = daoProducto.getSelect();
                     }
+
+                    if (registroList.get(0).equals(null)) {
+                        this.registroList = daoProducto.getSelect();
+                    }
+                
+                String dato = request.getParameter("dato");
+                if(request.getParameter("dato").equals("null")){
+                dato="";
                 }
                 out1.println("<link rel='stylesheet' type='text/css' href='css/EstiloFactura.css'>");
                 out1.println("<script src=https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js></script><script src=Ajax1.js></script> ");
-                out1.println("<div class='columns'><div class='column'>Buscar:<input type='text'  name='filtrar' id='filtrar' class='input is-success filtrar'/>");
+                out1.println("<div class='columns'><div class='column'>Buscar:<input type='text'  name='filtrar' id='filtrar' value='"+dato+"'class='input is-link filtrar' autofocus/></td>");
                 out1.println("<div class='column'><table  class='table is-fullwidth' >");
                 out1.println("<TR bgcolor='#3EB429' ><TD>");
                 out1.println("<H4 ><font color='#FFF'>CODIGÓ<TD>");

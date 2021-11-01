@@ -44,14 +44,15 @@ public class ControlCliente extends HttpServlet {
                 this.registroList = daoCliente.getMax();
                 int id = registroList.getMax() + 1;
                 cliente = new Cliente(id, crearCodigo("CE-", id), request.getParameter("nombre"), request.getParameter("apellido"), request.getParameter("telefono"), request.getParameter("direccion"));
-                if((daoCliente.insert(cliente)) == false){
-                     out1.println("<script>alert('Se produjo un error intente Nuevamente'); </script>");
+                if((daoCliente.insert(cliente)) == false ){
+                    
+                     out1.println("<script>alert('Numero ya registrado'); </script>");
                 }else{
                      
                      out1.println("<script>alert('Insertado Correctamente, Hacer clic en recargar'); </script>");
                 }
-            } catch (SQLException ex) {
-                Logger.getLogger(ControlCliente.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Exception ex) {
+               out1.println("<script>alert('Numero ya registrado'); </script>");
             }
         }
         if (request.getParameter("event").equals("btn_EliminarCliente")) {
