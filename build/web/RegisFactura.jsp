@@ -14,8 +14,8 @@
 
             <H1>
                 <font  color="#B76103" > 
-                Facturas</H1><TR><TD bgcolor="#3EB429" >
-            <H4 ><font color="#fff">CODIGO<TD bgcolor="#3EB429" >
+                Ventas Diarias</H1><TR><TD bgcolor="#3EB429" >
+            <H4 ><font color="#fff">Nº FACTURA<TD bgcolor="#3EB429" >
                     <H4><font color="#fff">FECHA<TD bgcolor="#3EB429" >
                             <H4><font color="#fff">CLIENTE<TD bgcolor="#3EB429" >
                                     <H4><font color="#fff">VENDEDOR<TD bgcolor="#3EB429" >
@@ -41,17 +41,17 @@
                                                     </td>
 
                                                     <td align="center">
-                                                        <%= registro.getCliente().getNombre()%>
+                                                        <%= registro.getCliente().getNombre()+" "+registro.getCliente().getApellido()%>
 
                                                     </td>
 
                                                     <td align="center">
 
-                                                        <%= registro.getEmpleado().getNombre()%>
+                                                        <%= registro.getEmpleado().getNombre() +" "+  registro.getEmpleado().getApellido() %>
                                                     </td>
                                                     <td align="center">
 
-                                                        <%= registro.getSaldoTotal()%>
+                                                        $ <%= String.format("%.2f", registro.getSaldoTotal())%>
                                                     </td>
                                                     <td align="center">
                                                         

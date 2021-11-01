@@ -1,9 +1,10 @@
 package modelo.entidades;
 
+import java.io.Serializable;
 import java.util.Date;
 import modelo.dao.EmpresaDao;
 
-public class Producto {
+public class Producto implements Serializable{
 
     private int idProducto;
     private String codigoProducto;

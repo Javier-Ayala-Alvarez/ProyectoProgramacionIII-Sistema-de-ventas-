@@ -40,6 +40,16 @@ border-radius:10px;
    
 
 }
+.totalFactura{
+  border: 0;
+  border-radius: 5px;
+  width: 180px;
+  font-weight: bold;
+  background: #257953;
+  color: #fff;
+  font-size: 8em;
+  text-align: center;  
+}
 .form-register1{
     margin: 10px;
     top: 17cm;
@@ -49,6 +59,7 @@ border-radius:10px;
     border:2px;
     position: absolute;
     font-family: arial;
+    
    
 
 }

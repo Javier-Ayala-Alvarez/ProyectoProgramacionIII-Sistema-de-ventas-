@@ -1,13 +1,14 @@
 
 
 package modelo.entidades;
+import java.io.Serializable;
 import java.util.Date;
 //Asociacion, Agregacion y herencia
 /**
  * 
  * @author Sammy Guergachi <sguergachi at gmail.com>
  */
-public class GastoEmpresa {
+public class GastoEmpresa implements Serializable{
     private int idGasto;
     private String codigoGastos;
     private Date fecha;

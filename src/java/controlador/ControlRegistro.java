@@ -67,18 +67,27 @@ public class ControlRegistro extends HttpServlet {
                     if (lista.size() < 6) {
                         if (!request.getParameter("codigoprducto").equals("null")) {
                             if (Integer.parseInt(request.getParameter("cantidad")) > 0) {
-                                 producto = daoProducto.getSelectTo(request.getParameter("codigoprducto"));
-                                 if(producto.getCantidad() >= Integer.parseInt(request.getParameter("cantidad"))){
-                                registroVenta.setCodigoProducto(request.getParameter("codigoprducto"));
-                                registroVenta.setNombreProducto(request.getParameter("producto"));
-                                registroVenta.setCantidadProducto(Integer.parseInt(request.getParameter("cantidad")));
-                                registroVenta.setPrecioVentaProducto(Double.parseDouble(request.getParameter("precioUni")));
-                                registroVenta.setPrecioTotalProducto(Double.parseDouble(request.getParameter("preciototal1")));
-                                this.lista.add(registroVenta);
-                                 
-                                 }else{
-                                     out1.println("<script>alert('Cantidad ingresada sobrepasa la existencia de: "+producto.getCantidad()+"'); </script>");
-                                 }
+                                producto = daoProducto.getSelectTo(request.getParameter("codigoprducto"));
+                                if (producto.getCantidad() >= Integer.parseInt(request.getParameter("cantidad"))) {
+                                    int existe = 0;
+                                    for (Registros registro : lista) {
+                                        if (request.getParameter("codigoprducto").equals(registro.getProducto().getCodigoProducto())) {
+                                            existe = 1;
+                                        }
+                                    }
+                                    if (existe == 0) {
+                                        registroVenta.setCodigoProducto(request.getParameter("codigoprducto"));
+                                        registroVenta.setNombreProducto(request.getParameter("producto"));
+                                        registroVenta.setCantidadProducto(Integer.parseInt(request.getParameter("cantidad")));
+                                        registroVenta.setPrecioVentaProducto(Double.parseDouble(request.getParameter("precioUni")));
+                                        registroVenta.setPrecioTotalProducto(Double.parseDouble(request.getParameter("preciototal1")));
+                                        this.lista.add(registroVenta);
+                                    } else {
+                                        out1.println("<script>alert('Ya esta el producto en carrito'); </script>");
+                                    }
+                                } else {
+                                    out1.println("<script>alert('Cantidad ingresada sobrepasa la existencia de: " + producto.getCantidad() + "'); </script>");
+                                }
 
                             } else {
                                 out1.println("<script>alert('Ingrese cantidad'); </script>");
@@ -123,13 +132,13 @@ public class ControlRegistro extends HttpServlet {
                                                     producto.setCodigoProducto(producto.getCodigoProducto());
                                                     producto.setNombreProducto(producto.getNombreProducto());
                                                     producto.setPrecioCompra(producto.getPrecioCompra());
-                                                    
+
                                                     producto.setCantidad(producto.getCantidad() - lista.get(x).getCantidadProducto());
                                                     producto.setFechaVencimiento(producto.getFechaVencimiento());
                                                     producto.setEstado(producto.getEstado());
                                                     producto.setEmpresa(producto.getEmpresa());
                                                     daoProducto.update(producto);
-                                                    
+
                                                     //fin de modificar producto//
                                                 }
 
@@ -162,12 +171,12 @@ public class ControlRegistro extends HttpServlet {
                     this.total = 0;
                 }
                 if (request.getParameter("event").equals("eliminarId")) {
-                    this.lista.remove(Integer.parseInt(request.getParameter("Eliminar")));
+                    this.lista.remove(Integer.parseInt(request.getParameter("Eliminar")) - 1);
                 }
-                out1.println("<div class='column'> <div class='TABLE3'> <table  class='table is-fullwidth'> <TR><TD bgcolor='#3EB429> <H4 ><font color='#fff'>N°<TD bgcolor='#3EB429' >"
-                        + "<H4 ><font color='#fff'>CODIGO<TD bgcolor='#3EB429' > <H4><font color='#fff'>PRODUCTO<TD bgcolor='#3EB429' ><H4><font color='#fff'>CANTIDAD<TD bgcolor='#3EB429' >"
-                        + "<H4><font color='#fff'>PRECIO<TD bgcolor='#3EB429' > <H4><font color='#fff'>TOTAL</TD><TD bgcolor='#3EB429' ><H4><font color='#fff'>OPCCIONES</TD>");
-                int i = 0;
+                out1.println("<div class='column'> <div class='TABLE3'> <table class='table is-fullwidth'> <TR><TD bgcolor='#3EB429  align='center> <H4 ><font color='#fff'>N°<TD bgcolor='#3EB429' >"
+                        + "<H4 ><font color='#fff'>CODIGÓ<TD bgcolor='#3EB429' > <H4><font color='#fff'>PRODUCTO<TD bgcolor='#3EB429' ><H4><font color='#fff'>CANTIDAD<TD bgcolor='#3EB429' >"
+                        + "<H4><font color='#fff'>PRECIO<TD bgcolor='#3EB429' > <H4><font color='#fff'>TOTAL</TD><TD bgcolor='#3EB429' ><H4><font color='#fff'>ACCIÓN</TD>");
+                int i = 1;
                 for (Registros registro : lista) {
                     out1.println("<tr><td align='center'>" + i + "</td>");
 
@@ -177,7 +186,7 @@ public class ControlRegistro extends HttpServlet {
                     out1.println("<td align='center'>" + "$" + String.format("%.2f", registro.getProducto().getPrecioVenta()) + "</td>");
                     out1.println("<td align='center'>" + "$" + String.format("%.2f", registro.getPrecioTotalProducto()) + "</td>");
                     i++;
-                    out1.println("<td align='center'> <button class='button is-danger is-outlined btn_EliminarProducto' value='" + registro.getIdRegistros() + "' id='btn_EliminarProducto'>Eliminar</a></button></td>");
+                    out1.println("<td align='center'> <button class='button is-link is-active btn_EliminarProducto' value='" + registro.getIdRegistros() + "' id='btn_EliminarProducto'>Quitar de carrito</button></td>");
                     this.total = total + registro.getPrecioTotalProducto();
                 }
                 out1.println("</tr></table>  </div>  </div>");
@@ -185,10 +194,10 @@ public class ControlRegistro extends HttpServlet {
                 out1.println("<div  class='form-register1'>");
                 out1.println("<table><tr><td>");
                 out1.println(" <form>");
-                out1.println("<td><input type='submit' name='ReFactura' value='Facturar' id='Facturar' class='button is-link is-active'>");
-                out1.println("<td> <input type = 'submit' name = 'ReFactura' id='cancelarFactura' value = 'Cancelar' class='button is-danger'>");
-                out1.println("<td class='column is-one-third'> Total:");
-                out1.println("<td> <input type='text'  name='Usuario' placeholder='Total' value='" + this.total + "' class='input is-success'/>");
+                out1.println("<td class='column' ><input type='submit' name='ReFactura' value='Facturar' id='Facturar' class='button is-warning'>");
+                out1.println("<input type = 'submit' name = 'cancelarFactura' id='cancelarFactura' value = 'Cancelar' class='button is-danger'>");
+                out1.println("</td> <td align='center'> Total: $ ");
+                out1.println("<input type='text'  name='Usuario' placeholder='Total' value='" + this.total + "' class='input is-medium is-right  totalFactura'/></td>");
                 out1.println("</form> </td> </tr> </table>");
                 this.total = 0;
 

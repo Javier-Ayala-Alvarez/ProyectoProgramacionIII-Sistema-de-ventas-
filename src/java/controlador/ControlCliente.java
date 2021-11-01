@@ -43,7 +43,7 @@ public class ControlCliente extends HttpServlet {
 
                 this.registroList = daoCliente.getMax();
                 int id = registroList.getMax() + 1;
-                cliente = new Cliente(id, crearCodigo("CE-", id), request.getParameter("nombre"), request.getParameter("apellido"), request.getParameter("apellido"), request.getParameter("direccion"));
+                cliente = new Cliente(id, crearCodigo("CE-", id), request.getParameter("nombre"), request.getParameter("apellido"), request.getParameter("telefono"), request.getParameter("direccion"));
                 if((daoCliente.insert(cliente)) == false){
                      out1.println("<script>alert('Se produjo un error intente Nuevamente'); </script>");
                 }else{
@@ -103,7 +103,7 @@ public class ControlCliente extends HttpServlet {
         out1.println("NOMBRE:<input type='text'  name='nombre' placeholder='nombre' id='nombreClien' class='input is-link' pattern='[A-Za-z]+' value='" + nombre + "' required/ > </div> <div class='column'>");
         out1.println("APELLIDO:<input type='text'  name='apellido' placeholder='Telefono' id='apellidoClien' value='" + apellido + "' class='input is-link' pattern='[A-Za-z]+'  required/> </div> </div>  <div class='columns'>");
         out1.println("<div class='column'>TELEFONO:<input type='text'  name='telefono' id='telefonoClien' placeholder='Telefono' value='" + telefono + "' class='input is-link' pattern='[0-9]+' minlength='8' maxlength='8' required/> </div> <div class='column'>");
-        out1.println("DIRECCION:<input type='text'  name='direccion' placeholder='Direccion' id='direccionClien' class='input is-link' value='" + direccion + "' required/> </div> <div class='column is-one-third'>");
+        out1.println("DIRECCIÓN:<input type='text'  name='direccion' placeholder='Direccion' id='direccionClien' class='input is-link' value='" + direccion + "' required/> </div> <div class='column is-one-third'>");
         out1.println("AGREGAR<input type='submit' name='btn_agregar' value='" + valor + "' id='" + id1 + "' class='button is-link is-active is-fullwidth'></form> </div> </div>");
 //Factura: Mostrar Datos
         this.daoCliente = new ClienteDao();
@@ -116,11 +116,11 @@ public class ControlCliente extends HttpServlet {
             out1.println("<table  class='table is-fullwidth' >");
             out1.println("<TR><TD  colspan='6'>REGISTROS DE CLIENTE</TD></TR>");
             out1.println("<TR bgcolor='#3EB429' ><TD>");
-            out1.println("<H4 ><font color='#FFF'>CODIGO<TD>");
+            out1.println("<H4 ><font color='#FFF'>CODIGÓ<TD>");
             out1.println("<H4><font color='#FFF'>NOMBRE<TD>");
             out1.println("<H4><font color='#FFF'>APELLIDO<TD>");
-            out1.println(" <H4><font color='#FFF'>TELEFONO<TD>");
-            out1.println(" <H4><font color='#FFF'>DIRECCION<TD>");
+            out1.println(" <H4><font color='#FFF'>TELÉFONO<TD>");
+            out1.println(" <H4><font color='#FFF'>DIRECCIÓN<TD>");
             out1.println("  <H4><font color='#FFF'>SELECCIONAR</TD>");
             for (Cliente registro : registroList1) {
                 out1.println("<tr id='regisCliente'><td>" + registro.getCodigoCliente() + "</td>");

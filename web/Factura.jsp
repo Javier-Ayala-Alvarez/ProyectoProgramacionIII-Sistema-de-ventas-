@@ -87,7 +87,7 @@
                         <section class="modal-card-body">
                             <!-- Content ... -->
                             <div class="columns">
-                                <div class="column">FORMULARIO DE INSCRIPCION</div>
+                                <div class="column">FORMULARIO DE INSCRIPCIÓN</div>
                             </div>
                             <div id="data2"> </div>
                             <!-- Muestra El formulario---------------- ... -->  

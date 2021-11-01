@@ -5,7 +5,6 @@ package controlador;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 import controlador.ControlCliente;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -25,48 +24,58 @@ import modelo.entidades.Producto;
 
 @WebServlet(urlPatterns = {"/ControlProducto"})
 public class ControlProducto extends HttpServlet {
-private ArrayList<Producto> registroList;
+
+    private ArrayList<Producto> registroList;
     private DaoProducto daoProducto;
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
-          if ((!request.getParameter("btn").isEmpty())) {
-              //Factura: Mostrar los registros de productos
-            this.daoProducto = new DaoProducto();
-            this.registroList = new ArrayList();
-            response.setContentType( "text/html; charset=iso-8859-1" );
-            PrintWriter out1 =  response.getWriter();
-            this.registroList = daoProducto.getSelect();
-                 
-            out1.println("<link rel='stylesheet' type='text/css' href='css/EstiloFactura.css'>");
-            out1.println("<script src=https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js></script><script src=Ajax1.js></script> ");
-            out1.println("<table  class='table is-fullwidth' >");
-            out1.println("<TR bgcolor='#3EB429' ><TD>");
-            out1.println("<H4 ><font color='#FFF'>CODIGO<TD>");
-            out1.println("<H4><font color='#FFF'>PRODUCTO<TD>");
-            out1.println("<H4><font color='#FFF'>PRECIO<TD>");
-            out1.println(" <H4><font color='#FFF'>CANTIDAD<TD>");
-            out1.println("  <H4><font color='#FFF'>SELECCIONAR</TD><tr>");
-            for (Producto registro : registroList) {
-                out1.println("<tr><td>" + registro.getCodigoProducto() + "</td>");
-                out1.println("<td>"+registro.getNombreProducto()+"</td>");
-                out1.println("<td>"+registro.getPrecioVenta()+"</td>");
-                out1.println("<td>"+registro.getCantidad()+"</td>");
-               
-                out1.println("<td><button class='button is-link is-outlined agregarProducto'>AGREGAR</button>");
-               
+            if ((!request.getParameter("btn").isEmpty())) {
+                //Factura: Mostrar los registros de productos
+                this.daoProducto = new DaoProducto();
+                this.registroList = new ArrayList();
+                response.setContentType("text/html; charset=iso-8859-1");
+                PrintWriter out1 = response.getWriter();
+
+                if ((request.getParameter("opccion").equals("todo"))) {
+                    this.registroList = daoProducto.getSelect();
+                } else if ((request.getParameter("opccion").equals("filtrar"))) {
+                    String dato =request.getParameter("dato"); 
+                    this.registroList = daoProducto.buscar(request.getParameter("dato"));
+                    if (registroList.equals(null)) {
+                        this.registroList = daoProducto.getSelect();
+                    }
+                }
+                out1.println("<link rel='stylesheet' type='text/css' href='css/EstiloFactura.css'>");
+                out1.println("<script src=https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js></script><script src=Ajax1.js></script> ");
+                out1.println("<div class='columns'><div class='column'>Buscar:<input type='text'  name='filtrar' id='filtrar' class='input is-success filtrar'/>");
+                out1.println("<div class='column'><table  class='table is-fullwidth' >");
+                out1.println("<TR bgcolor='#3EB429' ><TD>");
+                out1.println("<H4 ><font color='#FFF'>CODIGÓ<TD>");
+                out1.println("<H4><font color='#FFF'>PRODUCTO<TD>");
+                out1.println("<H4><font color='#FFF'>PRECIO<TD>");
+                out1.println(" <H4><font color='#FFF'>CANTIDAD<TD>");
+                out1.println("  <H4><font color='#FFF'>SELECCIONAR</TD><tr>");
+                for (Producto registro : registroList) {
+                    out1.println("<tr><td>" + registro.getCodigoProducto() + "</td>");
+                    out1.println("<td>" + registro.getNombreProducto() + "</td>");
+                    out1.println("<td>" + String.format("%.2f", registro.getPrecioVenta()) + "</td>");
+                    out1.println("<td>" + registro.getCantidad() + "</td>");
+
+                    out1.println("<td><button class='button is-link is-outlined agregarProducto'>AGREGAR</button>");
+
+                }
+                out1.print("</tr>");
+                out1.print("</table></div></div>");
+
             }
-            out1.print("</tr>");
-            out1.print("</table>");
-            
+        } catch (SQLException ex) {
+            Logger.getLogger(ControlCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
-          } catch (SQLException ex) {
-                Logger.getLogger(ControlCliente.class.getName()).log(Level.SEVERE, null, ex);
-            }
 
     }
-        
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**

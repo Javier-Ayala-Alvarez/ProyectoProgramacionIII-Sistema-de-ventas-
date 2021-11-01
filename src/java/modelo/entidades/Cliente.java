@@ -24,7 +24,7 @@ public class Cliente implements Serializable, JSONStreamAware{
     private String apellido;
     private String telefono;
     private String direccion;
-    private int max;
+    private int max;// Atributos para adquirir el numero maximo de id en la base de datos;
 
     public Cliente() {
     }

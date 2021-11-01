@@ -13,21 +13,21 @@
             <H1>
                 <font  color="#B76103" > 
                 Registros</H1><TR><TD bgcolor="#3EB429" >
-            <H4 ><font color="#fff">CODIGO<TD bgcolor="#3EB429" >
-                    <H4><font color="#fff">NOMBRE<TD bgcolor="#3EB429" >
+            <H4 ><font color="#fff">CODIGÓ<TD bgcolor="#3EB429" >
+                    <H4><font color="#fff">PRODUCTO<TD bgcolor="#3EB429" >
                             <H4><font color="#fff">CANTIDAD<TD bgcolor="#3EB429" >
                                     <H4><font color="#fff">PRECIO<TD bgcolor="#3EB429" >
                                             <H4><font color="#fff">TOTAL</TD>
-                                                
-                                            
-                                                
-                                                 <%
-                                                        List<Registros> registroList = (List<Registros>) request.getAttribute("registroList");
-                                                        for (Registros registro : registroList) {
-                                                    %>
+
+
+
+                                                <%
+                                                    List<Registros> registroList = (List<Registros>) request.getAttribute("registroList");
+                                                    for (Registros registro : registroList) {
+                                                %>
                                                 <TR>
 
-                                                   
+
 
                                                     <td align="center">
 
@@ -48,13 +48,13 @@
                                                         <%= registro.getProducto().getPrecioVenta()%>
                                                     </td>
                                                     <td align="center">
+                                                        $ <%= String.format("%.2f", registro.getPrecioTotalProducto())%>
 
-                                                        <%= registro.getPrecioTotalProducto()%>
                                                     </td>
-                                                    
-                                                   
-                                                    <%} %></tr>
-                                                    </table>
+
+
+                                                    <%}%></tr>
+                                                </table>
 
 
 

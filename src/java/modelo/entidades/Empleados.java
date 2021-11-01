@@ -1,8 +1,9 @@
 package modelo.entidades;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Empleados extends Persona{
+public class Empleados extends Persona implements Serializable{
     private int idUsuario;
     private int idEmpleado;
     private String cargoEmpleado,codigoEmpleado;
@@ -10,7 +11,6 @@ public class Empleados extends Persona{
     private Date fechaContratacion;
     private Usuario usuario;
     private Empresa empresa;
-    private ArrayList<Venta> ventas;
     private int estado;
 
     public Empleados(int idUsuario, int idEmpleado, String cargoEmpleado, String codigoEmpleado, double salarioEmpleado, double afp, double isss, Date fechaContratacion, Usuario usuario, Empresa empresa, ArrayList<Venta> ventas, int estado, int idPersona) {
@@ -25,15 +25,14 @@ public class Empleados extends Persona{
         this.fechaContratacion = fechaContratacion;
         this.usuario = usuario;
         this.empresa = empresa;
-        this.ventas = ventas;
         this.estado = estado;
+    }
+
+    public Empleados() {
     }
 
    
 
-    public Empleados() {
-        ventas = new ArrayList();
-    }
 
     public Empleados(int idEmpleado) {
         this.idEmpleado = idEmpleado;
@@ -62,8 +61,7 @@ public class Empleados extends Persona{
         this.afp = afp;
         this.isss = isss;
         this.fechaContratacion = fechaContratacion;
-        
-        ventas = new ArrayList();
+
     }
 
     public Empleados(String cargoEmpleado, String codigoEmpleado, double salarioEmpleado, double afp, double isss, Date fechaContratacion, int estado, String nombre, String apellido, String telefono, String direccion) {
@@ -82,6 +80,8 @@ public class Empleados extends Persona{
         this.cargoEmpleado = cargoEmpleado;
     }
 
+    
+
     public int getIdUsuario() {
         return idUsuario;
     }
@@ -90,14 +90,7 @@ public class Empleados extends Persona{
         this.idUsuario = idUsuario;
     }
 
-    public ArrayList<Venta> getVentas() {
-        return ventas;
-    }
-
-    public void setVentas(ArrayList<Venta> ventas) {
-        this.ventas = ventas;
-    }
-    
+   
 
    public int getIdEmpleado() {
         return idEmpleado;
@@ -153,9 +146,6 @@ public class Empleados extends Persona{
         return usuario;
     }
 
-    public void addVenta(Venta x){
-        ventas.add(x);
-    }
 
     public void addUsuario(Usuario x){
         this.usuario = x;

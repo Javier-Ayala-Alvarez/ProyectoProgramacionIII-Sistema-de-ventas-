@@ -1,9 +1,10 @@
 package modelo.entidades;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Venta {
+public class Venta implements Serializable{
 
     private int idFactura;
     private String nFactura;
@@ -12,7 +13,7 @@ public class Venta {
     private int estado;
     private Cliente cliente = new Cliente();
     private Empleados empleado = new Empleados();
-    private Empresa empresa;
+   
     private int max;
 
     public Venta() {
@@ -58,13 +59,7 @@ public class Venta {
         this.estado = estado;
     }
 
-    public Empresa getEmpresa() {
-        return empresa;
-    }
-
-    public void setEmpresa(Empresa empresa) {
-        this.empresa = empresa;
-    }
+  
 
     public String getnFactura() {
         return nFactura;
@@ -77,6 +72,17 @@ public class Venta {
     public void setNombreCliente(String nombre) {
 
         cliente.setNombre(nombre);
+
+    }
+
+    public void setApellidoEmpleado(String apellido) {
+
+        empleado.setApellido(apellido);
+
+    }
+    public void setApellidoCliente(String apellido) {
+
+        cliente.setApellido(apellido);
 
     }
 

@@ -1,16 +1,19 @@
 
 package modelo.entidades;
 
+import java.io.Serializable;
 
-public class Registros {
+
+public class Registros implements Serializable{
     private int idRegistros;
     private int cantidadProducto;
     private double precioTotalProducto;
-    Producto producto = new Producto();
+    private Producto producto = new Producto();
     
-    private int max;
-    
-    Venta venta;
+    private int max;// Atributos para adquirir el numero maximo de id en la base de datos;
+    //Comentar los atributos que no estan en la tablas 
+    //Recordar Ponerlo de tipo privado;--------------------------------
+    private Venta venta;
     public Registros() {
         
     }

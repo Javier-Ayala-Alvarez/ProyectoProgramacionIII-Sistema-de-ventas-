@@ -32,7 +32,23 @@ $("#btn_Producto").click(function (e) {
     e.stopImmediatePropagation();
     $.ajax({
 
-        url: "ControlProducto", type: 'POST', data: 'btn=4',
+        url: "ControlProducto", type: 'POST', data: 'btn=4&opccion=todo',
+        success: function (data) {
+            $("#producto").html(data);
+        }, error: function (xml, data) {
+            swal('Mensaje del sistema', 'Error', 'error');
+        }
+
+    });
+});
+
+//Factura: filtra los productos en la ventana modal producto//
+$(document).on('keyup', '#filtrar', function (e) {
+    e.stopImmediatePropagation();
+    var dato = $("#filtrar").val();
+    $.ajax({
+
+        url: "ControlProducto", type: 'POST', data: 'btn=4&opccion=filtrar&dato'+dato,
         success: function (data) {
             $("#producto").html(data);
         }, error: function (xml, data) {

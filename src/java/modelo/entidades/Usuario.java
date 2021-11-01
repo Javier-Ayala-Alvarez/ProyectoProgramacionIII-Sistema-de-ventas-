@@ -1,8 +1,10 @@
 
 package modelo.entidades;
 
+import java.io.Serializable;
 
-public class Usuario{
+
+public class Usuario implements Serializable{
     private int idUsuario;
     private String usuario;
     private String contraseña;
