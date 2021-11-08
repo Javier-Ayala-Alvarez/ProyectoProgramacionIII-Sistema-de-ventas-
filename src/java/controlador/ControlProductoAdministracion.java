@@ -48,9 +48,9 @@ public class ControlProductoAdministracion extends HttpServlet {
         this.producto = new Producto();
         this.empresa = new Empresa();
         this.daoEmpresa = new EmpresaDao();
-
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         try (PrintWriter out = response.getWriter()) {
-            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
             if (request.getParameter("btn_Guardar") != null) {
 
                 if (!request.getParameter("nombre").isEmpty()
@@ -99,27 +99,33 @@ public class ControlProductoAdministracion extends HttpServlet {
 
             } else if (request.getParameter("btn_ModificarRegistros") != null) {
 
-                /////////////////////////////////////////////////////////
-                String codigo = request.getParameter("codigo");
-                this.producto = daoProducto.getSelectTo1(codigo);
+                if (!request.getParameter("nombre").isEmpty()
+                        && !request.getParameter("precioCompra").isEmpty()
+                        && !request.getParameter("cantidad").isEmpty()
+                        && !request.getParameter("fecha").isEmpty()
+                        && !request.getParameter("precioVenta").isEmpty()) {
+                    String codigo = request.getParameter("codigo");
+                    this.producto = daoProducto.getSelectTo1(codigo);
 
-                producto.setNombreProducto(request.getParameter("nombre"));
-                producto.setCantidad(Integer.parseInt(request.getParameter("cantidad")));
-                producto.setPrecioCompra(Double.parseDouble(request.getParameter("precioCompra")));
-                producto.setPrecioVenta(Double.parseDouble(request.getParameter("precioVenta")));
-                producto.setFechaVencimiento(formatter.parse(request.getParameter("fecha")));
+                    producto.setNombreProducto(request.getParameter("nombre"));
+                    producto.setCantidad(Integer.parseInt(request.getParameter("cantidad")));
+                    producto.setPrecioCompra(Double.parseDouble(request.getParameter("precioCompra")));
+                    producto.setPrecioVenta(Double.parseDouble(request.getParameter("precioVenta")));
+                    producto.setFechaVencimiento(formatter.parse(request.getParameter("fecha")));
 
-                if (daoProducto.update(producto)) {
-                    this.producto = daoProducto.getMax();
-                    this.productoList = daoProducto.getSelect();
-                    request.setAttribute("alerta", "<script>alert('Modificado Con exito'); </script>");
-                    request.setAttribute("codigo", crearCodigo("CP-", producto.getMax() + 1));
-                    request.setAttribute("productoList", this.productoList);
-                    request.getRequestDispatcher("Producto.jsp").forward(request, response);
+                    if (daoProducto.update(producto)) {
+                        this.producto = daoProducto.getMax();
+                        this.productoList = daoProducto.getSelect();
+                        
+                        request.setAttribute("codigo", crearCodigo("CP-", producto.getMax() + 1));
+                        request.setAttribute("productoList", this.productoList);
+                        request.getRequestDispatcher("Producto.jsp").forward(request, response);
+                        request.setAttribute("alerta", "<script>alert('Modificado Con exito'); </script>");
 
-                } else {
+                    } else {
 
-                    request.setAttribute("alerta", "<script>alert('Se produjo un error'); </script>");
+                        request.setAttribute("alerta", "<script>alert('Se produjo un error'); </script>");
+                    }
                 }
             } else if (request.getParameter("btn_Aumetar") != null) {
                 String codigo = request.getParameter("id");
@@ -133,8 +139,8 @@ public class ControlProductoAdministracion extends HttpServlet {
 
                     String codigo = request.getParameter("codigo");
                     this.producto = daoProducto.getSelectTo1(codigo);
-                    producto.setCantidad(producto.getCantidad()+ Integer.parseInt(request.getParameter("cantidad")));
-                    producto.setPrecioCompra((producto.getPrecioCompra()+Double.parseDouble(request.getParameter("precioCompra")))/2);
+                    producto.setCantidad(producto.getCantidad() + Integer.parseInt(request.getParameter("cantidad")));
+                    producto.setPrecioCompra((producto.getPrecioCompra() + Double.parseDouble(request.getParameter("precioCompra"))) / 2);
 
                     if (daoProducto.update(producto)) {
                         this.producto = daoProducto.getMax();
