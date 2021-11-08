@@ -56,7 +56,7 @@ public class ControlProductoAdministracion extends HttpServlet {
                 if (!request.getParameter("nombre").isEmpty()
                         && !request.getParameter("precioCompra").isEmpty()
                         && !request.getParameter("cantidad").isEmpty()
-                        && !request.getParameter("fecha").isEmpty()
+                        && request.getParameter("fecha") != null
                         && !request.getParameter("precioVenta").isEmpty()) {
                     this.producto = daoProducto.getMax();
                     this.empresa = daoEmpresa.select();
@@ -116,11 +116,11 @@ public class ControlProductoAdministracion extends HttpServlet {
                     if (daoProducto.update(producto)) {
                         this.producto = daoProducto.getMax();
                         this.productoList = daoProducto.getSelect();
-                        
+                         request.setAttribute("alerta", "<script>alert('Modificado Con exito'); </script>");
                         request.setAttribute("codigo", crearCodigo("CP-", producto.getMax() + 1));
                         request.setAttribute("productoList", this.productoList);
                         request.getRequestDispatcher("Producto.jsp").forward(request, response);
-                        request.setAttribute("alerta", "<script>alert('Modificado Con exito'); </script>");
+                       
 
                     } else {
 
