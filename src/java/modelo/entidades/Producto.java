@@ -16,7 +16,6 @@ public class Producto implements Serializable{
 
     private int estado;
     private double gananciaUni;
-    private double iva;
     private double precioVenta;
     private Empresa empresa;
 
@@ -28,20 +27,37 @@ public class Producto implements Serializable{
         this.idProducto = idProducto;
     }
 
-    public Producto(String codigoProducto, String nombreProducto, double precioCompra, int cantidad, Date fechaVencimiento, int max, int estado, double gananciaUni, double iva, double precioVenta, Empresa empresa) {
+    public Producto( String codigoProducto, String nombreProducto, double precioCompra, int cantidad, Date fechaVencimiento, int estado, double precioVenta, Empresa empresa) {
+        
         this.codigoProducto = codigoProducto;
         this.nombreProducto = nombreProducto;
         this.precioCompra = precioCompra;
         this.cantidad = cantidad;
         this.fechaVencimiento = fechaVencimiento;
-        this.max = max;
-
         this.estado = estado;
-        this.gananciaUni = gananciaUni;
-        this.iva = iva;
         this.precioVenta = precioVenta;
         this.empresa = empresa;
     }
+//Id,codigo,Nombre,compra,canidad,fecha,venta,empresa
+    public Producto(int idProducto, String codigoProducto, String nombreProducto, double precioCompra, int cantidad, Date fechaVencimiento, int estado, double precioVenta, Empresa empresa) {
+        this.idProducto = idProducto;
+        this.codigoProducto = codigoProducto;
+        this.nombreProducto = nombreProducto;
+        this.precioCompra = precioCompra;
+        this.cantidad = cantidad;
+        this.fechaVencimiento = fechaVencimiento;
+        this.estado = estado;
+        this.precioVenta = precioVenta;
+        this.empresa = empresa;
+    }
+
+    
+
+    
+
+   
+
+   
 
     public int getIdProducto() {
         return idProducto;
@@ -120,13 +136,7 @@ public class Producto implements Serializable{
         this.gananciaUni = gananciaUni;
     }
 
-    public double getIva() {
-        return iva;
-    }
-
-    public void setIva(double iva) {
-        this.iva = iva;
-    }
+    
 
     public double getPrecioVenta() {
         return precioVenta;

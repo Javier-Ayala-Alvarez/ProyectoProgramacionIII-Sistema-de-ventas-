@@ -33,6 +33,38 @@ public class DaoProducto {
         this.conectar = new Conexion();
     }
 
+    public boolean insert(Producto obj) {
+        String sql = "insert into producto(idproducto, codigoproducto, nombreproducto, preciocompra, cantidad, fechavencimiento, estado, precioventa, idempresa)VALUES(?,?,?,?,?,?,?,?,?)";
+        try {
+            con = conectar.getConexion();
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, obj.getIdProducto());
+            ps.setString(2, obj.getCodigoProducto());
+            ps.setString(3, obj.getNombreProducto());
+            ps.setDouble(4, obj.getPrecioCompra());
+            ps.setInt(5, obj.getCantidad());
+            ps.setDate(6, new java.sql.Date(obj.getFechaVencimiento().getTime()));
+            ps.setInt(7, obj.getEstado());
+            ps.setDouble(8, obj.getPrecioVenta());
+            ps.setInt(9, obj.getEmpresa().getIdEmpresa());
+
+            ps.execute();
+
+            return true;
+        } catch (Exception e) {
+
+            e.printStackTrace();
+        } finally {
+            try {
+                ps.close();
+            } catch (Exception ex) {
+
+            }
+            conectar.cerrarConexiones();
+        }
+        return false;
+    }
+
     public Producto getMax() throws SQLException {
 
         this.registroList = new ArrayList<>();
@@ -60,7 +92,7 @@ public class DaoProducto {
 
         try {
             con = conectar.getConexion();
-            String sql = "SELECT * FROM producto WHERE cantidad > 0 and nombreproducto LIKE '%"+dato+"%'or codigoproducto LIKE '%"+dato+"%' ";
+            String sql = "SELECT * FROM producto WHERE cantidad > 0 and nombreproducto LIKE '%" + dato + "%'or codigoproducto LIKE '%" + dato + "%' ";
             ps = con.prepareStatement(sql);
             this.rs = this.ps.executeQuery();
             while (this.rs.next()) {
@@ -80,7 +112,7 @@ public class DaoProducto {
         } catch (Exception e) {
 
         }
-        return  this.registroList;
+        return this.registroList;
     }
 
     public ArrayList<Producto> getSelect() throws SQLException {
@@ -171,6 +203,57 @@ public class DaoProducto {
             }
             conectar.cerrarConexiones();
         }
+        return false;
+    }
+
+    public Producto getSelectTo1(String codigo) throws SQLException {
+
+        Producto obj = null;
+
+        try {
+            con = conectar.getConexion();
+            String sql = "SELECT * FROM producto WHERE codigoproducto ='" + codigo + "'";
+            ps = con.prepareStatement(sql);
+            this.rs = this.ps.executeQuery();
+            if (this.rs.next()) {
+
+                obj = new Producto();
+                obj.setIdProducto(rs.getInt("idproducto"));
+                obj.setCodigoProducto(rs.getString("codigoproducto"));
+                obj.setNombreProducto(rs.getString("nombreproducto"));
+                obj.setPrecioCompra(rs.getDouble("preciocompra"));
+                obj.setCantidad(rs.getInt("cantidad"));
+                obj.setFechaVencimiento(rs.getDate("fechavencimiento"));
+                obj.setEstado(rs.getInt("estado"));
+                obj.setPrecioVenta(rs.getDouble("precioventa"));
+                obj.setEmpresa(new Empresa(rs.getInt("idempresa")));
+
+                return obj;
+            }
+            this.conectar.cerrarConexiones();
+        } catch (Exception e) {
+        }
+        return null;
+    }
+
+    public boolean delete(String obj) {
+        String sql = "delete from producto where codigoproducto='" + obj + "'";
+
+        try {
+            con = conectar.getConexion();
+            ps = con.prepareStatement(sql);
+            ps.execute();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                ps.close();
+                conectar.cerrarConexiones();
+            } catch (Exception ex) {
+            }
+        }
+
         return false;
     }
 

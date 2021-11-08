@@ -132,7 +132,16 @@ nav> ul> li> ul> li a:hover{
     background: #FA1F0C;
 }
 
-
+.TABLEProducto{
+    top: +350px;
+    position: absolute;
+    left: 5cm;
+    height:2cm;
+    right: 0;
+    margin:auto;
+    width:33cm;
+    max-width: 25cm;
+}
 
 .TABLE3{
     top: +140px;
@@ -147,13 +156,14 @@ nav> ul> li> ul> li a:hover{
 .TABLEconfiguraciones{
     top: +140px;
     position: absolute;
-    left: 5cm;
+    left: 9cm;
     height:2cm;
     right: 0;
     margin:auto;
-    width:15cm;
-    max-width: 15cm;
+    width:25cm;
+    max-width: 25cm;
 }
+
 
 
 

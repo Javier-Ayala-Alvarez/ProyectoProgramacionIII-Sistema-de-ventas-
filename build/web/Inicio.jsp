@@ -48,11 +48,8 @@
                     <li><a class="li1"></i>Producto</a>
                         <ul>
                             <center>
-                                <form method="post">
+                                <form action="ControlProductoAdministracion" method="post"> 
                                     <li><input type="submit" name="BOTON" value="producto" class="btn-enviar"></li>
-                                    <li><input type="submit" name="BOTON" value="Consulta" class="btn-enviar"></li>
-
-
                                 </form>
                         </ul>
                     <li><a class="li1"></i></span>Empleado</a>

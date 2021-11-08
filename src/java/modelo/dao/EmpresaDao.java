@@ -17,6 +17,36 @@ public class EmpresaDao {
     public EmpresaDao() {
 
     }
+     public Empresa select() {
+        String sql = "SELECT * FROM empresa";
+
+        try {
+            con = conectar.getConexion();
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+            if (this.rs.next()) {
+                Empresa obj = new Empresa();
+                obj.setIdEmpresa(rs.getInt("idempresa"));
+                obj.setCodigoEmpresa(rs.getString("codigoempresa"));
+                obj.setNombre(rs.getString("nombreempresa"));
+                obj.setDireccion(rs.getString("dirrecionempresa"));
+                obj.setCorreo(rs.getString("correoempresa"));
+                return obj;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                ps.close();
+            } catch (Exception ex) {
+
+            }
+            conectar.cerrarConexiones();
+        }
+
+       return null;
+    }
  public Empresa selectId(int codigo) {
         String sql = "SELECT * FROM empresa where idempresa='" + codigo + "'";
 
