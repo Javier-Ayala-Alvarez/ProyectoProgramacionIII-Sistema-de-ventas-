@@ -26,14 +26,14 @@
                     </td></tr><tr><td >
                         <form action="ControlProductoAdministracion" method="post">
                             <div class="column">
-                                Codigó</td><td><input type='text'  name='codigo'  class='input is-link' value="<%=(dato == null) ? request.getAttribute("codigo") : dato.getCodigoProducto()%>"/></td><tr>
+                                Codigó</td><td><input type='text'  name='codigo'  class='input is-link' value="<%=(dato == null) ? request.getAttribute("codigo") : dato.getCodigoProducto()%> " readonly/></td><tr>
 
-                                <td>Nombre</td><td><input type='text'  name='nombre'  class='input is-link' value="<%=(dato == null) ? "" : dato.getNombreProducto()%>"/></td>
-                                <td>Precio Compra</td> <td><input type='text'  name='precioCompra' value="<%=(dato == null) ? "" : dato.getPrecioCompra()%>" class='input is-link'/></td>
-                                <tr><td>Cantidad</td><td><input type='number'  name='cantidad' value=<%=(dato == null) ? 0 : String.valueOf(dato.getCantidad())%> class='input is-link'/></td>
+                                <td>Nombre</td><td><input type='text'  name='nombre'  class='input is-link' value="<%=(dato == null) ? "" : dato.getNombreProducto()%>" required/></td>
+                                <td>Precio Compra</td> <td><input type='text'  name='precioCompra' value="<%=(dato == null) ? "" : dato.getPrecioCompra()%>" class='input is-link' required/></td>
+                                <tr><td>Cantidad</td><td><input type='number'  name='cantidad' value=<%=(dato == null) ? 0 : String.valueOf(dato.getCantidad())%> class='input is-link' required/></td>
                                     <td> Fecha de Vencimiento</td><td><input type='date'  name='fecha' class='input is-link'/></td>
                                 <tr>
-                                    <td>Precio Venta</td><td><input type='text'  name='precioVenta' value="<%=(dato == null) ? "" : dato.getPrecioVenta()%>" class='input is-link'/></td>
+                                    <td>Precio Venta</td><td><input type='text'  name='precioVenta' value="<%=(dato == null) ? "" : dato.getPrecioVenta()%>" class='input is-link' required/></td>
                                     <td><td> <input type="submit" name="<%=(dato == null) ? "btn_Guardar" : "btn_ModificarRegistros"%>" value="<%=(dato == null) ? "Guardar" : "Modificar"%>" class="button is-success is-active"></td>
                                 </tr>
                                 </from>
@@ -95,7 +95,7 @@
                                                                                                         </td>
                                                                                                         <td align="center">
                                                                                                             <form action="ControlProductoAdministracion?id=<%= registro.getCodigoProducto()%>" method="post">
-                                                                                                                <input type="submit" name="btn_Guardar" value="Aumetar" class="button is-small button is-success is-outlined">
+                                                                                                                <input type="submit" name="btn_Aumetar" value="Aumetar" class="button is-small button is-success is-outlined">
                                                                                                             </form>
                                                                                                         </td><%}%></tr>
 
