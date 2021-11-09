@@ -1,86 +1,40 @@
 package modelo.entidades;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Empleados extends Persona implements Serializable{
+public class Empleados extends Persona implements Serializable {
+
     private int idUsuario;
     private int idEmpleado;
-    private String cargoEmpleado,codigoEmpleado;
+    private String cargoEmpleado, codigoEmpleado;
     private double salarioEmpleado, afp, isss;
     private Date fechaContratacion;
     private Usuario usuario;
     private Empresa empresa;
     private int estado;
 
-    public Empleados(int idUsuario, int idEmpleado, String cargoEmpleado, String codigoEmpleado, double salarioEmpleado, double afp, double isss, Date fechaContratacion, Usuario usuario, Empresa empresa, ArrayList<Venta> ventas, int estado, int idPersona) {
-        super(idPersona);
-        this.idUsuario = idUsuario;
-        this.idEmpleado = idEmpleado;
-        this.cargoEmpleado = cargoEmpleado;
-        this.codigoEmpleado = codigoEmpleado;
-        this.salarioEmpleado = salarioEmpleado;
-        this.afp = afp;
-        this.isss = isss;
-        this.fechaContratacion = fechaContratacion;
-        this.usuario = usuario;
-        this.empresa = empresa;
-        this.estado = estado;
-    }
+ 
 
     public Empleados() {
     }
-
-   
-
 
     public Empleados(int idEmpleado) {
         this.idEmpleado = idEmpleado;
     }
 
-    public Empleados(int idUsuario, int idEmpleado, String cargoEmpleado, String codigoEmpleado, double salarioEmpleado, double afp, double isss, Date fechaContratacion, Usuario usuario,Empresa empresa, int estado, int idPersona) {
-        super(idPersona);
+    public Empleados(int idUsuario, int idEmpleado, String cargoEmpleado, String codigoEmpleado, Usuario usuario, int estado, String nombre, String apellido, String telefono, String direccion) {
+        super(nombre, apellido, telefono, direccion);
         this.idUsuario = idUsuario;
         this.idEmpleado = idEmpleado;
         this.cargoEmpleado = cargoEmpleado;
         this.codigoEmpleado = codigoEmpleado;
-        this.salarioEmpleado = salarioEmpleado;
-        this.afp = afp;
-        this.isss = isss;
-        this.fechaContratacion = fechaContratacion;
         this.usuario = usuario;
-        this.empresa = empresa;
         this.estado = estado;
     }
 
 
-    public Empleados(String cargoEmpleado, double salarioEmpleado, double afp, double isss, Date fechaContratacion, String nombre, String apellido, String telefono, String direccion) {
-        super(nombre, apellido, telefono, direccion);
-        this.cargoEmpleado = cargoEmpleado;
-        this.salarioEmpleado = salarioEmpleado;
-        this.afp = afp;
-        this.isss = isss;
-        this.fechaContratacion = fechaContratacion;
-
-    }
-
-    public Empleados(String cargoEmpleado, String codigoEmpleado, double salarioEmpleado, double afp, double isss, Date fechaContratacion, int estado, String nombre, String apellido, String telefono, String direccion) {
-        super(nombre, apellido, telefono, direccion);
-        this.cargoEmpleado = cargoEmpleado;
-        this.codigoEmpleado = codigoEmpleado;
-        this.salarioEmpleado = salarioEmpleado;
-        this.afp = afp;
-        this.isss = isss;
-        this.fechaContratacion = fechaContratacion;
-        this.estado = estado;
-    }
-
-    public Empleados(int idUsuario, String cargoEmpleado) {
-        this.idUsuario = idUsuario;
-        this.cargoEmpleado = cargoEmpleado;
-    }
-
-    
 
     public int getIdUsuario() {
         return idUsuario;
@@ -90,9 +44,7 @@ public class Empleados extends Persona implements Serializable{
         this.idUsuario = idUsuario;
     }
 
-   
-
-   public int getIdEmpleado() {
+    public int getIdEmpleado() {
         return idEmpleado;
     }
 
@@ -102,6 +54,10 @@ public class Empleados extends Persona implements Serializable{
 
     public String getCargoEmpleado() {
         return cargoEmpleado;
+    }
+
+    public void addUsuario(Usuario x) {
+        this.usuario = x;
     }
 
     public void setCargoEmpleado(String cargoEmpleado) {
@@ -140,21 +96,14 @@ public class Empleados extends Persona implements Serializable{
         this.fechaContratacion = fechaContratacion;
     }
 
-
-
     public Usuario getUsuario() {
         return usuario;
     }
 
-
-    public void addUsuario(Usuario x){
-        this.usuario = x;
-    }
-
+ 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-
 
     public String getCodigoEmpleado() {
         return codigoEmpleado;
@@ -173,12 +122,12 @@ public class Empleados extends Persona implements Serializable{
     }
 
     public Empresa getEmpresa() {
-       
+
         return empresa;
     }
 
     public void setEmpresa(Empresa empresa) {
         this.empresa = empresa;
     }
-    
+
 }

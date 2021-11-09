@@ -47,12 +47,13 @@ input{
 	width: 83%;
 }
 .btn-enviar{
+     left: center;
 	background: #FA1F0C;
 	color: #fff;
 	display: block;
 	padding: 10px 60px;
 	cursor: pointer;
-        bottom-align: center;
+        
         
 }
 .btn-enviar {

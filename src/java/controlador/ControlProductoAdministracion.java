@@ -42,7 +42,7 @@ public class ControlProductoAdministracion extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, ParseException {
-        response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/html;charset=utf-8>");
         this.daoProducto = new DaoProducto();
         this.productoList = new ArrayList<>();
         this.producto = new Producto();
@@ -116,11 +116,10 @@ public class ControlProductoAdministracion extends HttpServlet {
                     if (daoProducto.update(producto)) {
                         this.producto = daoProducto.getMax();
                         this.productoList = daoProducto.getSelect();
-                         request.setAttribute("alerta", "<script>alert('Modificado Con exito'); </script>");
+                        request.setAttribute("alerta", "<script>alert('Modificado Con exito'); </script>");
                         request.setAttribute("codigo", crearCodigo("CP-", producto.getMax() + 1));
                         request.setAttribute("productoList", this.productoList);
                         request.getRequestDispatcher("Producto.jsp").forward(request, response);
-                       
 
                     } else {
 

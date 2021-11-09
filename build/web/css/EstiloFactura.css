@@ -64,7 +64,16 @@ border-radius:10px;
 
 }
 
-
+.Empleado{
+    top: +2px;
+    position: absolute;
+    left: 32cm;
+    height:2cm;
+    right: 0;
+    margin:auto;
+    width:5cm;
+    max-width: 5cm;
+}
 
 .contenedor-inputs{
     padding: 10px 15px;

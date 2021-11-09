@@ -39,10 +39,7 @@ public class ControlSeleccionarCDE extends HttpServlet {
                 out1.println("Codigó Cliente:</td><td><input type='text'  name='codigopro' id='codigoCliente' value='" + request.getParameter("codigo") + "' class='input is-link'readonly /></td><td>"
                         + "<button class='button is-success is-active btn_Cliente1'><a href='javascript:abrirCliente()'><font color='#fff'>Buscar</a></button></td>"
                         + "<td><div class='column is-one-third'>Cliente:</td><td><input type='text'  name='nombreCliente' id='nombreCliente' value='" + nombre + "'  class='input is-link'readonly /></td><td>");
-                out1.println("<div class='column is-one-third'><td>");
-                out1.println("Codigó Empleado:</td><td><input type='text'  name='codigoEmpleado' id='codigoEmpleado' value='CE0001' class='input is-link'readonly /></td><td></td><td>");
-                out1.println("Empleado:</td><td><input type='text'  name='nombreEmpleado' id='nombreEmpleado' class='input is-link' /></td><td><tr></table></div>");
-
+                
             } catch (SQLException ex) {
 
             }
