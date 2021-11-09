@@ -32,7 +32,7 @@
                                 <tr><td>Nombre</td><td><input type='text'  name='nombre'  class='input is-link' value="<%=(dato == null) ? "" : dato.getNombreProducto()%>" /></td>
                                   <td>Precio Venta</td><td><input type='text'  name='precioVenta' value="<%=(dato == null) ? "" : dato.getPrecioVenta()%>" class='input is-link' pattern="[0-9\.]*"/></td>  
                                 <tr><td>Cantidad(uds)</td><td><input type='number'  name='cantidad' value=<%=(dato == null) ? 1 : String.valueOf(dato.getCantidad())%> class='input is-link'/></td>
-                                    <td> Fecha de Vencimiento</td><td><input type='date'  name='fecha' class='input is-link' required/></td>
+                                    <td> Fecha de Vencimiento</td><td><input type='date'  name='fecha' class='input is-link' value=<%=(dato == null) ? "" : dato.getFechaVencimiento()%>  required/></td>
                                 <tr>
 
                                     <td><td><td><td align="right"> <input type="submit" name="<%=(dato == null) ? "btn_Guardar" : "btn_ModificarRegistros"%>" value="<%=(dato == null) ? "Guardar" : "Modificar"%>" class="button is-success is-active"></td>

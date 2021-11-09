@@ -49,14 +49,14 @@ public class ControlProductoAdministracion extends HttpServlet {
         this.empresa = new Empresa();
         this.daoEmpresa = new EmpresaDao();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        try (PrintWriter out = response.getWriter()) {
+        try {
 
             if (request.getParameter("btn_Guardar") != null) {
 
                 if (!request.getParameter("nombre").isEmpty()
                         && !request.getParameter("precioCompra").isEmpty()
                         && !request.getParameter("cantidad").isEmpty()
-                        && request.getParameter("fecha") != null
+                        && !request.getParameter("fecha").isEmpty()
                         && !request.getParameter("precioVenta").isEmpty()) {
                     this.producto = daoProducto.getMax();
                     this.empresa = daoEmpresa.select();
