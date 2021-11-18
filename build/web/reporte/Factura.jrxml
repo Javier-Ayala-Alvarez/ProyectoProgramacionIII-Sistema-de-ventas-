@@ -10,7 +10,7 @@
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[SELECT em.nombreempresa,$P{total} total2, e.nombre || e.apellido empleado,v.fechaventa, cl.nombre || cl.apellido cliente, v.nfactura factura, pr.codigoproducto codigo, pr.nombreproducto producto, r.cantidadproducto cantidad, pr.precioventa precio, SUM ( r.cantidadproducto * pr.precioventa ) total FROM venta v INNER JOIN cliente cl ON v.idcliente = cl.idcliente INNER JOIN empleado e ON v.idempleado = e.idempleado INNER JOIN registros r ON r.idventa = v.idventa INNER JOIN producto pr ON r.idproducto = pr.idproducto INNER JOIN empresa em ON e.idempresa = em.idempresa WHERE v.estado = 0 and r.idventa = (SELECT idventa FROM venta WHERE nfactura = $P{codigoFactura}) GROUP BY pr.codigoproducto,v.fechaventa, pr.nombreproducto, r.cantidadproducto, pr.precioventa, v.nfactura, e.nombre || e.apellido, cl.nombre || cl.apellido, em.nombreempresa]]>
+		<![CDATA[SELECT em.nombreempresa,$P{total} total2, e.nombre ||', '|| e.apellido empleado,v.fechaventa, cl.nombre ||', '|| cl.apellido cliente, v.nfactura factura, pr.codigoproducto codigo, pr.nombreproducto producto, r.cantidadproducto cantidad, pr.precioventa precio, SUM ( r.cantidadproducto * pr.precioventa ) total FROM venta v INNER JOIN cliente cl ON v.idcliente = cl.idcliente INNER JOIN empleado e ON v.idempleado = e.idempleado INNER JOIN registros r ON r.idventa = v.idventa INNER JOIN producto pr ON r.idproducto = pr.idproducto INNER JOIN empresa em ON e.idempresa = em.idempresa WHERE v.estado = 0 and r.idventa = (SELECT idventa FROM venta WHERE nfactura = $P{codigoFactura}) GROUP BY pr.codigoproducto,v.fechaventa, pr.nombreproducto, r.cantidadproducto, pr.precioventa, v.nfactura, e.nombre , e.apellido, cl.nombre , cl.apellido, em.nombreempresa]]>
 	</queryString>
 	<field name="nombreempresa" class="java.lang.String"/>
 	<field name="total2" class="java.lang.String"/>
@@ -31,11 +31,17 @@
 		<groupFooter>
 			<band height="33">
 				<staticText>
-					<reportElement x="381" y="11" width="100" height="20" uuid="67e221bc-6db6-4dd7-9296-d370d5859a39"/>
+					<reportElement x="334" y="11" width="100" height="20" uuid="67e221bc-6db6-4dd7-9296-d370d5859a39"/>
+					<textElement>
+						<font size="14" isBold="true"/>
+					</textElement>
 					<text><![CDATA[Total:]]></text>
 				</staticText>
 				<textField>
 					<reportElement x="493" y="11" width="61" height="20" uuid="913c5ce9-bc86-4bad-b2e6-31e5c114d22a"/>
+					<textElement>
+						<font size="14" isBold="true"/>
+					</textElement>
 					<textFieldExpression><![CDATA[$F{total2}]]></textFieldExpression>
 				</textField>
 			</band>

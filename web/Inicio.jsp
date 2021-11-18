@@ -1,4 +1,7 @@
 
+<%@page import="modelo.entidades.Usuario"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="modelo.dao.UsuarioDao"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 
@@ -10,7 +13,7 @@
 
         <title>Menu</title>
 
-
+       
     </head>
     <div class="contenedor">
         <body> 
@@ -60,7 +63,7 @@
                                     <li><input type="submit" name="BOTON" value="Añadir Empleado" class="btn-enviar"></li>
                                     <li><input type="submit" name="BOTON" value="Consulta Usuario" class="btn-enviar"></li>
                                     <li><input type="submit" name="BOTON" value="Añadir Usuario" class="btn-enviar"></li>
-                                    
+
 
                                 </form>
                         </ul>

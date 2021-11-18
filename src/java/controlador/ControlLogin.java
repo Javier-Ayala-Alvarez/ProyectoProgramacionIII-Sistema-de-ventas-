@@ -50,7 +50,8 @@ public class ControlLogin extends HttpServlet {
                             && clave.equals(usuario1.get(0).getContraseña())
                             && usuario1.get(0).getEmpleados().getCargoEmpleado().equals("Administrador")
                             && usuario1.get(0).getEmpleados().getEstado() == 1) {
-
+                       
+                        request.setAttribute("codigo1", request.getParameter("Usuario"));
                         request.getRequestDispatcher("Inicio.jsp").forward(request, response);
 
                     } else if (request.getParameter("Usuario").equals(usuario1.get(0).getUsuario())
@@ -58,7 +59,7 @@ public class ControlLogin extends HttpServlet {
                             && usuario1.get(0).getEmpleados().getCargoEmpleado().equals("Cajero")
                             && usuario1.get(0).getEmpleados().getEstado() == 1) {
 
-                        request.setAttribute("nombreempleado", request.getParameter(usuario1.get(0).getEmpleados().getNombre() + " " + usuario1.get(0).getEmpleados().getApellido()));
+                      
                         request.setAttribute("codigo", request.getParameter("Usuario"));
                         request.getRequestDispatcher("Factura.jsp").forward(request, response);
 
