@@ -67,7 +67,7 @@ public class ControlProductoAdministracion extends HttpServlet {
                     if (daoProducto.insert(obj)) {
                         this.producto = daoProducto.getMax();
                         request.setAttribute("codigo", crearCodigo("CP-", producto.getMax() + 1));
-                        this.productoList = daoProducto.getSelect();
+                        this.productoList = daoProducto.getSelect1();
 
                         request.setAttribute("alerta", "<script>alert('Ingresado Con exito'); </script>");
                         request.setAttribute("productoList", this.productoList);
@@ -83,7 +83,7 @@ public class ControlProductoAdministracion extends HttpServlet {
             } else if (request.getParameter("btn_Modificar") != null) {
                 String codigo = request.getParameter("id");
                 this.producto = daoProducto.getSelectTo1(codigo);
-                this.productoList = daoProducto.getSelect();
+                this.productoList = daoProducto.getSelect1();
                 request.setAttribute("productoList", this.productoList);
                 request.setAttribute("producto", this.producto);
                 request.getRequestDispatcher("Producto.jsp").forward(request, response);
@@ -115,7 +115,7 @@ public class ControlProductoAdministracion extends HttpServlet {
 
                     if (daoProducto.update(producto)) {
                         this.producto = daoProducto.getMax();
-                        this.productoList = daoProducto.getSelect();
+                        this.productoList = daoProducto.getSelect1();
                         request.setAttribute("alerta", "<script>alert('Modificado Con exito'); </script>");
                         request.setAttribute("codigo", crearCodigo("CP-", producto.getMax() + 1));
                         request.setAttribute("productoList", this.productoList);
@@ -143,7 +143,7 @@ public class ControlProductoAdministracion extends HttpServlet {
 
                     if (daoProducto.update(producto)) {
                         this.producto = daoProducto.getMax();
-                        this.productoList = daoProducto.getSelect();
+                        this.productoList = daoProducto.getSelect1();
                         request.setAttribute("alerta", "<script>alert('Aunmento Con exito'); </script>");
                         request.setAttribute("codigo", crearCodigo("CP-", producto.getMax() + 1));
                         request.setAttribute("productoList", this.productoList);
@@ -160,7 +160,7 @@ public class ControlProductoAdministracion extends HttpServlet {
             }
             this.producto = daoProducto.getMax();
 
-            this.productoList = daoProducto.getSelect();
+            this.productoList = daoProducto.getSelect1();
             request.setAttribute("codigo", crearCodigo("CP-", producto.getMax() + 1));
             request.setAttribute("productoList", this.productoList);
             request.getRequestDispatcher("Producto.jsp").forward(request, response);

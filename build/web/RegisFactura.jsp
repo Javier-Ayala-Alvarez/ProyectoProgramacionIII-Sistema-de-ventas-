@@ -56,6 +56,7 @@
                                                     <td align="center">
                                                         
                                                         <a href="ControlDetalleVen?id=<%= registro.getnFactura()%>"><img src="img/registro.png"/></a>
+                                                        <a href="ReporteImpreso.jsp?id=<%= registro.getnFactura()%>"><img src="img/impresora.png"/></a>
                                                     </td>
                                                    
                                                     <%} %></tr>

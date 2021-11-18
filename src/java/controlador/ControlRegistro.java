@@ -5,14 +5,18 @@ import java.io.PrintWriter;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modelo.conexion.Conexion;
 import modelo.dao.ClienteDao;
 import modelo.dao.DaoProducto;
 import modelo.dao.EmpleadoDao;
@@ -23,6 +27,10 @@ import modelo.entidades.Empleados;
 import modelo.entidades.Producto;
 import modelo.entidades.Registros;
 import modelo.entidades.Venta;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperRunManager;
+import java.io.File;
+import java.util.Map;
 
 @WebServlet(name = "ControlRegistro", urlPatterns = {"/ControlRegistro"})
 public class ControlRegistro extends HttpServlet {
@@ -138,12 +146,15 @@ public class ControlRegistro extends HttpServlet {
                                                     producto.setEstado(producto.getEstado());
                                                     producto.setEmpresa(producto.getEmpresa());
                                                     daoProducto.update(producto);
+                                                    String id2 = request.getParameter("codigofactura");
+                                                   out1.println("<a href='ReporteImpreso.jsp?id="+id2+"'><img src='img/impresora.png'/></a>");
 
                                                     //fin de modificar producto//
                                                 }
 
                                                 this.lista.clear();
                                                 this.registroVenta = null;
+                                                
 
                                             } else {
                                                 out1.println("<script>alert('Verifique que los datos han sido ingresados correctamente'); </script>");

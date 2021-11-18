@@ -73,7 +73,7 @@ public class VentaDao {
         return this.ventasList;
     }
 
-    public ArrayList<Venta> getVentaTo(int codigo) throws SQLException {
+    public ArrayList<Venta> getVentaTo(String codigo) throws SQLException {
 
         this.ventasList = new ArrayList<>();
 
@@ -84,7 +84,7 @@ public class VentaDao {
                     + "INNER JOIN empleado e ON v.idempleado = e.idempleado "
                     + "INNER JOIN registros r ON r.idventa = v.idventa "
                     + "INNER JOIN producto pr ON r.idproducto = pr.idproducto "
-                    + "WHERE v.estado = 0 and v.idventa = '" + codigo + "' "
+                    + "WHERE v.estado = 0 and v.nfactura = '" + codigo + "' "
                     + "GROUP BY v.idventa,v.nfactura, v.fechaventa, e.nombre, cl.nombre";
             this.ps = accesoDB.prepareStatement(this.sql);
             this.rs = this.ps.executeQuery();
@@ -103,6 +103,36 @@ public class VentaDao {
             JOptionPane.showMessageDialog(null, "ERROR" + e, "ERROR", JOptionPane.ERROR_MESSAGE);
         }
         return this.ventasList;
+    }
+      public Venta getVentaTo1c(String codigo) throws SQLException {
+
+
+        try {
+            this.accesoDB = this.conexion.getConexion();
+            this.sql = "SELECT v.idventa id, v.nfactura factura, v.fechaventa fecha, e.nombre empleado , cl.nombre cliente, SUM ( r.cantidadproducto * pr.precioventa) total "
+                    + "FROM venta v INNER JOIN cliente cl ON v.idcliente  = cl.idcliente "
+                    + "INNER JOIN empleado e ON v.idempleado = e.idempleado "
+                    + "INNER JOIN registros r ON r.idventa = v.idventa "
+                    + "INNER JOIN producto pr ON r.idproducto = pr.idproducto "
+                    + "WHERE v.estado = 0 and v.nfactura = '" + codigo + "' "
+                    + "GROUP BY v.idventa,v.nfactura, v.fechaventa, e.nombre, cl.nombre";
+            this.ps = accesoDB.prepareStatement(this.sql);
+            this.rs = this.ps.executeQuery();
+            while (this.rs.next()) {
+                Venta venta = new Venta();
+                venta.setIdFactura(rs.getInt("id"));
+                venta.setnFactura(rs.getString("factura"));
+                venta.setFechaVenta(rs.getDate("fecha"));
+                venta.setNombreCliente(rs.getString("cliente"));
+                venta.setNombreEmpleado(rs.getString("empleado"));
+                venta.setSaldoTotal(rs.getDouble("total"));
+                return venta;
+            }
+            this.conexion.cerrarConexiones();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ERROR" + e, "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+        return venta;
     }
 
     public boolean getVentaTo1(String codigo) throws SQLException {

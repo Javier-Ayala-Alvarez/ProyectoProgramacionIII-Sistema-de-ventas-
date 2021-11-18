@@ -42,7 +42,7 @@ public class ControlLogin extends HttpServlet {
             } else {
                 ArrayList<Usuario> usuario1 = daoUsuario.selectAllTo("usuario", request.getParameter("Usuario"));
                 //String clave = Encriptacion.getStringMessageDigest(request.getParameter("Clave"), Encriptacion.SHA256);
-                String clave =request.getParameter("Clave");
+                String clave = request.getParameter("Clave");
                 try {
                     usuario1.get(0).AddEpleado1(String.valueOf(usuario1.get(0).getIdUsuario()));
 
@@ -57,8 +57,8 @@ public class ControlLogin extends HttpServlet {
                             && clave.equals(usuario1.get(0).getContraseña())
                             && usuario1.get(0).getEmpleados().getCargoEmpleado().equals("Cajero")
                             && usuario1.get(0).getEmpleados().getEstado() == 1) {
-                        
-                        request.setAttribute("EmpleadoNombre", request.getParameter(usuario1.get(0).getEmpleados().getNombre()+" "+usuario1.get(0).getEmpleados().getApellido()));
+
+                        request.setAttribute("nombreempleado", request.getParameter(usuario1.get(0).getEmpleados().getNombre() + " " + usuario1.get(0).getEmpleados().getApellido()));
                         request.setAttribute("codigo", request.getParameter("Usuario"));
                         request.getRequestDispatcher("Factura.jsp").forward(request, response);
 
@@ -71,7 +71,7 @@ public class ControlLogin extends HttpServlet {
                 } catch (Exception ex) {
                     Empleados emple = daoEmpleado.selectAllUsu();
                     if (request.getParameter("Clave").equals("12345") && (request.getParameter("Usuario").equals("Admin")) && emple == null) {
-
+                        request.setAttribute("codigo1", request.getParameter("Usuario"));
                         request.getRequestDispatcher("Inicio.jsp").forward(request, response);
 
                     } else {

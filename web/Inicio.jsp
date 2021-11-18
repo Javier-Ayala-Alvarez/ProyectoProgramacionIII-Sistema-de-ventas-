@@ -19,7 +19,7 @@
                         <font color="#fff"> <h2 align="center"> bienvenido</h2>
 
                         <img src='img/dottt.jpg' class='imgRedonda' />
-                        <font color="red"><h2 align="center" class="letra"> Nombre </h2>
+                        <font color="red"><h2 align="center" class="letra"> <%=request.getAttribute("codigo1")%> </h2>
                         <FORM action="index.jsp" method="POST">
 
                             <input type="submit" name="BOTON" value="Cerrar Sesion"class="btn-enviar">
