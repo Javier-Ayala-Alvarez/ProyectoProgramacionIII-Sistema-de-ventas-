@@ -35,7 +35,7 @@
                                     <td> Fecha de Vencimiento</td><td><input type='date'  name='fecha' class='input is-link' value=<%=(dato == null) ? "" : dato.getFechaVencimiento()%>  required/></td>
                                 <tr>
 
-                                    <td><td><td><td align="right"> <input type="submit" name="<%=(dato == null) ? "btn_Guardar" : "btn_ModificarRegistros"%>" value="<%=(dato == null) ? "Guardar" : "Modificar"%>" class="button is-success is-active"></td>
+                                    <td><td><td><td align="right"><a href="ReporteProducto.jsp"><img src="img/impresora.png"/></a> <input type="submit" name="<%=(dato == null) ? "btn_Guardar" : "btn_ModificarRegistros"%>" value="<%=(dato == null) ? "Guardar" : "Modificar"%>" class="button is-success is-active"></td>
                                 </tr>
                                 </from>
                                 <div class="column">
