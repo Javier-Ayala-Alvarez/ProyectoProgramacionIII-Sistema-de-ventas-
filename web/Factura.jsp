@@ -40,7 +40,6 @@
                 <table class="Empleado">
                     <tr><td><h4><font color="#fff">Empleado:</h4> <td><div class="select is-danger">                   
                                 <select>
-                                    
                                     <option name='codigoEmpleado' id='codigoEmpleado'><%=request.getAttribute("codigo")%></option>
                                 </select> </div>
                         </td></tr>

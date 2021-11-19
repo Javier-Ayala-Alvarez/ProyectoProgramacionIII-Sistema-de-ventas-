@@ -32,8 +32,8 @@
             ventasList = daoVenta.getVentaTo1c(request.getParameter("id"));
             parameter.put("codigoFactura", request.getParameter("id"));
             parameter.put("total", ventasList.getSaldoTotal());
+            
             byte[] bytes = JasperRunManager.runReportToPdf(reporfile.getPath(), parameter, conexion.getConexion());
-
             response.setContentType(request.getParameter("id")+".pdf");
             response.setContentLength(bytes.length);
             ServletOutputStream outpouststream = response.getOutputStream();
