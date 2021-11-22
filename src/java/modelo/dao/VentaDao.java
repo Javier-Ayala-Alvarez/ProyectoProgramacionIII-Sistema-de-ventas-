@@ -72,6 +72,28 @@ public class VentaDao {
         }
         return this.ventasList;
     }
+     public ArrayList<Venta> getFecha() throws SQLException {
+
+        this.ventasList = new ArrayList<>();
+
+        try {
+            this.accesoDB = this.conexion.getConexion();
+            this.sql = "SELECT  DISTINCT EXTRACT( YEAR FROM fechaventa ) AS fecha FROM venta GROUP BY fecha;";
+            this.ps = accesoDB.prepareStatement(this.sql);
+            this.rs = this.ps.executeQuery();
+            while (this.rs.next()) {
+                Venta venta = new Venta();
+ 
+                venta.setAño(rs.getInt("fecha"));
+               
+                this.ventasList.add(venta);
+            }
+            this.conexion.cerrarConexiones();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "ERROR" + e, "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+        return this.ventasList;
+    }
 
     public ArrayList<Venta> getVentaTo(String codigo) throws SQLException {
 

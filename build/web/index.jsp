@@ -5,6 +5,7 @@
     <head>
         
         <meta charset="utf-8">
+       
          <%
             out.println(request.getAttribute("alerta"));
         %>

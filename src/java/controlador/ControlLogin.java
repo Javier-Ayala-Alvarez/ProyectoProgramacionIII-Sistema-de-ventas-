@@ -60,7 +60,7 @@ public class ControlLogin extends HttpServlet {
                             && usuario1.get(0).getEmpleados().getEstado() == 1) {
 
                       
-                        request.setAttribute("codigo", request.getParameter("Usuario"));
+                        request.setAttribute("codigo1", request.getParameter("Usuario"));
                         request.getRequestDispatcher("Factura.jsp").forward(request, response);
 
                     } else {

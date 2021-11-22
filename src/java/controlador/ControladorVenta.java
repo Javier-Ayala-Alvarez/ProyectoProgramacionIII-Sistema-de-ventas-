@@ -17,7 +17,7 @@ import modelo.entidades.Venta;
 public class ControladorVenta extends HttpServlet {
 
     private VentaDao daoVenta;
-    private ArrayList<Venta> ventasList;
+    private ArrayList<Venta> ventasList,ventaaño;
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -26,8 +26,12 @@ public class ControladorVenta extends HttpServlet {
         try {
             this.daoVenta = new VentaDao();
             this.ventasList = new ArrayList<>();
+            this.ventaaño = new ArrayList<>();
             this.ventasList = daoVenta.getVenta();
+            this.ventaaño = daoVenta.getFecha();
             request.setAttribute("ventasList", this.ventasList);
+            
+            request.setAttribute("fecha", this.ventaaño);
             request.getRequestDispatcher("RegisFactura.jsp").forward(request, response);
 
         } catch (SQLException ex) {

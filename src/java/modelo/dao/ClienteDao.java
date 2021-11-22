@@ -126,7 +126,32 @@ public class ClienteDao {
         }
         return null;
     }
+public boolean getSelectToTelefono(String telefono) throws SQLException {
 
+        this.registroList = new ArrayList<>();
+
+        try {
+            con = conectar.getConexion();
+            String sql = "SELECT * FROM cliente WHERE telefonocliente ='" + telefono + "'";
+            ps = con.prepareStatement(sql);
+            this.rs = this.ps.executeQuery();
+            if (this.rs.next()) {
+
+                Cliente cliente = new Cliente();
+                cliente.setIdCliente(rs.getInt("idcliente"));
+                cliente.setCodigoCliente(rs.getString("codigocliente"));
+                cliente.setNombre(rs.getString("nombre"));
+                cliente.setApellido(rs.getString("apellido"));
+                cliente.setTelefono(rs.getString("telefonocliente"));
+                cliente.setDireccion(rs.getString("direccioncliente"));
+
+                return true;
+            }
+            this.conectar.cerrarConexiones();
+        } catch (Exception e) {
+        }
+        return false;
+    }
     public Cliente getMax() throws SQLException {
 
         this.registroList = new ArrayList<>();

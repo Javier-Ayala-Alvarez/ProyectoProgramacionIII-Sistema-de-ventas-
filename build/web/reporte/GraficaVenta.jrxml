@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="62a097dd-effc-4683-ac23-e9c231e79a95">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="anio" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT DISTINCT EXTRACT
+	( MONTH FROM v.fechaventa ) AS mes,
+	SUM ( r.cantidadproducto * pr.precioventa ) AS Total 
+FROM
+	venta v
+	INNER JOIN registros r ON r.idventa = v.idventa
+	INNER JOIN producto pr ON r.idproducto = pr.idproducto 
+WHERE
+	v.estado = 0 
+	AND EXTRACT ( YEAR FROM v.fechaventa ) = $P{anio}
+GROUP BY
+	Mes 
+ORDER BY
+	Mes ASC;]]>
+	</queryString>
+	<field name="mes" class="java.lang.Double"/>
+	<field name="total" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="200" y="20" width="148" height="30" uuid="5f2b2559-567b-4e71-b723-8c750f1a656c"/>
+				<textElement>
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Graficas de venta]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="363" y="0" width="100" height="20" uuid="7ee6c9e8-0ac8-452f-9d4b-cac2088114a4"/>
+				<text><![CDATA[Total]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="153" y="0" width="100" height="20" uuid="f7c0600f-da37-4d2b-b4df-5defb5b1fba5"/>
+				<text><![CDATA[Mes]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="363" y="0" width="100" height="20" uuid="d4ee9526-d403-4051-b0ac-5d936c21c65b"/>
+				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="153" y="0" width="100" height="20" uuid="68f9a248-cced-42ca-9714-92b3d3c3c984"/>
+				<textFieldExpression><![CDATA[$F{mes}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="2" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="200" splitType="Stretch">
+			<bar3DChart>
+				<chart>
+					<reportElement x="0" y="0" width="555" height="200" uuid="bead6f20-2b54-4dde-a3c8-b7b625ffb4eb"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{mes}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{total}]]></categoryExpression>
+						<valueExpression><![CDATA[$F{mes}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<bar3DPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</bar3DPlot>
+			</bar3DChart>
+		</band>
+	</summary>
+</jasperReport>

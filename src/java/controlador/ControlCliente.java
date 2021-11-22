@@ -44,26 +44,30 @@ public class ControlCliente extends HttpServlet {
                 this.registroList = daoCliente.getMax();
                 int id = registroList.getMax() + 1;
                 cliente = new Cliente(id, crearCodigo("CE-", id), request.getParameter("nombre"), request.getParameter("apellido"), request.getParameter("telefono"), request.getParameter("direccion"));
-                if((daoCliente.insert(cliente)) == false ){
+                if ((daoCliente.insert(cliente)) == true) {
+
+         if ((daoCliente.getSelectToTelefono(request.getParameter("telefono"))) == true) {
+                        out1.println("<script>alert('Insertado Correctamente, Hacer clic en recargar'); </script>");
+
+                    } else {
+                       out1.println("<script>alert('Numero ya registrado'); </script>");
+                    }
+                } else {
                     
-                     out1.println("<script>alert('Numero ya registrado'); </script>");
-                }else{
-                     
-                     out1.println("<script>alert('Insertado Correctamente, Hacer clic en recargar'); </script>");
                 }
             } catch (Exception ex) {
-               out1.println("<script>alert('Numero ya registrado'); </script>");
+                out1.println("<script>alert('Numero ya registrado'); </script>");
             }
         }
         if (request.getParameter("event").equals("btn_EliminarCliente")) {
             //ControlCliente: Eliminar Un cliente
-            
-            if(daoCliente.delete(request.getParameter("Eliminar"))==false){
-               out1.println("<script>alert('Cliente tiene asignada una factura (no se puede eliminar)'); </script>");
-            }else{
-            out1.println("<script>alert('Eliminado con exito'); </script>");
+
+            if (daoCliente.delete(request.getParameter("Eliminar")) == false) {
+                out1.println("<script>alert('Cliente tiene asignada una factura (no se puede eliminar)'); </script>");
+            } else {
+                out1.println("<script>alert('Eliminado con exito'); </script>");
             }
-            
+
         }
         if (request.getParameter("event").equals("ModificarCliente")) {
             //ControlCliente: Modificar Un cliente

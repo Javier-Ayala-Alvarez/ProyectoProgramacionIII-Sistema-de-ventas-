@@ -332,7 +332,9 @@ function cargarContenido(event) {
     request.open("POST", "ControlCliente", true);
     request.setRequestHeader("content-type", "application/x-www-form-urlencoded")
     request.send(crear_query_string());
+     
     datos.reset();
+     
 
 
 
@@ -346,8 +348,9 @@ function inicializarXHMHttpRequest() {
 function procesaRespuesta() {
     if (request.readyState === READY_STATE_COMPLETE & request.status === 200) {
         alert("Agregado con exito");
-
-
+    }
+      if (request.readyState === READY_STATE_COMPLETE & request.status === 500) {
+        alert("Agregado con exito");
     }
 
 }
@@ -365,6 +368,7 @@ function crear_query_string() {
             "&telefono=" + encodeURI(telefono) +
             "&direccion=" + encodeURI(direccion) +
             "&btn_agregar=1";
+  
 
 
 }

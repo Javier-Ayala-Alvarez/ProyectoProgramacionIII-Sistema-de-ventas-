@@ -4,16 +4,17 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Venta implements Serializable{
+public class Venta implements Serializable {
 
     private int idFactura;
     private String nFactura;
     private Date fechaVenta;
     private double saldoTotal;
     private int estado;
+    private int año;
     private Cliente cliente = new Cliente();
     private Empleados empleado = new Empleados();
-   
+
     private int max;
 
     public Venta() {
@@ -23,7 +24,16 @@ public class Venta implements Serializable{
         this.max = max;
     }
 
-    public Venta(int idFactura, String nFactura, Date fechaVenta,int estado, Cliente cliente, Empleados empleado) {
+    public Venta(int idFactura, String nFactura, Date fechaVenta, double saldoTotal, int estado, int año) {
+        this.idFactura = idFactura;
+        this.nFactura = nFactura;
+        this.fechaVenta = fechaVenta;
+        this.saldoTotal = saldoTotal;
+        this.estado = estado;
+        this.año = año;
+    }
+
+    public Venta(int idFactura, String nFactura, Date fechaVenta, int estado, Cliente cliente, Empleados empleado) {
         this.idFactura = idFactura;
         this.nFactura = nFactura;
         this.fechaVenta = fechaVenta;
@@ -35,11 +45,10 @@ public class Venta implements Serializable{
     public Venta(int idFactura, String nFactura, int estado, Cliente cliente) {
         this.idFactura = idFactura;
         this.nFactura = nFactura;
-      
+
         this.estado = estado;
         this.cliente = cliente;
     }
-
 
     public int getMax() {
         return max;
@@ -47,6 +56,14 @@ public class Venta implements Serializable{
 
     public void setMax(int max) {
         this.max = max;
+    }
+
+    public int getAño() {
+        return año;
+    }
+
+    public void setAño(int año) {
+        this.año = año;
     }
 
     public int getEstado() {
@@ -58,8 +75,6 @@ public class Venta implements Serializable{
 
         this.estado = estado;
     }
-
-  
 
     public String getnFactura() {
         return nFactura;
@@ -80,6 +95,7 @@ public class Venta implements Serializable{
         empleado.setApellido(apellido);
 
     }
+
     public void setApellidoCliente(String apellido) {
 
         cliente.setApellido(apellido);

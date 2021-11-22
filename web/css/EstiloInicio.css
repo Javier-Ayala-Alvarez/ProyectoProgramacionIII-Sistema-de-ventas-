@@ -153,6 +153,16 @@ nav> ul> li> ul> li a:hover{
     width:33cm;
     max-width: 25cm;
 }
+.reporte{
+    top: +85px;
+    position: absolute;
+    left: 25cm;
+    height:4cm;
+    right: 8;
+    margin:auto;
+    width:4cm;
+    max-width: 4cm;
+}
 .TABLEconfiguraciones{
     top: +140px;
     position: absolute;
