@@ -33,7 +33,7 @@ nav{
 
 nav > ul {
 
-    left: -2cm;
+    left: -5cm;
     display: table;
     width:35cm;
     background: #2D0A02;
@@ -68,8 +68,8 @@ nav> ul li a {
 
     color: #fff;
     display: block;
-    line-height: 20px;
-    padding: 20px;
+    line-height: 10px;
+    padding: 10px;
     position: relative;
 
     text-align: center;
@@ -96,8 +96,8 @@ nav> ul> li> ul> li a:hover{
 }
 
 .imgRedonda {
-    width:4cm;
-    height:4cm;
+    width:1.5cm;
+    height:1.5cm;
     border-radius:160px;
     border:10px solid #666;
 }
@@ -135,7 +135,7 @@ nav> ul> li> ul> li a:hover{
 .TABLEProducto{
     top: +350px;
     position: absolute;
-    left: 5cm;
+    left: 1.50cm;
     height:2cm;
     right: 0;
     margin:auto;
@@ -144,19 +144,19 @@ nav> ul> li> ul> li a:hover{
 }
 
 .TABLE3{
-    top: +140px;
+    top: +170px;
     position: absolute;
-    left: 5cm;
-    height:2cm;
+    left: 1.50cm;
+    height:1cm;
     right: 0;
     margin:auto;
-    width:33cm;
+    width:30cm;
     max-width: 25cm;
 }
 .reporte{
-    top: +85px;
+    top: +130px;
     position: absolute;
-    left: 25cm;
+    left: 22cm;
     height:4cm;
     right: 8;
     margin:auto;
@@ -166,7 +166,7 @@ nav> ul> li> ul> li a:hover{
 .TABLEconfiguraciones{
     top: +140px;
     position: absolute;
-    left: 5cm;
+   left: 1.50cm;
     height:2cm;
     right: 0;
     margin:auto;
@@ -197,7 +197,7 @@ nav> ul> li> ul> li a:hover{
 
     top: +140px;
     position: relative;
-    left: 2.5cm;
+    left: 1.50cm;
     right: 0;
     margin:auto;
     width: 7cm;

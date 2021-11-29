@@ -92,11 +92,13 @@ public class DaoProducto {
 
         try {
             con = conectar.getConexion();
-            String sql = "SELECT * FROM producto WHERE cantidad > 0 and nombreproducto LIKE '%" + dato + "%'or codigoproducto LIKE '%" + dato + "%' ";
+            String sql = "SELECT * FROM producto p INNER JOIN empresa e on p.idempresa = e.idempresa WHERE p.cantidad > 0 and p.nombreproducto LIKE '%" + dato + "%'or p.codigoproducto LIKE '%" + dato + "%' ";
             ps = con.prepareStatement(sql);
             this.rs = this.ps.executeQuery();
             while (this.rs.next()) {
                 Producto producto = new Producto();
+                Empresa obj = new Empresa();
+
                 producto.setIdProducto(rs.getInt("idproducto"));
                 producto.setCodigoProducto(rs.getString("codigoproducto"));
                 producto.setNombreProducto(rs.getString("nombreproducto"));
@@ -105,7 +107,14 @@ public class DaoProducto {
                 producto.setFechaVencimiento(rs.getDate("fechavencimiento"));
                 producto.setEstado(rs.getInt("estado"));
                 producto.setPrecioVenta(rs.getDouble("precioventa"));
-                producto.setEmpresa(new Empresa(rs.getInt("idempresa")));
+
+                obj.setIdEmpresa(rs.getInt("idempresa"));
+                obj.setCodigoEmpresa(rs.getString("codigoempresa"));
+                obj.setNombre(rs.getString("nombreempresa"));
+                obj.setDireccion(rs.getString("dirrecionempresa"));
+                obj.setCorreo(rs.getString("correoempresa"));
+                producto.setEmpresa(obj);
+               
                 this.registroList.add(producto);
             }
             this.conectar.cerrarConexiones();
@@ -114,17 +123,20 @@ public class DaoProducto {
         }
         return this.registroList;
     }
- public ArrayList<Producto> getSelect1() throws SQLException {
+
+    public ArrayList<Producto> getSelect1() throws SQLException {
 
         this.registroList = new ArrayList<>();
 
         try {
             con = conectar.getConexion();
-            String sql = "SELECT * FROM producto";
+            String sql = "SELECT * FROM producto p INNER JOIN empresa e on p.idempresa = e.idempresa";
             ps = con.prepareStatement(sql);
             this.rs = this.ps.executeQuery();
             while (this.rs.next()) {
                 Producto producto = new Producto();
+                Empresa obj = new Empresa();
+
                 producto.setIdProducto(rs.getInt("idproducto"));
                 producto.setCodigoProducto(rs.getString("codigoproducto"));
                 producto.setNombreProducto(rs.getString("nombreproducto"));
@@ -133,7 +145,13 @@ public class DaoProducto {
                 producto.setFechaVencimiento(rs.getDate("fechavencimiento"));
                 producto.setEstado(rs.getInt("estado"));
                 producto.setPrecioVenta(rs.getDouble("precioventa"));
-                producto.setEmpresa(new Empresa(rs.getInt("idempresa")));
+
+                obj.setIdEmpresa(rs.getInt("idempresa"));
+                obj.setCodigoEmpresa(rs.getString("codigoempresa"));
+                obj.setNombre(rs.getString("nombreempresa"));
+                obj.setDireccion(rs.getString("dirrecionempresa"));
+                obj.setCorreo(rs.getString("correoempresa"));
+                producto.setEmpresa(obj);
                 this.registroList.add(producto);
             }
             this.conectar.cerrarConexiones();
@@ -142,17 +160,20 @@ public class DaoProducto {
         }
         return this.registroList;
     }
+
     public ArrayList<Producto> getSelect() throws SQLException {
 
         this.registroList = new ArrayList<>();
 
         try {
             con = conectar.getConexion();
-            String sql = "SELECT * FROM producto where cantidad > 0";
+            String sql = "SELECT * FROM producto p INNER JOIN empresa e on p.idempresa = e.idempresa where p.cantidad > 0";
             ps = con.prepareStatement(sql);
             this.rs = this.ps.executeQuery();
             while (this.rs.next()) {
-                Producto producto = new Producto();
+               Producto producto = new Producto();
+                Empresa obj = new Empresa();
+
                 producto.setIdProducto(rs.getInt("idproducto"));
                 producto.setCodigoProducto(rs.getString("codigoproducto"));
                 producto.setNombreProducto(rs.getString("nombreproducto"));
@@ -161,7 +182,13 @@ public class DaoProducto {
                 producto.setFechaVencimiento(rs.getDate("fechavencimiento"));
                 producto.setEstado(rs.getInt("estado"));
                 producto.setPrecioVenta(rs.getDouble("precioventa"));
-                producto.setEmpresa(new Empresa(rs.getInt("idempresa")));
+
+                obj.setIdEmpresa(rs.getInt("idempresa"));
+                obj.setCodigoEmpresa(rs.getString("codigoempresa"));
+                obj.setNombre(rs.getString("nombreempresa"));
+                obj.setDireccion(rs.getString("dirrecionempresa"));
+                obj.setCorreo(rs.getString("correoempresa"));
+                producto.setEmpresa(obj);
                 this.registroList.add(producto);
             }
             this.conectar.cerrarConexiones();
@@ -177,12 +204,14 @@ public class DaoProducto {
 
         try {
             con = conectar.getConexion();
-            String sql = "SELECT * FROM producto WHERE codigoproducto ='" + codigo + "'";
+            String sql = "SELECT * FROM producto p INNER JOIN empresa e on p.idempresa = e.idempresa WHERE p.codigoproducto ='" + codigo + "'";
             ps = con.prepareStatement(sql);
             this.rs = this.ps.executeQuery();
             if (this.rs.next()) {
 
                 Producto producto = new Producto();
+                Empresa obj = new Empresa();
+
                 producto.setIdProducto(rs.getInt("idproducto"));
                 producto.setCodigoProducto(rs.getString("codigoproducto"));
                 producto.setNombreProducto(rs.getString("nombreproducto"));
@@ -191,7 +220,14 @@ public class DaoProducto {
                 producto.setFechaVencimiento(rs.getDate("fechavencimiento"));
                 producto.setEstado(rs.getInt("estado"));
                 producto.setPrecioVenta(rs.getDouble("precioventa"));
-                producto.setEmpresa(new Empresa(rs.getInt("idempresa")));
+
+                obj.setIdEmpresa(rs.getInt("idempresa"));
+                obj.setCodigoEmpresa(rs.getString("codigoempresa"));
+                obj.setNombre(rs.getString("nombreempresa"));
+                obj.setDireccion(rs.getString("dirrecionempresa"));
+                obj.setCorreo(rs.getString("correoempresa"));
+                producto.setEmpresa(obj);
+                this.registroList.add(producto);
 
                 return producto;
             }
@@ -235,27 +271,37 @@ public class DaoProducto {
 
     public Producto getSelectTo1(String codigo) throws SQLException {
 
-        Producto obj = null;
+       
 
         try {
             con = conectar.getConexion();
-            String sql = "SELECT * FROM producto WHERE codigoproducto ='" + codigo + "'";
+            String sql = "SELECT * FROM producto p INNER JOIN empresa e on p.idempresa = e.idempresa WHERE p.codigoproducto ='" + codigo + "'";
             ps = con.prepareStatement(sql);
             this.rs = this.ps.executeQuery();
             if (this.rs.next()) {
 
-                obj = new Producto();
-                obj.setIdProducto(rs.getInt("idproducto"));
-                obj.setCodigoProducto(rs.getString("codigoproducto"));
-                obj.setNombreProducto(rs.getString("nombreproducto"));
-                obj.setPrecioCompra(rs.getDouble("preciocompra"));
-                obj.setCantidad(rs.getInt("cantidad"));
-                obj.setFechaVencimiento(rs.getDate("fechavencimiento"));
-                obj.setEstado(rs.getInt("estado"));
-                obj.setPrecioVenta(rs.getDouble("precioventa"));
-                obj.setEmpresa(new Empresa(rs.getInt("idempresa")));
+               
+                Producto producto = new Producto();
+                Empresa obj = new Empresa();
 
-                return obj;
+                producto.setIdProducto(rs.getInt("idproducto"));
+                producto.setCodigoProducto(rs.getString("codigoproducto"));
+                producto.setNombreProducto(rs.getString("nombreproducto"));
+                producto.setPrecioCompra(rs.getDouble("preciocompra"));
+                producto.setCantidad(rs.getInt("cantidad"));
+                producto.setFechaVencimiento(rs.getDate("fechavencimiento"));
+                producto.setEstado(rs.getInt("estado"));
+                producto.setPrecioVenta(rs.getDouble("precioventa"));
+
+                obj.setIdEmpresa(rs.getInt("idempresa"));
+                obj.setCodigoEmpresa(rs.getString("codigoempresa"));
+                obj.setNombre(rs.getString("nombreempresa"));
+                obj.setDireccion(rs.getString("dirrecionempresa"));
+                obj.setCorreo(rs.getString("correoempresa"));
+                producto.setEmpresa(obj);
+              
+
+                return producto;
             }
             this.conectar.cerrarConexiones();
         } catch (Exception e) {

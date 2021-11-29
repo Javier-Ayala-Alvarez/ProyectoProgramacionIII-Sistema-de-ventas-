@@ -147,8 +147,7 @@ public class Producto implements Serializable{
     }
 
     public Empresa getEmpresa() {
-        EmpresaDao daoEmpresa = new EmpresaDao();
-        empresa = daoEmpresa.selectId(empresa.getIdEmpresa());
+       
 
         return empresa;
     }

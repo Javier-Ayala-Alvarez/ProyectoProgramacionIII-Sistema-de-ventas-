@@ -12,33 +12,14 @@
         <link rel="stylesheet" type="text/css" href="css/EstiloInicio.css">
 
         <title>Menu</title>
-
-       
     </head>
     <div class="contenedor">
         <body> 
-            <TABLE  CLASS="TABLE" align="left">
-                <TR><TD align="center">
-                        <font color="#fff"> <h2 align="center"> bienvenido</h2>
 
-                        <img src='img/dottt.jpg' class='imgRedonda' />
-                        <font color="red"><h2 align="center" class="letra"> <%=request.getAttribute("codigo1")%> </h2>
-                        <FORM action="index.jsp" method="POST">
-
-                            <input type="submit" name="BOTON" value="Cerrar Sesion"class="btn-enviar">
-                        </FORM>
-                        <FORM action="Inicio.jsp" method="POST">
-
-                            <input type="submit" name="BOTON" value="Inicio"class="btn-enviar">
-                        </FORM>
-                <tr><td align="center">
-
-
-            </TABLE>
 
             <nav >
                 <ul>
-
+                    <li><img src='img/dottt.jpg' class='imgRedonda' class="li1"/></li>
                     <li><a class="li1"></i>Venta</a>
                         <ul>
                             <center>
@@ -95,10 +76,27 @@
                                 <form action="ControlConfiguraciones" method="post">
                                     <li><input type="submit" name="BOTON" value="Mostrar" class="btn-enviar"></li>
                                 </form>
+                            </center>
                         </ul>
                     </li>
-                </ul>
+                
+                
+                <li>
+                    <a class="li1"></i></span>Opcciones</a>
+                    <ul>
+                        <center>
+                        <li><FORM action="index.jsp" method="POST">
+
+                            <input type="submit" name="BOTON" value="Cerrar Sesion"class="btn-enviar">
+                        </FORM></li>
+                        <li><FORM action="Inicio.jsp" method="POST">
+
+                            <input type="submit" name="BOTON" value="Inicio"class="btn-enviar">
+                        </FORM></li>
+                        </center>
+                        </ul>
                 </li>
+                </ul>
             </nav>
     </div>
-</center></ul></li></center></ul></li></center>
+

@@ -31,6 +31,8 @@ public class Empresa implements Serializable {
         this.correo = correo;
     }
 
+   
+
     public String getCodigoEmpresa() {
         return codigoEmpresa;
     }
