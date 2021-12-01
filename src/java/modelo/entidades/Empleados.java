@@ -56,9 +56,7 @@ public class Empleados extends Persona implements Serializable {
         return cargoEmpleado;
     }
 
-    public void addUsuario(Usuario x) {
-        this.usuario = x;
-    }
+ 
 
     public void setCargoEmpleado(String cargoEmpleado) {
         this.cargoEmpleado = cargoEmpleado;

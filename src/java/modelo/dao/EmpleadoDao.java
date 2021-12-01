@@ -23,15 +23,18 @@ public class EmpleadoDao {
     public EmpleadoDao() {
 
     }
-     public Empleados selectAllTo(String atributo, int condicion) {
-        String sql = "SELECT * fROM empleado WHERE  " + atributo + "='" + condicion + "'";
-         try {
+
+    public Empleados selectAllTo(String atributo, int condicion) {
+        String sql = "SELECT * fROM empleado e INNER JOIN empresa ee ON ee.idempresa = e.idempresa  INNER JOIN usuario u ON u.idusuario = e.idusuario WHERE  e." + atributo + "='" + condicion + "'";
+        try {
             con = conectar.getConexion();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             if (this.rs.next()) {
                 Empleados empleado = new Empleados();
-                
+                Empresa obj = new Empresa();
+                Usuario usuario = new Usuario();
+
                 empleado.setIdEmpleado(rs.getInt("idempleado"));
                 empleado.setIdPersona(rs.getInt("idempleado"));
                 empleado.setCodigoEmpleado(rs.getString("codigoempleado"));
@@ -45,12 +48,20 @@ public class EmpleadoDao {
                 empleado.setIsss(rs.getDouble("isss"));
                 empleado.setFechaContratacion(rs.getDate("contratacion"));
                 empleado.setEstado(rs.getInt("estado"));
-                Empresa empresa = new Empresa(rs.getInt(("idempresa")));
-                Usuario usuario = new Usuario(rs.getInt(("idusuario")));
-                 empleado.setEmpresa(empresa);
-                empleado.addUsuario(usuario);
+
+                obj.setIdEmpresa(rs.getInt("idempresa"));
+                obj.setCodigoEmpresa(rs.getString("codigoempresa"));
+                obj.setNombre(rs.getString("nombreempresa"));
+                obj.setDireccion(rs.getString("dirrecionempresa"));
+                obj.setCorreo(rs.getString("correoempresa"));
+
+                usuario.setIdUsuario(rs.getInt("idusuario"));
+                usuario.setUsuario(rs.getString("usuario"));
+                usuario.setContraseña(rs.getString("contraseña"));
+
+                empleado.setEmpresa(obj);
+                empleado.setUsuario(usuario);
                 return empleado;
-                
 
             }
             conectar.cerrarConexiones();
@@ -61,14 +72,16 @@ public class EmpleadoDao {
         return null;
     }
 
- public Empleados selectAllUsu() {
-        String sql = "SELECT * fROM empleado WHERE  cargoempleado = 'Administrador' AND estado = '1' AND idusuario != 'null'";
-         try {
+    public Empleados selectAllUsu() {
+        String sql = "SELECT * fROM empleado e INNER JOIN usuario u ON u.idusuario = e.idusuario WHERE  cargoempleado = 'Administrador' AND estado = '1' AND idusuario != 'null'";
+        try {
             con = conectar.getConexion();
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             if (this.rs.next()) {
                 Empleados empleado = new Empleados();
+                Usuario usuario = new Usuario();
+
                 empleado.setIdEmpleado(rs.getInt("idempleado"));
                 empleado.setIdPersona(rs.getInt("idempleado"));
                 empleado.setCodigoEmpleado(rs.getString("codigoempleado"));
@@ -82,10 +95,12 @@ public class EmpleadoDao {
                 empleado.setIsss(rs.getDouble("isss"));
                 empleado.setFechaContratacion(rs.getDate("contratacion"));
                 empleado.setEstado(rs.getInt("estado"));
-                Usuario usuario = new Usuario(rs.getInt(("idUsuario")));
-                empleado.addUsuario(usuario);
+
+                usuario.setIdUsuario(rs.getInt("idusuario"));
+                usuario.setUsuario(rs.getString("usuario"));
+                usuario.setContraseña(rs.getString("contraseña"));
+                empleado.setUsuario(usuario);
                 return empleado;
-                
 
             }
             conectar.cerrarConexiones();
@@ -95,8 +110,9 @@ public class EmpleadoDao {
 
         return null;
     }
+
     public Empleados getselectAllTo(String condicion) throws SQLException {
-        String sql = "SELECT * FROM empleado WHERE codigoempleado='" + condicion + "'";
+        String sql = "SELECT * fROM empleado e INNER JOIN usuario u ON u.idusuario = e.idusuario  WHERE e.codigoempleado='"+ condicion + "'";
 
         try {
             con = conectar.getConexion();
@@ -104,6 +120,7 @@ public class EmpleadoDao {
             rs = ps.executeQuery();
             if (this.rs.next()) {
                 Empleados empleado = new Empleados();
+                 Usuario usuario = new Usuario();
                 empleado.setIdEmpleado(rs.getInt("idempleado"));
                 empleado.setIdPersona(rs.getInt("idempleado"));
                 empleado.setCodigoEmpleado(rs.getString("codigoempleado"));
@@ -117,10 +134,13 @@ public class EmpleadoDao {
                 empleado.setIsss(rs.getDouble("isss"));
                 empleado.setFechaContratacion(rs.getDate("contratacion"));
                 empleado.setEstado(rs.getInt("estado"));
-                Usuario usuario = new Usuario(rs.getInt(("idUsuario")));
-                empleado.addUsuario(usuario);
-                return empleado;
+               
+                usuario.setIdUsuario(rs.getInt("idusuario"));
+                usuario.setUsuario(rs.getString("usuario"));
+                usuario.setContraseña(rs.getString("contraseña"));
                 
+                empleado.setUsuario(usuario);
+                return empleado;
 
             }
             conectar.cerrarConexiones();

@@ -26,11 +26,11 @@
                     <div class="column ">
                         
 
-                        Codigo<input type='text'  name='código' value="<%= registro.getCodigoEmpresa()%>" class='input is-link'  readonly/>
+                        Codigo<input type='text'  name='codigo' value="<%= registro.getCodigoEmpresa()%>" class='input is-link'  readonly/>
                         Nombre <input type='text'  name='nombre' value="<%= registro.getNombre()%>" class='input is-link'/>
                     </div>   
                     <div class="column">
-                        Direccion<input type='text'  name='dirección' value="<%= registro.getDireccion()%>" class='input is-link'/>
+                        Direccion<input type='text'  name='direccion' value="<%= registro.getDireccion()%>" class='input is-link'/>
                         Correo <input type='text'  name='correo' value="<%= registro.getCorreo()%>" class='input is-link'/>
                         <%}%>
                     </div> 

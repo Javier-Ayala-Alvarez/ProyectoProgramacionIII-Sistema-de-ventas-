@@ -33,11 +33,15 @@ private EmpresaDao daoEmpresa;
             if(request.getParameter("btn_Actualizar") != null){
                 this.registroList1 = daoEmpresa.selectAllto(request.getParameter("codigo"));
                registroList1.setIdEmpresa(registroList1.getIdEmpresa());
-                registroList1.setCodigoEmpresa(request.getParameter("codigó"));
+                registroList1.setCodigoEmpresa(request.getParameter("codigo"));
                 registroList1.setNombre(request.getParameter("nombre"));
                 registroList1.setCorreo(request.getParameter("correo"));
-                registroList1.setDireccion(request.getParameter("dirección"));
+                registroList1.setDireccion(request.getParameter("direccion"));
                 daoEmpresa.update(registroList1);
+                
+                this.registroList = daoEmpresa.selectAll();
+            request.setAttribute("registroList", this.registroList);
+           request.getRequestDispatcher("Configuraciones.jsp").forward(request, response);
             
             }
             

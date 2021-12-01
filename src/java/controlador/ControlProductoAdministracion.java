@@ -58,23 +58,31 @@ public class ControlProductoAdministracion extends HttpServlet {
                         && !request.getParameter("cantidad").isEmpty()
                         && !request.getParameter("fecha").isEmpty()
                         && !request.getParameter("precioVenta").isEmpty()) {
-                    this.producto = daoProducto.getMax();
-                    this.empresa = daoEmpresa.select();
-                    Producto obj = new Producto(producto.getMax() + 1, crearCodigo("CP-", producto.getMax() + 1),
-                            request.getParameter("nombre"), Double.parseDouble(request.getParameter("precioCompra")),
-                            Integer.parseInt(request.getParameter("cantidad")), formatter.parse(request.getParameter("fecha")),
-                            1, Double.parseDouble(request.getParameter("precioVenta")), empresa);
-                    if (daoProducto.insert(obj)) {
-                        this.producto = daoProducto.getMax();
-                        request.setAttribute("codigo", crearCodigo("CP-", producto.getMax() + 1));
-                        this.productoList = daoProducto.getSelect1();
+                    if (Integer.parseInt(request.getParameter("precioCompra")) > 0 && Integer.parseInt(request.getParameter("precioVenta")) > 0) {
+                        if (Integer.parseInt(request.getParameter("cantidad")) > 0) {
+                            this.producto = daoProducto.getMax();
+                            this.empresa = daoEmpresa.select();
+                            Producto obj = new Producto(producto.getMax() + 1, crearCodigo("CP-", producto.getMax() + 1),
+                                    request.getParameter("nombre"), Double.parseDouble(request.getParameter("precioCompra")),
+                                    Integer.parseInt(request.getParameter("cantidad")), formatter.parse(request.getParameter("fecha")),
+                                    1, Double.parseDouble(request.getParameter("precioVenta")), empresa);
+                            if (daoProducto.insert(obj)) {
+                                this.producto = daoProducto.getMax();
+                                request.setAttribute("codigo", crearCodigo("CP-", producto.getMax() + 1));
+                                this.productoList = daoProducto.getSelect1();
 
-                        request.setAttribute("alerta", "<script>alert('Ingresado Con exito'); </script>");
-                        request.setAttribute("productoList", this.productoList);
-                        request.getRequestDispatcher("Producto.jsp").forward(request, response);
+                                request.setAttribute("alerta", "<script>alert('Ingresado Con exito'); </script>");
+                                request.setAttribute("productoList", this.productoList);
+                                request.getRequestDispatcher("Producto.jsp").forward(request, response);
 
+                            } else {
+                                request.setAttribute("alerta", "<script>alert('Campos incorrectos'); </script>");
+                            }
+                        } else {
+                            request.setAttribute("alerta", "<script>alert('Cantidad debe ser mayor a 0'); </script>");
+                        }
                     } else {
-                        request.setAttribute("alerta", "<script>alert('Campos incorrectos'); </script>");
+                        request.setAttribute("alerta", "<script>alert('Precio debe ser mayor a 0'); </script>");
                     }
                 } else {
                     request.setAttribute("alerta", "<script>alert('Campos vacios'); </script>");
@@ -135,25 +143,31 @@ public class ControlProductoAdministracion extends HttpServlet {
             } else if (request.getParameter("btn_GuardarAumento") != null) {
                 if (!request.getParameter("cantidad").isEmpty()
                         && !request.getParameter("precioCompra").isEmpty()) {
+                    if (Integer.parseInt(request.getParameter("precioCompra")) > 0 && Integer.parseInt(request.getParameter("precioVenta")) > 0) {
+                        if (Integer.parseInt(request.getParameter("cantidad")) > 0) {
+                            String codigo = request.getParameter("codigo");
+                            this.producto = daoProducto.getSelectTo1(codigo);
+                            producto.setCantidad(producto.getCantidad() + Integer.parseInt(request.getParameter("cantidad")));
+                            producto.setPrecioCompra((producto.getPrecioCompra() + Double.parseDouble(request.getParameter("precioCompra"))) / 2);
 
-                    String codigo = request.getParameter("codigo");
-                    this.producto = daoProducto.getSelectTo1(codigo);
-                    producto.setCantidad(producto.getCantidad() + Integer.parseInt(request.getParameter("cantidad")));
-                    producto.setPrecioCompra((producto.getPrecioCompra() + Double.parseDouble(request.getParameter("precioCompra"))) / 2);
+                            if (daoProducto.update(producto)) {
+                                this.producto = daoProducto.getMax();
+                                this.productoList = daoProducto.getSelect1();
+                                request.setAttribute("alerta", "<script>alert('Aunmento Con exito'); </script>");
+                                request.setAttribute("codigo", crearCodigo("CP-", producto.getMax() + 1));
+                                request.setAttribute("productoList", this.productoList);
+                                request.getRequestDispatcher("Producto.jsp").forward(request, response);
 
-                    if (daoProducto.update(producto)) {
-                        this.producto = daoProducto.getMax();
-                        this.productoList = daoProducto.getSelect1();
-                        request.setAttribute("alerta", "<script>alert('Aunmento Con exito'); </script>");
-                        request.setAttribute("codigo", crearCodigo("CP-", producto.getMax() + 1));
-                        request.setAttribute("productoList", this.productoList);
-                        request.getRequestDispatcher("Producto.jsp").forward(request, response);
+                            } else {
 
+                                request.setAttribute("alerta", "<script>alert('Se produjo un error'); </script>");
+                            }
+                        } else {
+                            request.setAttribute("alerta", "<script>alert('Cantidad debe ser mayor a 0'); </script>");
+                        }
                     } else {
-
-                        request.setAttribute("alerta", "<script>alert('Se produjo un error'); </script>");
+                        request.setAttribute("alerta", "<script>alert('Precio debe ser mayor a 0'); </script>");
                     }
-
                 } else {
                     request.setAttribute("alerta", "<script>alert('Campos vacios'); </script>");
                 }
